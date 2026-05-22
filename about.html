@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Tom Jobim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-main: #3f3227;
+      --text-subtle: #6a5646;
+      --line: #c8b8a4;
+      --card-bg: rgba(251, 246, 238, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f0f0f0;
+      font-family: "Avenir Next", "Helvetica Neue", "Noto Sans TC", sans-serif;
+      color: var(--text-main);
+    }
+
+    .page {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    /* 歌詞區（與首頁銜接用，可於整合時移除） */
+    .lyrics-preview {
+      margin: 0 auto 3.5rem;
+      max-width: 36rem;
+      text-align: center;
+      font-family: "Special Elite", "Courier New", monospace;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      line-height: 1.85;
+      color: #4d3b2b;
+      letter-spacing: 0.02em;
+      white-space: pre-wrap;
+      opacity: 0.85;
+    }
+
+    .about {
+      position: relative;
+    }
+
+    .about-heading {
+      margin: 0 0 2.8rem;
+      text-align: center;
+      font-family: "EB Garamond", "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
+      line-height: 1.15;
+    }
+
+    .about-stage {
+      position: relative;
+      min-height: 18rem;
+      padding-left: 0;
+    }
+
+    .bio-card {
+      position: relative;
+      width: min(320px, 88vw);
+      margin: 0;
+      padding: 1.35rem 1.4rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-left: 2px solid #8a7560;
+      box-shadow: none;
+      opacity: 0;
+      transform: translateX(-32px) scale(0.97);
+      transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bio-card.is-visible {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    .bio-card::before {
+      content: "";
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 2.4rem;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .bio-card::after {
+      content: "";
+      position: absolute;
+      bottom: 1.1rem;
+      left: 1.4rem;
+      width: 3.2rem;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .bio-label {
+      margin: 0 0 0.65rem;
+      font-family: "EB Garamond", serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    .bio-name {
+      margin: 0 0 1rem;
+      font-family: "EB Garamond", serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+
+    .bio-meta {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .bio-meta li {
+      display: grid;
+      grid-template-columns: 5.2rem 1fr;
+      gap: 0.6rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(200, 184, 164, 0.55);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .bio-meta dt {
+      margin: 0;
+      font-family: "EB Garamond", serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    .bio-meta dd {
+      margin: 0;
+      font-family: "EB Garamond", serif;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .bio-text {
+      margin: 1rem 0 0;
+      font-family: "EB Garamond", serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-subtle);
+    }
+
+    @media (min-width: 640px) {
+      .about-stage {
+        padding-left: 1.5rem;
+      }
+
+      .bio-card {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <p class="lyrics-preview" aria-hidden="true">Tall and tan and young and lovely,
+The girl from Ipanema goes walking
+And when she passes,
+each one she passes goes, "Aaah..."</p>
+
+    <section class="about" aria-labelledby="about-heading">
+      <h2 class="about-heading" id="about-heading">About Tom Jobim</h2>
+
+      <div class="about-stage">
+        <article class="bio-card" id="bioCard" aria-label="Tom Jobim 人物誌">
+          <p class="bio-label">Profile</p>
+          <h3 class="bio-name">Antônio Carlos Jobim</h3>
+
+          <dl class="bio-meta">
+            <div>
+              <dt>Born</dt>
+              <dd>1927 · Rio de Janeiro</dd>
+            </div>
+            <div>
+              <dt>Alias</dt>
+              <dd>Tom Jobim</dd>
+            </div>
+            <div>
+              <dt>Role</dt>
+              <dd>Composer · Pianist · Arranger</dd>
+            </div>
+          </dl>
+
+          <p class="bio-text">
+            [人物誌簡述：Bossa Nova 代表人物，以柔和和聲與詩意旋律將里約的風景寫進世界音樂史。]
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const bioCard = document.getElementById("bioCard");
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            bioCard.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    observer.observe(bioCard);
+  </script>
+</body>
+</html>

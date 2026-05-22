@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antônio Carlos Jobim — The Bossa Nova Era</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #FCFCFC;
+      --paper-warm: #FCFCFC;
+      --text: #272727;
+      --ink-dark: #272727;
+      --ink-mid: #272727;
+      --ink-soft: #272727;
+      --ink-faded: rgba(39, 39, 39, 0.72);
+      --lyric-light: rgba(39, 39, 39, 0.52);
+      --quote-deep: #272727;
+      --line: rgba(39, 39, 39, 0.22);
+      --string: #272727;
+      --coffee-dark: #272727;
+      --font-en-display: "Benton Modern Display", "Libre Baskerville", "Times New Roman", Georgia, serif;
+      --font-en-small: "Times New Roman", Times, serif;
+      --font-typewriter: "Special Elite", "Courier New", monospace;
+      --font-zh-title: "Noto Serif TC", "PMingLiU", "MingLiU", serif;
+      --font-zh-body: "Noto Sans TC", "Source Han Sans TC", "PingFang TC", sans-serif;
+      --nav-collapsed-size: 52px;
+      --hero-nav-height: clamp(220px, 27vw, 300px);
+      --nav-menu-width: min(460px, calc(100vw - 2.5rem));
+      --nav-transition: 0.82s;
+      --nav-popup-transition: 1.2s;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--paper);
+      color: var(--ink-mid);
+      font-family: var(--font-zh-body);
+      font-weight: 400;
+      line-height: 1.75;
+    }
+
+    /* 紙質磨砂質感（非漸變底色） */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.38;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='0.35'/%3E%3C/svg%3E");
+      background-size: 140px 140px, 220px 220px;
+      mix-blend-mode: soft-light, multiply;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0.045;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(39, 39, 39, 0.025) 2px,
+        rgba(39, 39, 39, 0.025) 3px
+      );
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 3vw, 2.5rem) 6rem;
+    }
+
+    /* ── 第零單元：Hero 首頁小報（分屏排版） ── */
+    .hero-newspaper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 0;
+      align-items: stretch;
+      min-height: min(88vh, 860px);
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
+    @media (max-width: 820px) {
+      .hero-newspaper {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .hero-left {
+      position: relative;
+      min-height: min(88vh, 860px);
+      opacity: 0;
+      transform: translateX(-32px);
+      animation: heroLeftEnter 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+    }
+
+    @media (max-width: 820px) {
+      .hero-left {
+        min-height: 0;
+      }
+    }
+
+    @keyframes heroLeftEnter {
+      from {
+        opacity: 0;
+        transform: translateX(-32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-left {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: min(88vh, 860px);
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: min(88vh, 860px);
+      object-fit: cover;
+      object-position: center center;
+      filter: contrast(1.05) grayscale(1);
+    }
+
+    @media (max-width: 820px) {
+      .hero-photo-wrap,
+      .hero-photo {
+        min-height: clamp(320px, 72vw, 520px);
+      }
+    }
+
+    .hero-titles {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: auto;
+      width: min(92%, 420px);
+      padding: clamp(1.4rem, 3.5vw, 2.4rem);
+      text-align: right;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(26, 21, 16, 0.35) 38%,
+        rgba(26, 21, 16, 0.78) 100%
+      );
+      z-index: 4;
+    }
+
+    .hero-title-en {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(1.35rem, 3.2vw, 2.1rem);
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      color: #f5f0e8;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-title-en .line2 {
+      display: block;
+      margin-top: 0.15em;
+      font-size: 0.72em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-family: var(--font-en-small);
+      font-weight: 400;
+    }
+
+    .hero-title-zh {
+      margin: 0.55rem 0 0;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.82rem, 1.8vw, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: rgba(245, 240, 232, 0.92);
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: min(88vh, 860px);
+      padding: clamp(2.5rem, 6vh, 4.5rem) clamp(2rem, 5.5vw, 4.5rem);
+      background: var(--paper);
+    }
+
+    @media (max-width: 820px) {
+      .hero-right {
+        min-height: 0;
+        padding: clamp(2rem, 6vw, 3rem) clamp(1.25rem, 5vw, 2rem);
+      }
+    }
+
+    .hero-right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: clamp(2.2rem, 5.5vh, 4rem);
+      width: 100%;
+      max-width: 34rem;
+    }
+
+    .hero-kicker {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+    }
+
+    .typewriter-block {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 4.5vh, 3.2rem);
+    }
+
+    .typewriter-lyrics {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.88rem, 1.6vw, 1rem);
+      line-height: 1.85;
+      letter-spacing: 0.02em;
+      color: var(--lyric-light);
+    }
+
+    .typewriter-quote {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.9rem, 1.65vw, 1.05rem);
+      line-height: 1.9;
+      color: var(--quote-deep);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .typewriter-quote.is-active {
+      opacity: 1;
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 0.85s steps(1, end) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ── 吉他六弦導覽（源自 index2） ── */
+    .guitar-nav-wrap:not(.is-collapsed) {
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.65rem;
+    }
+
+    .guitar-nav-wrap {
+      position: relative;
+      z-index: 100;
+      width: 100%;
+      margin-top: 0.35rem;
+      padding: 0.15rem 0 0.65rem;
+      transform-origin: top left;
+    }
+
+    .guitar-nav-wrap.is-collapsing .guitar-nav {
+      opacity: 0;
+      transition: opacity 0.42s ease;
+    }
+
+    .guitar-nav-wrap.is-collapsing {
+      pointer-events: none;
+    }
+
+    .guitar-nav-spacer {
+      height: 0;
+      transition: height var(--nav-transition) cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .guitar-nav-wrap.is-collapsed {
+      position: fixed;
+      top: 1.25rem;
+      left: 1.25rem;
+      bottom: auto;
+      right: auto;
+      margin: 0;
+      padding: 0;
+      width: var(--nav-collapsed-size);
+      height: var(--nav-collapsed-size);
+      border-bottom: none;
+      background: transparent;
+      pointer-events: auto;
+      transform-origin: top left;
+      z-index: 200;
+    }
+
+    .guitar-nav {
+      position: relative;
+      width: 100%;
+      height: var(--hero-nav-height);
+      transition:
+        width var(--nav-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        height var(--nav-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        max-height var(--nav-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        padding var(--nav-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow var(--nav-transition) ease,
+        background calc(var(--nav-transition) * 0.85) ease;
+      transform-origin: top left;
+    }
+
+    .guitar-nav-wrap.is-collapsed:not(.is-expanded) .guitar-nav {
+      width: var(--nav-collapsed-size);
+      height: var(--nav-collapsed-size);
+      max-height: var(--nav-collapsed-size);
+      overflow: hidden;
+      opacity: 0.88;
+      transition: opacity 0.45s ease;
+    }
+
+    .guitar-nav-wrap.is-collapsed .guitar-nav {
+      width: var(--nav-collapsed-size);
+      height: var(--nav-collapsed-size);
+      max-height: var(--nav-collapsed-size);
+      overflow: hidden;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .guitar-nav {
+      width: var(--nav-menu-width);
+      height: auto;
+      min-height: var(--nav-collapsed-size);
+      max-height: min(420px, 78vh);
+      overflow: hidden;
+      opacity: 1;
+      padding: calc(var(--nav-collapsed-size) + 0.15rem) 0.85rem 0.65rem;
+      background: rgba(252, 252, 252, 0.97);
+      border: 1px solid rgba(39, 39, 39, 0.18);
+      border-radius: 6px;
+      box-shadow: 0 8px 22px rgba(39, 39, 39, 0.1);
+      transition:
+        width var(--nav-popup-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        height var(--nav-popup-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        max-height var(--nav-popup-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        padding var(--nav-popup-transition) cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow var(--nav-popup-transition) ease,
+        background calc(var(--nav-popup-transition) * 0.85) ease,
+        opacity calc(var(--nav-popup-transition) * 0.55) ease;
+    }
+
+    .index-menu-kicker {
+      display: none;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-typewriter);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity calc(var(--nav-popup-transition) * 0.75) ease;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .index-menu-kicker {
+      display: block;
+      position: absolute;
+      top: 0.7rem;
+      left: calc(var(--nav-collapsed-size) + 0.5rem);
+      right: 0.85rem;
+      opacity: 1;
+    }
+
+    .headstock-icon {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--nav-collapsed-size);
+      height: var(--nav-collapsed-size);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      border: 1px solid rgba(39, 39, 39, 0.28);
+      background: rgba(252, 252, 252, 0.92);
+      border-radius: 4px 4px 8px 8px;
+      box-shadow: 0 4px 14px rgba(39, 39, 39, 0.12);
+      transition: opacity calc(var(--nav-popup-transition) * 0.65) ease;
+    }
+
+    .guitar-nav-wrap.is-collapsed .headstock-icon {
+      display: flex;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .headstock-icon {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .headstock-icon svg {
+      width: 70%;
+      height: auto;
+      fill: var(--coffee-dark);
+      opacity: 0.85;
+    }
+
+    .guitar-stage {
+      position: absolute;
+      inset: 0;
+      transition: opacity calc(var(--nav-transition) * 0.7) ease;
+    }
+
+    .guitar-nav-wrap.is-collapsed .guitar-stage {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity calc(var(--nav-popup-transition) * 0.75) ease, visibility 0s linear var(--nav-popup-transition);
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .guitar-stage {
+      position: relative;
+      inset: auto;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      height: auto;
+      transition: opacity calc(var(--nav-popup-transition) * 0.85) ease 0.12s, visibility 0s;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .bridge {
+      display: none;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .string {
+      position: relative;
+      left: auto;
+      width: 100%;
+      top: auto !important;
+      margin: 0.22rem 0;
+      min-height: 30px;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .string-line {
+      display: none;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .string-label {
+      max-width: none;
+      padding: 0.12em 0;
+      background: transparent;
+      font-family: var(--font-zh-title), var(--font-en-small), serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      white-space: nowrap;
+      line-height: 1.35;
+      letter-spacing: 0.03em;
+    }
+
+    .bridge {
+      position: absolute;
+      left: 4.5%;
+      top: 22%;
+      width: 1%;
+      height: 58%;
+      background: var(--coffee-dark);
+      border-radius: 2px;
+      z-index: 2;
+    }
+
+    .string {
+      position: absolute;
+      left: 7%;
+      width: 88%;
+      height: auto;
+      min-height: 30px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      transform-origin: left center;
+      z-index: 3;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .string-line {
+      flex: 1 1 0;
+      height: 1.25px;
+      background: var(--string);
+      min-width: 8%;
+    }
+
+    .string-line--left {
+      margin-right: 0.35rem;
+    }
+
+    .string-line--right {
+      margin-left: 0.35rem;
+    }
+
+    .string-label {
+      position: relative;
+      flex: 0 0 auto;
+      max-width: 72%;
+      padding: 0.18em 0.75em;
+      background: var(--paper);
+      color: var(--ink-soft);
+      font-family: var(--font-zh-title), var(--font-en-small), serif;
+      font-size: clamp(0.8rem, 1.35vw, 1rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .string:nth-of-type(1) { top: calc(24% - 15px); }
+    .string:nth-of-type(2) { top: calc(34% - 15px); }
+    .string:nth-of-type(3) { top: calc(44% - 15px); }
+    .string:nth-of-type(4) { top: calc(54% - 15px); }
+    .string:nth-of-type(5) { top: calc(64% - 15px); }
+    .string:nth-of-type(6) { top: calc(74% - 15px); }
+
+    .string.is-plucked {
+      animation: pluck 0.85s ease-out;
+    }
+
+    @keyframes pluck {
+      0% { transform: translateY(0) scaleX(1); }
+      20% { transform: translateY(-4px) scaleX(1.001); }
+      35% { transform: translateY(3px) scaleX(0.999); }
+      50% { transform: translateY(-2px) scaleX(1.001); }
+      70% { transform: translateY(1px) scaleX(1); }
+      100% { transform: translateY(0) scaleX(1); }
+    }
+
+    .note {
+      position: absolute;
+      font-size: 1.25rem;
+      color: var(--coffee-dark);
+      pointer-events: none;
+      z-index: 5;
+      animation: rise 1s ease-out forwards;
+    }
+
+    @keyframes rise {
+      0% { transform: translate(-50%, 0) scale(0.8); opacity: 0.95; }
+      100% { transform: translate(-50%, -48px) scale(1.1) rotate(-8deg); opacity: 0; }
+    }
+
+    /* ── 章節佔位 ── */
+    .chapter {
+      padding: 4rem 0 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .chapter h2 {
+      margin: 0 0 1rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 700;
+      color: var(--ink-dark);
+      letter-spacing: 0.08em;
+    }
+
+    .chapter p {
+      margin: 0;
+      max-width: 62ch;
+      font-family: var(--font-zh-body);
+      color: var(--ink-faded);
+    }
+
+    body.is-ch1-zone {
+      background-color: #ffffff;
+    }
+
+    body.is-ch1-zone::before,
+    body.is-ch1-zone::after {
+      opacity: 0.22;
+    }
+
+    /* ── 第一單元：實體資料夾 ── */
+    .chapter-1 {
+      border-top: none;
+      padding: clamp(3rem, 8vh, 5rem) 0 clamp(4rem, 10vh, 6rem);
+      background: #ffffff;
+      margin-left: calc(-1 * clamp(1rem, 3vw, 2.5rem));
+      margin-right: calc(-1 * clamp(1rem, 3vw, 2.5rem));
+      padding-left: clamp(1rem, 3vw, 2.5rem);
+      padding-right: clamp(1rem, 3vw, 2.5rem);
+    }
+
+    .ch1-scene {
+      perspective: 1200px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .ch1-drawer {
+      position: relative;
+      padding-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .ch1-drawer-rail {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 0;
+      height: 6px;
+      background: linear-gradient(180deg, #d8d8d8 0%, #ececec 100%);
+      border-radius: 3px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .ch1-folder.is-pulled .ch1-drawer-rail {
+      opacity: 1;
+    }
+
+    .ch1-folder {
+      position: relative;
+      margin-top: 0.35rem;
+      transform: translateY(72%);
+      opacity: 0;
+      transition:
+        transform 1.35s cubic-bezier(0.22, 1, 0.28, 1),
+        opacity 0.85s ease;
+      will-change: transform, opacity;
+    }
+
+    .ch1-folder.is-pulled {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .ch1-folder-tabs {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      padding-left: clamp(0.5rem, 2vw, 1.2rem);
+      position: relative;
+      z-index: 4;
+    }
+
+    .ch1-tab {
+      position: relative;
+      border: 0;
+      cursor: pointer;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      background: #e8e4dc;
+      padding: 0.55rem 1.15rem 0.65rem;
+      margin-right: -0.35rem;
+      border-radius: 8px 8px 0 0;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.65),
+        0 -1px 0 rgba(39, 39, 39, 0.06);
+      transition:
+        background 0.16s ease,
+        transform 0.16s ease,
+        padding 0.16s ease,
+        z-index 0s;
+      z-index: 1;
+    }
+
+    .ch1-tab:nth-child(1) {
+      background: #ebe7df;
+      transform: translateY(4px);
+    }
+
+    .ch1-tab:nth-child(2) {
+      background: #e3dfd6;
+      transform: translateY(2px);
+      z-index: 2;
+    }
+
+    .ch1-tab:nth-child(3) {
+      background: #ddd8cf;
+      z-index: 3;
+    }
+
+    .ch1-tab.is-active {
+      background: #f7f4ee;
+      transform: translateY(0);
+      padding-bottom: 0.85rem;
+      z-index: 5;
+      color: var(--ink-dark);
+      font-weight: 600;
+    }
+
+    .ch1-folder-shell {
+      position: relative;
+      background: #f7f4ee;
+      border: 1px solid rgba(39, 39, 39, 0.14);
+      border-radius: 0 12px 12px 12px;
+      box-shadow:
+        0 18px 40px rgba(39, 39, 39, 0.08),
+        0 4px 12px rgba(39, 39, 39, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+    }
+
+    .ch1-folder-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.5'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+      mix-blend-mode: multiply;
+    }
+
+    .ch1-folder-cover {
+      display: grid;
+      grid-template-columns: minmax(0, 240px) 1fr;
+      gap: clamp(1rem, 3vw, 2rem);
+      padding: clamp(1.4rem, 3.5vw, 2.2rem);
+      border-bottom: 1px solid rgba(39, 39, 39, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 640px) {
+      .ch1-folder-cover {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+    }
+
+    .ch1-polaroid {
+      position: relative;
+      width: min(100%, 210px);
+      padding: 0.65rem 0.65rem 0.85rem;
+      background: #fafafa;
+      box-shadow:
+        0 3px 14px rgba(39, 39, 39, 0.12),
+        0 1px 3px rgba(39, 39, 39, 0.08);
+      transform: rotate(-2.5deg);
+    }
+
+    .ch1-polaroid-photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(1) contrast(1.08);
+    }
+
+    .ch1-tape {
+      position: absolute;
+      top: -0.35rem;
+      left: 50%;
+      width: 58%;
+      height: 1.35rem;
+      transform: translateX(-50%) rotate(-2deg);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.72) 0%,
+        rgba(255, 255, 255, 0.38) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 1px 3px rgba(39, 39, 39, 0.08);
+      opacity: 0.92;
+      clip-path: polygon(2% 0%, 98% 4%, 96% 100%, 4% 96%);
+      z-index: 3;
+    }
+
+    .ch1-cover-meta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.65rem;
+      padding-top: 0.5rem;
+      padding-left: clamp(1.25rem, 3.5vw, 2.25rem);
+    }
+
+    .ch1-cover-title {
+      margin: 0;
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      line-height: 1.35;
+      color: var(--ink-dark);
+    }
+
+    .ch1-cover-sub {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(0.88rem, 1.6vw, 1rem);
+      color: var(--ink-faded);
+      letter-spacing: 0.04em;
+    }
+
+    .ch1-folder-interior {
+      position: relative;
+      min-height: 220px;
+      padding: clamp(1.5rem, 3.5vw, 2.2rem);
+      background: #ffffff;
+    }
+
+    .ch1-panel {
+      display: none;
+      animation: ch1PanelIn 0.2s ease;
+    }
+
+    .ch1-panel.is-active {
+      display: block;
+    }
+
+    @keyframes ch1PanelIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ch1-panel-body {
+      margin: 0;
+      max-width: 62ch;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+    }
+
+    .ch1-works-stage {
+      position: relative;
+      min-height: 240px;
+      padding-right: clamp(195px, 33vw, 270px);
+    }
+
+    .ch1-vinyl-wrap {
+      position: absolute;
+      right: -8%;
+      bottom: -12%;
+      width: clamp(195px, 30vw, 252px);
+      height: clamp(195px, 30vw, 252px);
+      transform: translateX(110%);
+      opacity: 0;
+      transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .ch1-vinyl-wrap.is-out {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ch1-vinyl-btn {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: transparent;
+      box-shadow: 0 10px 28px rgba(39, 39, 39, 0.18);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .ch1-vinyl-btn:hover {
+      box-shadow: 0 14px 32px rgba(39, 39, 39, 0.24);
+    }
+
+    .ch1-vinyl-disc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at center, #f3f3f3 0 2.8%, transparent 3%),
+        repeating-radial-gradient(circle at center, #1a1a1a 0 72%, #2a2a2a 72% 73%, #1a1a1a 73% 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .ch1-vinyl-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52%;
+      height: 52%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .ch1-vinyl-disc::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5%;
+      height: 5%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #e8e8e8;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
+
+    .ch1-vinyl-btn.is-spinning .ch1-vinyl-disc {
+      animation: ch1VinylSpin 9s linear infinite;
+    }
+
+    @keyframes ch1VinylSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .ch1-vinyl-hint {
+      margin: 1rem 0 0;
+      font-family: var(--font-en-small);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-faded);
+      opacity: 0;
+      transition: opacity 0.35s ease 0.25s;
+    }
+
+    .ch1-works-stage:has(.ch1-vinyl-wrap.is-out) .ch1-vinyl-hint {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ch1-folder {
+        transform: none;
+        opacity: 1;
+        transition: none;
+      }
+
+      .ch1-vinyl-wrap {
+        transform: none;
+        opacity: 1;
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 1.5rem;
+      }
+
+      .ch1-vinyl-btn.is-spinning .ch1-vinyl-disc {
+        animation: none;
+      }
+    }
+
+    /* ── 第二單元：文藝音樂雜誌特刊 ── */
+    .chapter-2 {
+      border-top: 1px solid var(--line);
+      padding: clamp(4rem, 9vh, 6rem) 0 clamp(5rem, 11vh, 7rem);
+      background: var(--paper);
+    }
+
+    .ch2-masthead {
+      margin-bottom: clamp(3rem, 7vh, 4.5rem);
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ink-dark);
+    }
+
+    .ch2-issue {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-typewriter);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-faded);
+    }
+
+    .ch2-title {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      color: var(--ink-dark);
+    }
+
+    .ch2-title-zh {
+      display: block;
+      margin-top: 0.35em;
+      font-family: var(--font-zh-title);
+      font-size: 0.52em;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+    }
+
+    .ch2-block {
+      margin-bottom: clamp(3.5rem, 8vh, 5rem);
+    }
+
+    .ch2-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .ch2-kicker {
+      margin: 0 0 1.25rem;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+    }
+
+    .ch2-body {
+      margin: 0;
+      max-width: 68ch;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      line-height: 1.9;
+      color: var(--ink-faded);
+    }
+
+    .ch2-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.85rem, 2vw, 1.35rem);
+      margin: 1.75rem 0 1rem;
+    }
+
+    @media (max-width: 760px) {
+      .ch2-trio {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .ch2-flip {
+      aspect-ratio: 3 / 4.2;
+      perspective: 1000px;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .ch2-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .ch2-flip.is-flipped .ch2-flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .ch2-flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border: 1.5px solid var(--ink-dark);
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .ch2-flip-back {
+      transform: rotateY(180deg);
+      padding: 1rem 1.1rem;
+      justify-content: center;
+    }
+
+    .ch2-flip-photo {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .ch2-flip-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(1) contrast(1.05);
+    }
+
+    .ch2-flip-name {
+      margin: 0;
+      padding: 0.85rem 0.75rem;
+      font-family: var(--font-en-small);
+      font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+      letter-spacing: 0.06em;
+      text-align: center;
+      color: var(--ink-dark);
+      border-top: 1px solid rgba(39, 39, 39, 0.12);
+    }
+
+    .ch2-flip-back p {
+      margin: 0;
+      font-family: var(--font-zh-body);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--ink-faded);
+    }
+
+    .ch2-trio-note {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.76rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-faded);
+      opacity: 0.85;
+    }
+
+    .ch2-neck-stage {
+      margin: 2.5rem 0 1.5rem;
+      padding: 2rem 0 1.5rem;
+    }
+
+    .ch2-neck {
+      position: relative;
+      height: 4px;
+      margin: 0 clamp(0.5rem, 4vw, 2rem);
+      background: linear-gradient(90deg, #3d3428 0%, #5c4f3e 40%, #4a4032 100%);
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(39, 39, 39, 0.12);
+    }
+
+    .ch2-neck::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      width: 14px;
+      height: 22px;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, #2a241c, #4a4032);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .ch2-resonance {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px;
+      height: 18px;
+      border: 0;
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
+      background: var(--ink-dark);
+      box-shadow: 0 0 0 0 rgba(39, 39, 39, 0.45);
+      animation: ch2Pulse 2.4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .ch2-resonance:nth-child(1) { left: 22%; animation-delay: 0s; }
+    .ch2-resonance:nth-child(2) { left: 50%; animation-delay: 0.55s; }
+    .ch2-resonance:nth-child(3) { left: 78%; animation-delay: 1.1s; }
+
+    .ch2-resonance.is-active {
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--ink-dark);
+      animation: none;
+    }
+
+    @keyframes ch2Pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(39, 39, 39, 0.35); }
+      50% { box-shadow: 0 0 0 10px rgba(39, 39, 39, 0); }
+    }
+
+    .ch2-res-labels {
+      display: flex;
+      justify-content: space-between;
+      margin: 1.1rem clamp(0.5rem, 4vw, 2rem) 0;
+      padding: 0 4%;
+    }
+
+    .ch2-res-label {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+      letter-spacing: 0.08em;
+      color: var(--ink-faded);
+    }
+
+    .ch2-res-label.is-active {
+      color: var(--ink-dark);
+      font-weight: 600;
+    }
+
+    .ch2-res-text {
+      margin: 1.5rem 0 0;
+      min-height: 3em;
+      max-width: 68ch;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .ch2-res-text.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ch2-merge {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
+    .ch2-merge-btn {
+      border: 1.5px solid var(--ink-dark);
+      background: transparent;
+      padding: 0.65rem 2rem;
+      font-family: var(--font-en-display);
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.12em;
+      color: var(--ink-dark);
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .ch2-merge-btn:hover,
+    .ch2-merge-btn.is-playing {
+      background: var(--ink-dark);
+      color: #ffffff;
+    }
+
+    .ch2-merge-text {
+      margin: 1.25rem auto 0;
+      max-width: 68ch;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    .ch2-merge-text.is-visible {
+      opacity: 1;
+    }
+
+    .ch2-scores {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1rem, 2.5vw, 1.75rem);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .ch2-scores {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ch2-score-slot {
+      aspect-ratio: 4 / 3;
+      border: 1px dashed rgba(39, 39, 39, 0.28);
+      background: rgba(255, 255, 255, 0.6);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-typewriter);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-faded);
+    }
+
+    .ch2-score-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header class="hero-newspaper" id="hero" aria-label="Hero 首頁小報">
+      <div class="hero-left">
+        <div class="hero-photo-wrap">
+          <img class="hero-photo" src="./jobim-photo.png" alt="Antônio Carlos Jobim 於鋼琴前作曲的黑白照片" width="600" height="600">
+          <div class="hero-titles">
+            <h1 class="hero-title-en">
+              Antônio Carlos Jobim
+              <span class="line2">The Bossa Nova Era</span>
+            </h1>
+            <p class="hero-title-zh">安東尼奧·卡洛斯·裘賓與波薩諾瓦音樂</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-right-content">
+          <p class="hero-kicker">[Getz/Gilberto · 1964]</p>
+          <div class="typewriter-block" aria-live="polite">
+            <p class="typewriter-lyrics" id="typewriterLyrics"></p>
+            <p class="typewriter-quote" id="typewriterQuote"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="site-body">
+    <nav class="guitar-nav-wrap" id="guitarNavWrap" aria-label="吉他六弦章節導覽">
+      <div class="guitar-nav" id="guitarNav">
+        <button type="button" class="headstock-icon" id="headstockBtn" aria-label="展開章節導覽">
+          <svg viewBox="0 0 48 56" aria-hidden="true">
+            <path d="M8 4h32v8H8zm4 12h6v36h-6zm10 0h6v36h-6zm10 0h6v36h-6z"/>
+            <circle cx="14" cy="10" r="2"/><circle cx="24" cy="10" r="2"/><circle cx="34" cy="10" r="2"/>
+          </svg>
+        </button>
+        <p class="index-menu-kicker">[章節索引 INDEX]</p>
+        <main class="guitar-stage" id="guitarStage">
+          <div class="bridge" aria-hidden="true"></div>
+
+          <a class="string" href="#chapter-1" data-string="1" aria-label="關於裘賓 Antônio Carlos Jobim">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">關於裘賓 Antônio Carlos Jobim</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+          <a class="string" href="#chapter-2" data-string="2" aria-label="什麼是波薩諾瓦？ What is Bossa Nova?">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">什麼是波薩諾瓦？ What is Bossa Nova?</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+          <a class="string" href="#chapter-3" data-string="3" aria-label="1950年代現代化的巴西 The Modern Miracle">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">1950年代現代化的巴西 The Modern Miracle</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+          <a class="string" href="#chapter-4" data-string="4" aria-label="國際的成功 The Global Stage">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">國際的成功 The Global Stage</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+          <a class="string" href="#chapter-5" data-string="5" aria-label="1960年代巴西本土的裂痕 The Backlash">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">1960年代巴西本土的裂痕  The Backlash</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+          <a class="string" href="#chapter-6" data-string="6" aria-label="1970 鉛色年代的沈默 The Tension">
+            <span class="string-line string-line--left" aria-hidden="true"></span>
+            <span class="string-label">1970 鉛色年代的沈默 The Tension</span>
+            <span class="string-line string-line--right" aria-hidden="true"></span>
+          </a>
+        </main>
+      </div>
+    </nav>
+    <div class="guitar-nav-spacer" id="guitarNavSpacer" aria-hidden="true"></div>
+
+    <section class="chapter chapter-1" id="chapter-1" aria-labelledby="ch1-heading">
+      <div class="ch1-scene">
+        <div class="ch1-drawer">
+          <div class="ch1-drawer-rail" aria-hidden="true"></div>
+          <article class="ch1-folder" id="ch1Folder">
+            <div class="ch1-folder-tabs" role="tablist" aria-label="裘賓資料夾索引">
+              <button type="button" class="ch1-tab is-active" role="tab" id="ch1-tab-bio" aria-selected="true" aria-controls="ch1-panel-bio" data-ch1-tab="bio">生平</button>
+              <button type="button" class="ch1-tab" role="tab" id="ch1-tab-music" aria-selected="false" aria-controls="ch1-panel-music" data-ch1-tab="music">音樂因子</button>
+              <button type="button" class="ch1-tab" role="tab" id="ch1-tab-works" aria-selected="false" aria-controls="ch1-panel-works" data-ch1-tab="works">作品</button>
+            </div>
+
+            <div class="ch1-folder-shell">
+              <header class="ch1-folder-cover">
+                <figure class="ch1-polaroid">
+                  <span class="ch1-tape" aria-hidden="true"></span>
+                  <img class="ch1-polaroid-photo" src="./素材照片/Profile Jobim.jpeg" alt="Antônio Carlos Jobim 側面肖像" width="180" height="180">
+                </figure>
+                <div class="ch1-cover-meta">
+                  <h2 class="ch1-cover-title" id="ch1-heading">關於裘賓 Antônio Carlos Jobim</h2>
+                  <p class="ch1-cover-sub">Composer · Pianist · Arranger</p>
+                </div>
+              </header>
+
+              <div class="ch1-folder-interior">
+                <div class="ch1-panel is-active" role="tabpanel" id="ch1-panel-bio" aria-labelledby="ch1-tab-bio">
+                  <p class="ch1-panel-body">``</p>
+                </div>
+                <div class="ch1-panel" role="tabpanel" id="ch1-panel-music" aria-labelledby="ch1-tab-music" hidden>
+                  <p class="ch1-panel-body">``</p>
+                </div>
+                <div class="ch1-panel" role="tabpanel" id="ch1-panel-works" aria-labelledby="ch1-tab-works" hidden>
+                  <div class="ch1-works-stage">
+                    <p class="ch1-panel-body">``</p>
+                    <div class="ch1-vinyl-wrap" id="ch1VinylWrap">
+                      <button type="button" class="ch1-vinyl-btn" id="ch1VinylBtn" aria-label="播放 Chega de Saudade">
+                        <span class="ch1-vinyl-disc" aria-hidden="true">
+                          <img class="ch1-vinyl-label" src="./素材照片/Chega de Saudade.jpeg" alt="Chega de Saudade 專輯封面" width="132" height="132">
+                        </span>
+                      </button>
+                    </div>
+                    <p class="ch1-vinyl-hint">點擊黑膠播放 · Chega de Saudade</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="chapter chapter-2" id="chapter-2" aria-labelledby="ch2-heading">
+      <header class="ch2-masthead">
+        <p class="ch2-issue">Feature · Bossa Nova Special</p>
+        <h2 class="ch2-title" id="ch2-heading">
+          What is Bossa Nova?
+          <span class="ch2-title-zh">什麼是波薩諾瓦？</span>
+        </h2>
+      </header>
+
+      <article class="ch2-block">
+        <h3 class="ch2-kicker">［Bossa Nova一詞］</h3>
+        <p class="ch2-body">``</p>
+      </article>
+
+      <article class="ch2-block">
+        <h3 class="ch2-kicker">［Bossa Nova三巨頭］</h3>
+        <div class="ch2-trio">
+          <button type="button" class="ch2-flip" aria-label="Tom Jobim 字卡，點擊翻轉">
+            <div class="ch2-flip-inner">
+              <div class="ch2-flip-face ch2-flip-front">
+                <div class="ch2-flip-photo">
+                  <img src="./素材照片/Profile Jobim.jpeg" alt="Tom Jobim" width="240" height="280">
+                </div>
+                <p class="ch2-flip-name">Tom Jobim</p>
+              </div>
+              <div class="ch2-flip-face ch2-flip-back">
+                <p>``</p>
+              </div>
+            </div>
+          </button>
+          <button type="button" class="ch2-flip" aria-label="João Gilberto 字卡，點擊翻轉">
+            <div class="ch2-flip-inner">
+              <div class="ch2-flip-face ch2-flip-front">
+                <div class="ch2-flip-photo">
+                  <img src="./素材照片/joao gilberto profile.jpeg" alt="João Gilberto" width="240" height="280">
+                </div>
+                <p class="ch2-flip-name">João Gilberto</p>
+              </div>
+              <div class="ch2-flip-face ch2-flip-back">
+                <p>``</p>
+              </div>
+            </div>
+          </button>
+          <button type="button" class="ch2-flip" aria-label="Vinicius de Moraes 字卡，點擊翻轉">
+            <div class="ch2-flip-inner">
+              <div class="ch2-flip-face ch2-flip-front">
+                <div class="ch2-flip-photo">
+                  <img src="./素材照片/vinicius-de-moraes profile.webp" alt="Vinicius de Moraes" width="240" height="280">
+                </div>
+                <p class="ch2-flip-name">Vinicius de Moraes</p>
+              </div>
+              <div class="ch2-flip-face ch2-flip-back">
+                <p>``</p>
+              </div>
+            </div>
+          </button>
+        </div>
+        <p class="ch2-trio-note">``</p>
+      </article>
+
+      <article class="ch2-block">
+        <h3 class="ch2-kicker">［Bossa Nova的音樂性特色］</h3>
+        <p class="ch2-body">``</p>
+
+        <div class="ch2-neck-stage">
+          <div class="ch2-neck" role="group" aria-label="音樂共鳴點">
+            <button type="button" class="ch2-resonance" data-ch2-res="samba" aria-label="森巴共鳴點"></button>
+            <button type="button" class="ch2-resonance" data-ch2-res="jazz" aria-label="酷派爵士共鳴點"></button>
+            <button type="button" class="ch2-resonance" data-ch2-res="classical" aria-label="古典與德布西共鳴點"></button>
+          </div>
+          <div class="ch2-res-labels">
+            <span class="ch2-res-label" data-ch2-label="samba">森巴</span>
+            <span class="ch2-res-label" data-ch2-label="jazz">酷派爵士</span>
+            <span class="ch2-res-label" data-ch2-label="classical">古典與德布西</span>
+          </div>
+          <p class="ch2-res-text" id="ch2ResText" aria-live="polite"></p>
+        </div>
+
+        <div class="ch2-merge">
+          <button type="button" class="ch2-merge-btn" id="ch2MergeBtn">Bossa Nova</button>
+          <p class="ch2-merge-text" id="ch2MergeText">``</p>
+        </div>
+
+        <div class="ch2-scores">
+          <div class="ch2-score-slot" aria-label="樂譜圖片佔位">[圖片樂譜1]</div>
+          <div class="ch2-score-slot" aria-label="樂譜圖片佔位">[圖片樂譜2]</div>
+        </div>
+      </article>
+    </section>
+    <section class="chapter" id="chapter-3">
+      <h2>1950年代現代化的巴西 The Modern Miracle</h2>
+      <p>[章節內容佔位符]</p>
+    </section>
+    <section class="chapter" id="chapter-4">
+      <h2>國際的成功 The Global Stage</h2>
+      <p>[章節內容佔位符]</p>
+    </section>
+    <section class="chapter" id="chapter-5">
+      <h2>1960年代巴西本土的裂痕  The Backlash</h2>
+      <p>[章節內容佔位符]</p>
+    </section>
+    <section class="chapter" id="chapter-6">
+      <h2>1970 鉛色年代的沈默 The Tension</h2>
+      <p>[章節內容佔位符]</p>
+    </section>
+    </div>
+  </div>
+
+  <audio id="strumSound" preload="auto" src="./刷弦聲.mp3"></audio>
+
+  <script>
+    const lyricText = `Tall and tan and young and lovely,
+The girl from Ipanema goes walking
+And when she passes,
+each one she passes goes, "Aaah..."`;
+
+    const quoteText = ``;
+    let hasTypedLyrics = false;
+
+    const stringAudio = {
+      1: "./六根弦音檔/1(E).mp3",
+      2: "./六根弦音檔/2(A).mp3",
+      3: "./六根弦音檔/3(D).mp3",
+      4: "./六根弦音檔/4(G).mp3",
+      5: "./六根弦音檔/5(B).mp3",
+      6: "./六根弦音檔/6(E).mp3"
+    };
+
+    const lyricsEl = document.getElementById("typewriterLyrics");
+    const quoteEl = document.getElementById("typewriterQuote");
+    const heroEl = document.getElementById("hero");
+    const navWrap = document.getElementById("guitarNavWrap");
+    const navSpacer = document.getElementById("guitarNavSpacer");
+    const headstockBtn = document.getElementById("headstockBtn");
+    const guitarStage = document.getElementById("guitarStage");
+    const strumAudio = document.getElementById("strumSound");
+    const strings = document.querySelectorAll(".string");
+
+    const notePool = {};
+    Object.entries(stringAudio).forEach(([key, src]) => {
+      const audio = new Audio(src);
+      audio.preload = "auto";
+      notePool[key] = audio;
+    });
+
+    function nextDelay(char) {
+      const base = 22 + Math.random() * 75;
+      if (char === "\n") return 140 + Math.random() * 160;
+      if (/[,.!?]/.test(char)) return 130 + Math.random() * 220;
+      if (Math.random() < 0.1) return base + 90 + Math.random() * 120;
+      return base;
+    }
+
+    function typeInto(el, text, onDone) {
+      let index = 0;
+      function tick() {
+        if (index < text.length) {
+          const slice = text.slice(0, index);
+          el.textContent = slice;
+          el.innerHTML = slice + '<span class="cursor">|</span>';
+          const ch = text[index];
+          index += 1;
+          setTimeout(tick, nextDelay(ch));
+        } else {
+          el.textContent = text;
+          if (onDone) onDone();
+        }
+      }
+      tick();
+    }
+
+    function finishLyrics() {
+      hasTypedLyrics = true;
+      lyricsEl.textContent = lyricText;
+      if (!quoteText.trim()) {
+        quoteEl.textContent = "[史學報告核心研究引文佔位符]";
+        quoteEl.classList.add("is-active");
+        return;
+      }
+      quoteEl.classList.add("is-active");
+      typeInto(quoteEl, quoteText);
+    }
+
+    if (!hasTypedLyrics) {
+      typeInto(lyricsEl, lyricText, finishLyrics);
+    }
+
+    function playStringNote(stringId) {
+      const audio = notePool[stringId];
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    }
+
+    function playStrum() {
+      if (strumAudio.readyState >= 1) {
+        strumAudio.currentTime = 0;
+        strumAudio.volume = 0.35;
+        strumAudio.play().catch(fallbackStrum);
+        return;
+      }
+      strumAudio.addEventListener("canplay", () => {
+        strumAudio.currentTime = 0;
+        strumAudio.volume = 0.35;
+        strumAudio.play().catch(fallbackStrum);
+      }, { once: true });
+      strumAudio.load();
+    }
+
+    function fallbackStrum() {
+      [1, 3, 5, 2, 4, 6].forEach((id, i) => {
+        setTimeout(() => playStringNote(String(id)), i * 42);
+      });
+    }
+
+    function spawnNote(x, y) {
+      const note = document.createElement("span");
+      note.className = "note";
+      note.textContent = "♪";
+      note.style.left = `${x}px`;
+      note.style.top = `${y}px`;
+      guitarStage.appendChild(note);
+      setTimeout(() => note.remove(), 1000);
+    }
+
+    let scrollAnimId = null;
+
+    function easeInOutQuart(t) {
+      return t < 0.5
+        ? 8 * t * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 4) / 2;
+    }
+
+    function smoothScrollToElement(target, duration = 3400) {
+      if (!target) return;
+      if (scrollAnimId) cancelAnimationFrame(scrollAnimId);
+
+      const startY = window.scrollY;
+      const targetY = target.getBoundingClientRect().top + startY;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, startY + distance * easeInOutQuart(progress));
+        if (progress < 1) {
+          scrollAnimId = requestAnimationFrame(step);
+        } else {
+          scrollAnimId = null;
+        }
+      }
+
+      scrollAnimId = requestAnimationFrame(step);
+    }
+
+    strings.forEach((stringEl) => {
+      stringEl.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const id = stringEl.dataset.string;
+        playStringNote(id);
+
+        stringEl.classList.remove("is-plucked");
+        void stringEl.offsetWidth;
+        stringEl.classList.add("is-plucked");
+
+        const rect = guitarStage.getBoundingClientRect();
+        spawnNote(event.clientX - rect.left, event.clientY - rect.top - 8);
+
+        const target = document.querySelector(stringEl.getAttribute("href"));
+        setTimeout(() => smoothScrollToElement(target, 3600), 480);
+
+        if (navWrap.classList.contains("is-collapsed")) {
+          setTimeout(() => navWrap.classList.remove("is-expanded"), 1200);
+        }
+      });
+    });
+
+    let collapseRaf = null;
+    let navAnimating = false;
+    const collapseFadeMs = 420;
+
+    function setNavCollapsed(shouldCollapse) {
+      const isCollapsed = navWrap.classList.contains("is-collapsed");
+      if (shouldCollapse === isCollapsed || navAnimating) return;
+
+      if (shouldCollapse) {
+        const fromRect = navWrap.getBoundingClientRect();
+        navSpacer.style.height = `${fromRect.height}px`;
+        navAnimating = true;
+        navWrap.classList.remove("is-expanded");
+        navWrap.classList.add("is-collapsing");
+
+        setTimeout(() => {
+          navWrap.classList.remove("is-collapsing");
+          navWrap.classList.add("is-collapsed");
+          navAnimating = false;
+        }, collapseFadeMs);
+        return;
+      }
+
+      navWrap.classList.remove("is-expanded", "is-collapsing", "is-collapsed");
+      navSpacer.style.height = "0";
+    }
+
+    function updateNavCollapse() {
+      if (collapseRaf) cancelAnimationFrame(collapseRaf);
+      collapseRaf = requestAnimationFrame(() => {
+        const heroBottom = heroEl.getBoundingClientRect().bottom;
+        setNavCollapsed(heroBottom < 80);
+      });
+    }
+
+    window.addEventListener("scroll", updateNavCollapse, { passive: true });
+    updateNavCollapse();
+
+    function expandNav() {
+      if (!navWrap.classList.contains("is-collapsed")) return;
+      navWrap.classList.add("is-expanded");
+      playStrum();
+    }
+
+    function collapseNav() {
+      navWrap.classList.remove("is-expanded");
+    }
+
+    navWrap.addEventListener("mouseenter", () => {
+      if (navWrap.classList.contains("is-collapsed")) expandNav();
+    });
+
+    navWrap.addEventListener("mouseleave", collapseNav);
+
+    headstockBtn.addEventListener("click", () => {
+      navWrap.classList.toggle("is-expanded");
+      if (navWrap.classList.contains("is-expanded")) playStrum();
+    });
+
+    document.addEventListener("pointerup", (e) => {
+      if (!navWrap.contains(e.target)) collapseNav();
+    });
+
+    /* ── 第一單元：資料夾 ── */
+    const ch1Folder = document.getElementById("ch1Folder");
+    const ch1Section = document.getElementById("chapter-1");
+    const ch1Tabs = document.querySelectorAll(".ch1-tab");
+    const ch1Panels = document.querySelectorAll(".ch1-panel");
+    const ch1VinylWrap = document.getElementById("ch1VinylWrap");
+    const ch1VinylBtn = document.getElementById("ch1VinylBtn");
+    const chegaAudio = new Audio("./Chega De Saudade - Antonio Carlos Jobim (youtube).mp3");
+    chegaAudio.preload = "auto";
+    let ch1Pulled = false;
+
+    const ch1Observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          document.body.classList.toggle("is-ch1-zone", entry.isIntersecting);
+          if (entry.isIntersecting && !ch1Pulled) {
+            ch1Pulled = true;
+            ch1Folder.classList.add("is-pulled");
+          }
+        });
+      },
+      { threshold: 0.22, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    if (ch1Section) ch1Observer.observe(ch1Section);
+
+    function switchCh1Tab(tabId) {
+      ch1Tabs.forEach((tab) => {
+        const active = tab.dataset.ch1Tab === tabId;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
+      });
+
+      ch1Panels.forEach((panel) => {
+        const active = panel.id === `ch1-panel-${tabId}`;
+        panel.classList.toggle("is-active", active);
+        panel.hidden = !active;
+      });
+
+      if (tabId === "works") {
+        requestAnimationFrame(() => {
+          ch1VinylWrap.classList.add("is-out");
+        });
+      } else {
+        ch1VinylWrap.classList.remove("is-out");
+        ch1VinylBtn.classList.remove("is-spinning");
+        chegaAudio.pause();
+        chegaAudio.currentTime = 0;
+      }
+    }
+
+    ch1Tabs.forEach((tab) => {
+      tab.addEventListener("click", () => switchCh1Tab(tab.dataset.ch1Tab));
+    });
+
+    ch1VinylBtn.addEventListener("click", () => {
+      if (chegaAudio.paused) {
+        chegaAudio.play().catch(() => {});
+        ch1VinylBtn.classList.add("is-spinning");
+      } else {
+        chegaAudio.pause();
+        ch1VinylBtn.classList.remove("is-spinning");
+      }
+    });
+
+    chegaAudio.addEventListener("ended", () => {
+      chegaAudio.currentTime = 0;
+      ch1VinylBtn.classList.remove("is-spinning");
+    });
+
+    /* ── 第二單元 ── */
+    const ch2Flips = document.querySelectorAll(".ch2-flip");
+    const ch2ResBtns = document.querySelectorAll(".ch2-resonance");
+    const ch2ResLabels = document.querySelectorAll(".ch2-res-label");
+    const ch2ResText = document.getElementById("ch2ResText");
+    const ch2MergeBtn = document.getElementById("ch2MergeBtn");
+    const ch2MergeText = document.getElementById("ch2MergeText");
+
+    const ch2ResContent = {
+      samba: "``",
+      jazz: "``",
+      classical: "``"
+    };
+
+    const ch2ResAudio = {
+      samba: new Audio("./森巴.mp3"),
+      jazz: new Audio("./爵士.mp3"),
+      classical: new Audio("./鋼琴.mp3")
+    };
+
+    const ch2BossaAudio = new Audio("./經典 Bossa Nova.mp3");
+    let ch2CurrentAudio = null;
+
+    Object.values(ch2ResAudio).forEach((a) => { a.preload = "auto"; });
+    ch2BossaAudio.preload = "auto";
+
+    function ch2StopAllAudio() {
+      if (ch2CurrentAudio) {
+        ch2CurrentAudio.pause();
+        ch2CurrentAudio.currentTime = 0;
+        ch2CurrentAudio = null;
+      }
+      ch2MergeBtn.classList.remove("is-playing");
+    }
+
+    ch2Flips.forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("is-flipped");
+      });
+    });
+
+    ch2ResBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.ch2Res;
+        ch2StopAllAudio();
+        ch2BossaAudio.pause();
+
+        ch2ResBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+        ch2ResLabels.forEach((l) => l.classList.toggle("is-active", l.dataset.ch2Label === key));
+
+        ch2ResText.textContent = ch2ResContent[key] || "``";
+        ch2ResText.classList.add("is-visible");
+
+        const audio = ch2ResAudio[key];
+        if (audio) {
+          ch2CurrentAudio = audio;
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        }
+      });
+    });
+
+    ch2MergeBtn.addEventListener("click", () => {
+      ch2StopAllAudio();
+      ch2ResBtns.forEach((b) => b.classList.remove("is-active"));
+      ch2ResLabels.forEach((l) => l.classList.remove("is-active"));
+      ch2ResText.classList.remove("is-visible");
+
+      ch2MergeBtn.classList.add("is-playing");
+      ch2MergeText.classList.add("is-visible");
+      ch2CurrentAudio = ch2BossaAudio;
+      ch2BossaAudio.currentTime = 0;
+      ch2BossaAudio.play().catch(() => {});
+    });
+
+    ch2BossaAudio.addEventListener("ended", () => {
+      ch2MergeBtn.classList.remove("is-playing");
+      ch2CurrentAudio = null;
+    });
+
+    Object.values(ch2ResAudio).forEach((audio) => {
+      audio.addEventListener("ended", () => {
+        if (ch2CurrentAudio === audio) ch2CurrentAudio = null;
+      });
+    });
+  </script>
+</body>
+</html>
