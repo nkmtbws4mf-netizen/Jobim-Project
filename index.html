@@ -1776,7 +1776,7 @@
         #434850 100%
       );
       --ch5-progress: 0;
-      color: rgba(248, 246, 242, 0.92);
+      color: #ffffff;
     }
 
     .chapter-5::before {
@@ -1869,14 +1869,15 @@
       z-index: 3;
       max-width: 920px;
       margin: 0 auto;
-      padding-top: clamp(2rem, 5vh, 3.5rem);
-      padding-bottom: clamp(5rem, 12vh, 8rem);
+      padding-top: clamp(3rem, 7vh, 5rem);
+      padding-bottom: clamp(7rem, 16vh, 11rem);
+      min-height: clamp(68vh, 78vh, 860px);
     }
 
     .ch5-masthead {
-      margin-bottom: clamp(2.5rem, 6vh, 3.5rem);
+      margin-bottom: clamp(3rem, 7vh, 4.5rem);
       padding-bottom: 1.25rem;
-      border-bottom: 1px solid rgba(248, 246, 242, 0.22);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
     }
 
     .ch5-kicker {
@@ -1885,7 +1886,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(248, 246, 242, 0.58);
+      color: rgba(255, 255, 255, 0.82);
     }
 
     .ch5-title {
@@ -1894,7 +1895,6 @@
       font-size: clamp(1.75rem, 4.2vw, 2.6rem);
       font-weight: 500;
       line-height: 1.12;
-      color: rgba(252, 250, 246, 0.96);
     }
 
     .ch5-title-zh {
@@ -1906,18 +1906,399 @@
       letter-spacing: 0.12em;
     }
 
+    .chapter.chapter-5 h2.ch5-title,
+    .chapter.chapter-5 .ch5-title-zh {
+      color: var(--ink-dark);
+    }
+
     .ch5-body {
       margin: 0;
-      max-width: 68ch;
+      max-width: none;
+      min-height: clamp(300px, 40vh, 480px);
       font-family: var(--font-zh-body);
       font-size: clamp(0.92rem, 1.6vw, 1.02rem);
       line-height: 1.9;
-      color: rgba(248, 246, 242, 0.72);
+      color: #ffffff;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .ch5-fx { display: none; }
       .chapter-5 { padding-top: clamp(4rem, 10vh, 6rem); }
+    }
+
+    /* ── 第六單元：1970 鉛色年代的沈默 ── */
+    .chapter-6 {
+      position: relative;
+      border-top: none;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: clamp(4rem, 10vh, 6rem) clamp(1rem, 3vw, 2.5rem) clamp(6rem, 14vh, 9rem);
+      overflow: hidden;
+      background: linear-gradient(
+        180deg,
+        #434850 0%,
+        #3f444c 35%,
+        #3a3f46 70%,
+        #353940 100%
+      );
+      color: #ffffff;
+    }
+
+    .chapter.chapter-6 :is(h2, h3, p) {
+      color: #ffffff;
+    }
+
+    .chapter-6::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: clamp(80px, 14vh, 140px);
+      background: linear-gradient(to bottom, #434850 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.is-ch6-zone {
+      background-color: #3a3f46;
+    }
+
+    body.is-ch6-zone::before,
+    body.is-ch6-zone::after {
+      opacity: 0.08;
+    }
+
+    .ch6-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .ch6-masthead {
+      margin-bottom: clamp(3.5rem, 8vh, 5rem);
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .ch6-kicker {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-typewriter);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .ch6-title {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(1.75rem, 4.2vw, 2.6rem);
+      font-weight: 500;
+      line-height: 1.12;
+      color: #ffffff;
+    }
+
+    .ch6-title-zh {
+      display: block;
+      margin-top: 0.35em;
+      font-family: var(--font-zh-title);
+      font-size: 0.5em;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+    }
+
+    .ch6-block {
+      position: relative;
+      margin-bottom: clamp(4.5rem, 11vh, 6.5rem);
+    }
+
+    .ch6-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .ch6-block-label {
+      margin: 0 0 1.25rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.1em;
+      color: #ffffff;
+    }
+
+    .ch6-body {
+      margin: 0 0 1.5rem;
+      max-width: 68ch;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      line-height: 1.9;
+      color: #ffffff;
+    }
+
+    .ch6-body:last-child {
+      margin-bottom: 0;
+    }
+
+    .ch6-audio-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 3vw, 2rem);
+      margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    }
+
+    @media (max-width: 640px) {
+      .ch6-audio-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ch6-audio-card {
+      padding: clamp(1rem, 2.5vw, 1.35rem);
+      background: rgba(248, 246, 242, 0.04);
+      border: 1px solid rgba(248, 246, 242, 0.1);
+    }
+
+    .chapter.chapter-6 .ch6-audio-label,
+    .ch6-audio-btn {
+      font-family: var(--font-en-display);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #ffffff;
+    }
+
+    .chapter.chapter-6 .ch6-audio-label {
+      margin-top: -0.4rem;
+      margin-bottom: clamp(0.75rem, 2vh, 1rem);
+    }
+
+    .ch6-audio-btn {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: transparent;
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .ch6-audio-btn:hover,
+    .ch6-audio-btn.is-playing {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+
+    .ch6-redact {
+      position: relative;
+      display: inline;
+      white-space: nowrap;
+    }
+
+    .ch6-redact.is-redacted {
+      cursor: pointer;
+    }
+
+    .ch6-redact.is-redacted:focus-visible {
+      outline: 1px solid rgba(255, 255, 255, 0.55);
+      outline-offset: 3px;
+    }
+
+    .ch6-redact::after {
+      content: "";
+      position: absolute;
+      left: -3px;
+      right: -3px;
+      top: 8%;
+      bottom: 8%;
+      background: #141414;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition:
+        transform 0.9s cubic-bezier(0.35, 0, 0.25, 1),
+        opacity 0.45s ease;
+      transition-delay: var(--redact-delay, 0s);
+      opacity: 0.94;
+      border-radius: 1px;
+      pointer-events: none;
+    }
+
+    .ch6-redact.is-redacted::after {
+      transform: scaleX(1);
+    }
+
+    .ch6-redact.is-revealed::after {
+      transform: scaleX(0);
+      transform-origin: right center;
+      opacity: 0;
+      transition-delay: 0s;
+    }
+
+    .ch6-block--nature {
+      position: relative;
+      padding-top: clamp(1rem, 3vh, 2rem);
+      padding-bottom: clamp(10rem, 24vh, 14rem);
+    }
+
+    .ch6-nature-scene {
+      position: absolute;
+      right: clamp(-0.25rem, 1vw, 0.75rem);
+      bottom: clamp(0.25rem, 2vh, 1rem);
+      width: min(58vw, 340px);
+      height: min(42vh, 300px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: calc(0.15 + var(--ch6-tree, 0) * 0.65);
+    }
+
+    .ch6-nature-scene svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .ch6-tree-line {
+      fill: none;
+      stroke: rgba(248, 246, 242, 0.42);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .ch6-bird {
+      fill: none;
+      stroke: rgba(248, 246, 242, 0.5);
+      stroke-width: 1.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      opacity: calc(1 - var(--ch6-birds, 0));
+      transform-box: fill-box;
+      transform-origin: center center;
+      transform:
+        translate(
+          calc(var(--ch6-birds, 0) * var(--bird-dx, 120px)),
+          calc(var(--ch6-birds, 0) * var(--bird-dy, -90px))
+        )
+        scale(calc(1 - var(--ch6-birds, 0) * 0.4));
+      transition:
+        transform 1.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 1.35s ease;
+    }
+
+    .ch6-block--nature.is-birds-departed {
+      --ch6-birds: 1;
+    }
+
+    .ch6-nature-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ch6-block--wave {
+      margin-bottom: 0;
+      padding-top: clamp(2rem, 5vh, 3rem);
+    }
+
+    .ch6-wave-stage {
+      max-width: 280px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ch6-wave-stage.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chapter.chapter-6 .ch6-wave-label {
+      margin: 0 0 1rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.14em;
+      color: #ffffff;
+    }
+
+    .ch6-wave-card {
+      margin: 0;
+      padding: clamp(0.85rem, 2vw, 1.1rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    .ch6-wave-cover {
+      width: 100%;
+      max-width: 200px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid rgba(39, 39, 39, 0.1);
+      box-shadow: 0 2px 8px rgba(39, 39, 39, 0.06);
+    }
+
+    .ch6-wave-caption {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+      letter-spacing: 0.05em;
+      color: var(--ink-dark);
+    }
+
+    .ch6-typewriter {
+      margin: clamp(1.5rem, 4vh, 2.25rem) 0 0;
+      min-height: 4.5em;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.88rem, 1.55vw, 1rem);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      white-space: pre-wrap;
+    }
+
+    .ch6-typewriter .cursor {
+      animation: ch6CursorBlink 0.9s step-end infinite;
+    }
+
+    @keyframes ch6CursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ch6-redact::after {
+        transition: none;
+      }
+
+      .ch6-redact.is-redacted:not(.is-revealed)::after {
+        transform: scaleX(1);
+      }
+
+      .ch6-redact.is-revealed::after {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      .ch6-nature-scene {
+        opacity: 0.55;
+      }
+
+      .ch6-bird {
+        opacity: 0;
+        transform: none;
+      }
+
+      .ch6-wave-stage {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
   </style>
 
@@ -2238,14 +2619,94 @@
         <p class="ch5-body">``</p>
       </div>
     </section>
-    <section class="chapter" id="chapter-6">
-      <h2>1970 鉛色年代的沈默 The Tension</h2>
-      <p>``</p>
+    <section class="chapter chapter-6" id="chapter-6" aria-labelledby="ch6-heading">
+      <div class="ch6-inner">
+        <header class="ch6-masthead">
+          <p class="ch6-kicker">Brazil · 1970s · Structural Silence</p>
+          <h2 class="ch6-title" id="ch6-heading">
+            The Tension
+            <span class="ch6-title-zh">1970 鉛色年代的沈默</span>
+          </h2>
+        </header>
+
+        <article class="ch6-block" id="ch6BlockCritique">
+          <h3 class="ch6-block-label">［被批判的 Bossa Nova］</h3>
+          <p class="ch6-body">``</p>
+          <div class="ch6-audio-row">
+            <div class="ch6-audio-card">
+              <p class="ch6-audio-label">Chico Buarque</p>
+              <button type="button" class="ch6-audio-btn" data-ch6-audio="banda" data-src="./Chico Buarque - Banda.mp3">Banda</button>
+            </div>
+            <div class="ch6-audio-card">
+              <p class="ch6-audio-label">Tom Jobim</p>
+              <button type="button" class="ch6-audio-btn" data-ch6-audio="sabia" data-src="./Tom Jobim - Sabiá.mp3">Sabiá</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="ch6-block ch6-block--censor" id="ch6BlockCensor">
+          <h3 class="ch6-block-label">［音樂家 Jobim 的緊張生活］</h3>
+          <p class="ch6-body">``</p>
+          <p class="ch6-body ch6-redact-para">
+            ……他與<span class="ch6-redact">辛納屈</span>的交往，<span class="ch6-redact">富人崇洋</span>的暗流，以及<span class="ch6-redact">政府審查</span>的壓力……
+          </p>
+        </article>
+
+        <article class="ch6-block ch6-block--nature" id="ch6BlockNature">
+          <div class="ch6-nature-scene" id="ch6NatureScene" aria-hidden="true">
+            <svg viewBox="0 0 280 300" preserveAspectRatio="xMaxYMax meet">
+              <path class="ch6-tree-line" data-ch6-tree-layer="0" d="M 148 278 L 148 168"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 148 210 L 108 168"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 148 198 L 188 156"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 148 178 L 118 138"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 148 166 L 178 126"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 148 152 L 128 118"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 148 142 L 168 108"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 128 Q 118 98 92 82"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 118 Q 178 88 204 72"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 108 Q 148 78 148 52"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 118 96 Q 98 78 88 62"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 178 92 Q 198 74 212 58"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="0" d="M 228 278 L 228 212"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 228 242 L 212 218"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 228 234 L 244 210"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 228 224 L 216 202"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 228 218 L 240 196"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 228 210 L 220 190"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 228 204 L 236 184"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 198 Q 214 178 204 168"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 192 Q 242 172 252 162"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 186 Q 228 168 228 154"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 216 184 Q 208 172 202 164"/>
+              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 240 180 Q 248 168 256 160"/>
+              <path class="ch6-bird" style="--bird-dx: 110px; --bird-dy: -82px" d="M 132 88 L 142 82 L 152 88"/>
+              <path class="ch6-bird" style="--bird-dx: 130px; --bird-dy: -96px" d="M 158 72 L 168 66 L 178 72"/>
+              <path class="ch6-bird" style="--bird-dx: 95px; --bird-dy: -88px" d="M 112 104 L 122 98 L 132 104"/>
+            </svg>
+          </div>
+          <div class="ch6-nature-content">
+            <h3 class="ch6-block-label">［逃向大自然的焦慮移情］</h3>
+            <p class="ch6-body">``</p>
+            <p class="ch6-typewriter" id="ch6Typewriter" aria-live="polite"></p>
+          </div>
+        </article>
+
+        <article class="ch6-block ch6-block--wave" id="ch6BlockWave">
+          <div class="ch6-wave-stage" id="ch6WaveStage">
+            <p class="ch6-wave-label">補充聆聽</p>
+            <figure class="ch6-wave-card paper-card">
+              <img class="ch6-wave-cover" src="./素材照片/Wave.jpeg" alt="Wave — Antônio Carlos Jobim 專輯封面" width="200" height="200">
+              <figcaption class="ch6-wave-caption">Wave · Antônio Carlos Jobim</figcaption>
+            </figure>
+          </div>
+        </article>
+      </div>
     </section>
     </div>
   </div>
 
   <audio id="strumSound" preload="auto" src="./刷弦聲.mp3"></audio>
+  <audio id="ipanemaAudio" preload="auto" src="./The Girl From Ipanema - Stan Getz (youtube).mp3"></audio>
 
   <script>
     const lyricText = `Tall and tan and young and lovely,
@@ -2679,9 +3140,29 @@ each one she passes goes, "Aaah..."`;
     const ch4HallFlip = document.getElementById("ch4HallFlip");
     const ch4MarketStage = document.getElementById("ch4MarketStage");
     const ch4Playing = document.getElementById("ch4Playing");
-    const ipanemaAudio = new Audio("./The Girl From Ipanema - Stan Getz (youtube).mp3");
-    ipanemaAudio.preload = "auto";
-    let ch4MarketPlayed = false;
+    const ipanemaAudio = document.getElementById("ipanemaAudio");
+    let ch4IpanemaStarted = false;
+    let ch4IpanemaWantsPlay = false;
+
+    async function syncCh4Ipanema(shouldPlay) {
+      if (!ipanemaAudio) return;
+      ch4IpanemaWantsPlay = shouldPlay;
+      if (!shouldPlay) {
+        ipanemaAudio.pause();
+        ch4Playing?.classList.remove("is-active");
+        return;
+      }
+      try {
+        if (!ch4IpanemaStarted) {
+          ipanemaAudio.currentTime = 0;
+        }
+        await ipanemaAudio.play();
+        ch4IpanemaStarted = true;
+        ch4Playing?.classList.add("is-active");
+      } catch {
+        ch4Playing?.classList.remove("is-active");
+      }
+    }
 
     if (ch4HallFlip) {
       ch4HallFlip.addEventListener("click", () => {
@@ -2694,22 +3175,22 @@ each one she passes goes, "Aaah..."`;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             ch4MarketStage.classList.add("is-visible");
-            if (!ch4MarketPlayed) {
-              ch4MarketPlayed = true;
-              ipanemaAudio.currentTime = 0;
-              ipanemaAudio.play().catch(() => {});
-              ch4Playing.classList.add("is-active");
-            }
-          } else if (ch4MarketPlayed) {
-            ipanemaAudio.pause();
-            ch4Playing.classList.remove("is-active");
+            syncCh4Ipanema(true);
+          } else {
+            syncCh4Ipanema(false);
           }
         });
       },
-      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.25, rootMargin: "0px 0px -5% 0px" }
     );
 
     if (ch4MarketStage) ch4MarketObserver.observe(ch4MarketStage);
+
+    document.addEventListener("pointerdown", () => {
+      if (ch4IpanemaWantsPlay && ipanemaAudio?.paused) {
+        syncCh4Ipanema(true);
+      }
+    }, { passive: true });
 
     /* ── 第五單元：音符一次性墜落 ── */
     const CH5_NOTE_COUNT = 36;
@@ -2811,9 +3292,183 @@ each one she passes goes, "Aaah..."`;
     window.addEventListener("scroll", updateCh5Scroll, { passive: true });
     window.addEventListener("resize", updateCh5Scroll, { passive: true });
 
-    ipanemaAudio.addEventListener("ended", () => {
-      ch4Playing.classList.remove("is-active");
+    ipanemaAudio?.addEventListener("ended", () => {
+      ch4Playing?.classList.remove("is-active");
     });
+
+    /* ── 第六單元 ── */
+    const ch6BlockCensor = document.getElementById("ch6BlockCensor");
+    const ch6BlockNature = document.getElementById("ch6BlockNature");
+    const ch6NatureScene = document.getElementById("ch6NatureScene");
+    const ch6BlockWave = document.getElementById("ch6BlockWave");
+    const ch6WaveStage = document.getElementById("ch6WaveStage");
+    const ch6TreeLines = document.querySelectorAll(".ch6-tree-line");
+    const ch6Typewriter = document.getElementById("ch6Typewriter");
+    const ch6Confession = "他們砍倒了樹木。他們殺死了鳥兒……我們怎麼辦？";
+    const ch6AudioBtns = document.querySelectorAll(".ch6-audio-btn");
+    const ch6TreeLayerDelay = [0, 0.08, 0.16, 0.24, 0.32, 0.4];
+    const ch6ReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ch6ConfessionTyped = false;
+    let ch6CurrentAudio = null;
+    let ch6TreeLinesReady = false;
+
+    function initCh6TreeLines() {
+      ch6TreeLines.forEach((line) => {
+        const len = line.getTotalLength();
+        line.dataset.len = String(len);
+        line.style.strokeDasharray = String(len);
+        line.style.strokeDashoffset = ch6ReducedMotion ? "0" : String(len);
+      });
+      ch6TreeLinesReady = true;
+      if (ch6ReducedMotion && ch6BlockNature) {
+        ch6BlockNature.style.setProperty("--ch6-tree", "1");
+        ch6BlockNature.style.setProperty("--ch6-birds", "1");
+      }
+    }
+
+    function updateCh6NatureScroll() {
+      if (!ch6BlockNature || ch6ReducedMotion) return;
+      const vh = window.innerHeight;
+      const rect = ch6BlockNature.getBoundingClientRect();
+      const start = vh * 0.82;
+      const end = -rect.height * 0.1;
+      const raw = (start - rect.top) / (start - end);
+      const progress = Math.min(1, Math.max(0, raw));
+      const treeProgress = Math.min(1, progress / 0.62);
+
+      ch6BlockNature.style.setProperty("--ch6-tree", treeProgress.toFixed(3));
+
+      if (ch6TreeLinesReady) {
+        ch6TreeLines.forEach((line) => {
+          const len = parseFloat(line.dataset.len || "0");
+          const layer = Number(line.dataset.ch6TreeLayer || 0);
+          const delay = ch6TreeLayerDelay[layer] ?? 0;
+          const layerProgress = Math.min(1, Math.max(0, (treeProgress - delay) / (1 - delay)));
+          line.style.strokeDashoffset = String(len * (1 - layerProgress));
+        });
+      }
+    }
+
+    function updateCh6Zone() {
+      if (!ch6Section) return;
+      const rect = ch6Section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const inCh6 = rect.top < vh * 0.92 && rect.bottom > vh * 0.05;
+      document.body.classList.toggle("is-ch6-zone", inCh6);
+      if (inCh6) {
+        document.body.classList.remove("is-ch5-zone");
+      }
+      updateCh6NatureScroll();
+    }
+
+    function ch6StopAudio() {
+      if (ch6CurrentAudio) {
+        ch6CurrentAudio.pause();
+        ch6CurrentAudio.currentTime = 0;
+        ch6CurrentAudio = null;
+      }
+      ch6AudioBtns.forEach((btn) => btn.classList.remove("is-playing"));
+    }
+
+    ch6AudioBtns.forEach((btn) => {
+      const src = btn.dataset.src;
+      if (!src) return;
+      const audio = new Audio(src);
+      audio.preload = "auto";
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("is-playing")) {
+          ch6StopAudio();
+          return;
+        }
+        ch6StopAudio();
+        ch6CurrentAudio = audio;
+        btn.classList.add("is-playing");
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+          btn.classList.remove("is-playing");
+          ch6CurrentAudio = null;
+        });
+      });
+      audio.addEventListener("ended", () => {
+        btn.classList.remove("is-playing");
+        if (ch6CurrentAudio === audio) ch6CurrentAudio = null;
+      });
+    });
+
+    const ch6CensorObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.querySelectorAll(".ch6-redact").forEach((el, i) => {
+            if (el.classList.contains("is-revealed")) return;
+            el.style.setProperty("--redact-delay", `${0.15 + i * 0.35}s`);
+            el.classList.add("is-redacted");
+            el.setAttribute("tabindex", "0");
+            el.setAttribute("role", "button");
+            el.setAttribute("aria-label", `摘去遮蓋：${el.textContent.trim()}`);
+          });
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    if (ch6BlockCensor) ch6CensorObserver.observe(ch6BlockCensor);
+
+    function revealCh6Redact(el) {
+      if (!el.classList.contains("is-redacted") || el.classList.contains("is-revealed")) return;
+      el.classList.add("is-revealed");
+      el.classList.remove("is-redacted");
+      el.removeAttribute("tabindex");
+      el.removeAttribute("role");
+      el.setAttribute("aria-label", el.textContent.trim());
+    }
+
+    document.querySelectorAll(".ch6-redact").forEach((el) => {
+      el.addEventListener("click", () => revealCh6Redact(el));
+      el.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          revealCh6Redact(el);
+        }
+      });
+    });
+
+    const ch6NatureObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-birds-departed");
+            if (!ch6ConfessionTyped && ch6Typewriter) {
+              ch6ConfessionTyped = true;
+              typeInto(ch6Typewriter, ch6Confession);
+            }
+          }
+        });
+      },
+      { threshold: 0.22 }
+    );
+
+    if (ch6BlockNature) ch6NatureObserver.observe(ch6BlockNature);
+
+    const ch6WaveObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.28, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    if (ch6WaveStage) ch6WaveObserver.observe(ch6WaveStage);
+
+    if (ch6TreeLines.length) initCh6TreeLines();
+
+    updateCh6Zone();
+    window.addEventListener("scroll", updateCh6Zone, { passive: true });
+    window.addEventListener("resize", updateCh6Zone, { passive: true });
   </script>
 </body>
 </html>
