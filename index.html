@@ -675,8 +675,11 @@
       .ch2-trio-lead,
       .ch2-flip-back p,
       .ch3-body,
+      .ch3-note,
+      .ch3-cite,
       .ch4-body,
       .ch4-flip-back p,
+      .ch4-flip-roster li,
       .ch5-body,
       .ch6-body,
       .ch7-body,
@@ -796,16 +799,10 @@
 
     .ch1-tab:nth-child(1) {
       background: #ebe7df;
-      transform: translateY(4px);
+      transform: translateY(2px);
     }
 
     .ch1-tab:nth-child(2) {
-      background: #e3dfd6;
-      transform: translateY(2px);
-      z-index: 2;
-    }
-
-    .ch1-tab:nth-child(3) {
       background: #ddd8cf;
       z-index: 3;
     }
@@ -828,14 +825,10 @@
     }
 
     .ch1-folder-tabs--bottom .ch1-tab:nth-child(1) {
-      transform: translateY(-4px);
-    }
-
-    .ch1-folder-tabs--bottom .ch1-tab:nth-child(2) {
       transform: translateY(-2px);
     }
 
-    .ch1-folder-tabs--bottom .ch1-tab:nth-child(3) {
+    .ch1-folder-tabs--bottom .ch1-tab:nth-child(2) {
       transform: translateY(0);
     }
 
@@ -1218,111 +1211,6 @@
       color: var(--ink-faded);
     }
 
-    .ch1-works-stage {
-      position: relative;
-      min-height: 240px;
-      padding-right: clamp(195px, 33vw, 270px);
-    }
-
-    .ch1-vinyl-wrap {
-      position: absolute;
-      right: -8%;
-      bottom: -12%;
-      width: clamp(195px, 30vw, 252px);
-      height: clamp(195px, 30vw, 252px);
-      transform: translateX(110%);
-      opacity: 0;
-      transition:
-        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .ch1-vinyl-wrap.is-out {
-      transform: translateX(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .ch1-vinyl-btn {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      padding: 0;
-      border-radius: 50%;
-      cursor: pointer;
-      background: transparent;
-      box-shadow: 0 10px 28px rgba(39, 39, 39, 0.18);
-      transition: box-shadow 0.3s ease;
-      position: relative;
-    }
-
-    .ch1-vinyl-btn:hover {
-      box-shadow: 0 14px 32px rgba(39, 39, 39, 0.24);
-    }
-
-    .ch1-vinyl-disc {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      position: relative;
-      background:
-        radial-gradient(circle at center, #f3f3f3 0 2.8%, transparent 3%),
-        repeating-radial-gradient(circle at center, #1a1a1a 0 72%, #2a2a2a 72% 73%, #1a1a1a 73% 100%);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    }
-
-    .ch1-vinyl-label {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 52%;
-      height: 52%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
-    }
-
-    .ch1-vinyl-disc::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 5%;
-      height: 5%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: #e8e8e8;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
-      z-index: 2;
-    }
-
-    .ch1-vinyl-btn.is-spinning .ch1-vinyl-disc {
-      animation: ch1VinylSpin 9s linear infinite;
-    }
-
-    @keyframes ch1VinylSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .ch1-vinyl-hint {
-      margin: 1rem 0 0;
-      font-family: var(--font-en-small);
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      color: var(--ink-faded);
-      opacity: 0;
-      transition: opacity 0.35s ease 0.25s;
-    }
-
-    .ch1-works-stage:has(.ch1-vinyl-wrap.is-out) .ch1-vinyl-hint {
-      opacity: 1;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .ch1-folder {
         transform: none;
@@ -1330,16 +1218,12 @@
         transition: none;
       }
 
-      .ch1-vinyl-wrap {
+      .ch2-vinyl-wrap {
         transform: none;
         opacity: 1;
-        position: relative;
-        right: auto;
-        bottom: auto;
-        margin-top: 1.5rem;
       }
 
-      .ch1-vinyl-btn.is-spinning .ch1-vinyl-disc {
+      .ch2-vinyl-btn.is-spinning .ch2-vinyl-disc {
         animation: none;
       }
     }
@@ -1567,6 +1451,126 @@
       text-align: center;
     }
 
+    .ch2-vinyl-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 252px) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .ch2-vinyl-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .ch2-vinyl-quote {
+      max-width: none;
+      margin: 0;
+    }
+
+    @media (max-width: 720px) {
+      .ch2-vinyl-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ch2-vinyl-wrap {
+      width: clamp(195px, 30vw, 252px);
+      height: clamp(195px, 30vw, 252px);
+      transform: translateX(-18%);
+      opacity: 0;
+      transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
+    }
+
+    .ch2-vinyl-wrap.is-visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .ch2-vinyl-btn {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: transparent;
+      box-shadow: 0 10px 28px rgba(39, 39, 39, 0.18);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .ch2-vinyl-btn:hover {
+      box-shadow: 0 14px 32px rgba(39, 39, 39, 0.24);
+    }
+
+    .ch2-vinyl-disc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at center, #f3f3f3 0 2.8%, transparent 3%),
+        repeating-radial-gradient(circle at center, #1a1a1a 0 72%, #2a2a2a 72% 73%, #1a1a1a 73% 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .ch2-vinyl-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52%;
+      height: 52%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .ch2-vinyl-disc::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5%;
+      height: 5%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #e8e8e8;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
+
+    .ch2-vinyl-btn.is-spinning .ch2-vinyl-disc {
+      animation: ch2VinylSpin 9s linear infinite;
+    }
+
+    @keyframes ch2VinylSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .ch2-vinyl-hint {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-faded);
+      opacity: 0;
+      transition: opacity 0.35s ease 0.25s;
+    }
+
+    .ch2-vinyl-stage:has(.ch2-vinyl-wrap.is-visible) .ch2-vinyl-hint {
+      opacity: 1;
+    }
+
     /* ── 第三單元：Ipanema 陽光與現代巴西 ── */
     .chapter-3 {
       position: relative;
@@ -1676,6 +1680,30 @@
       font-size: clamp(0.92rem, 1.6vw, 1.05rem);
       line-height: 1.9;
       color: rgba(39, 39, 39, 0.78);
+    }
+
+    .ch3-body + .ch3-body {
+      margin-top: 1.35em;
+    }
+
+    .ch3-cite {
+      margin: 0 0 1.75rem;
+      max-width: 68ch;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.78rem, 1.4vw, 0.88rem);
+      letter-spacing: 0.06em;
+      line-height: 1.75;
+      color: rgba(42, 58, 68, 0.68);
+    }
+
+    .ch3-block {
+      margin-top: clamp(2.5rem, 5vh, 3.25rem);
+    }
+
+    .ch3-note {
+      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
+      color: rgba(39, 39, 39, 0.58);
+      font-style: italic;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1854,9 +1882,17 @@
       font-family: var(--font-zh-body);
       font-size: 0.78rem;
       letter-spacing: 0.06em;
-      text-align: center;
+      text-align: left;
       color: var(--ink-faded);
       border-top: 1px solid rgba(39, 39, 39, 0.1);
+    }
+
+    .ch4-flip-caption-hint {
+      margin-left: 0.35em;
+      font-family: var(--font-typewriter);
+      font-size: 0.92em;
+      letter-spacing: 0.08em;
+      color: rgba(39, 39, 39, 0.58);
     }
 
     .ch4-flip-back p {
@@ -1865,6 +1901,29 @@
       font-size: clamp(0.88rem, 1.5vw, 0.98rem);
       line-height: 1.8;
       color: var(--ink-faded);
+    }
+
+    .ch4-flip-roster {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+    }
+
+    .ch4-flip-roster li + li {
+      margin-top: 0.45rem;
+    }
+
+    .ch4-subheading {
+      margin: clamp(1.75rem, 4vh, 2.25rem) 0 0.85rem;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.82rem, 1.5vw, 0.92rem);
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
     }
 
     .ch4-body {
@@ -1895,14 +1954,13 @@
       display: grid;
       grid-template-columns: minmax(0, 140px) 1fr;
       gap: clamp(1rem, 2.5vw, 1.75rem);
-      align-items: center;
+      align-items: start;
     }
 
     @media (max-width: 560px) {
       .ch4-market-card {
         grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
+        justify-items: start;
       }
     }
 
@@ -1915,33 +1973,19 @@
       box-shadow: 0 2px 8px rgba(39, 39, 39, 0.06);
     }
 
-    .ch4-stats {
+    .ch4-market-copy {
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
+      min-width: 0;
     }
 
-    .ch4-stat { padding: 0.85rem 1rem; }
-
-    .ch4-stat-label {
-      margin: 0 0 0.25rem;
-      font-family: var(--font-typewriter);
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faded);
-    }
-
-    .ch4-stat-value {
-      margin: 0;
-      font-family: var(--font-en-display);
-      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-      letter-spacing: 0.04em;
-      color: var(--ink-dark);
+    .ch4-market-body {
+      max-width: none;
     }
 
     .ch4-playing {
-      margin: 0.75rem 0 0;
+      margin: 0;
       font-family: var(--font-en-small);
       font-size: 0.78rem;
       letter-spacing: 0.06em;
@@ -2777,7 +2821,6 @@
             <div class="ch1-folder-tabs" role="tablist" aria-label="裘賓資料夾索引">
               <button type="button" class="ch1-tab is-active" role="tab" id="ch1-tab-bio" aria-selected="true" aria-controls="ch1-panel-bio" data-ch1-tab="bio">生平</button>
               <button type="button" class="ch1-tab" role="tab" id="ch1-tab-music" aria-selected="false" aria-controls="ch1-panel-music" data-ch1-tab="music">音樂因子</button>
-              <button type="button" class="ch1-tab" role="tab" id="ch1-tab-works" aria-selected="false" aria-controls="ch1-panel-works" data-ch1-tab="works">作品</button>
             </div>
 
             <div class="ch1-folder-shell">
@@ -2926,26 +2969,12 @@
                     </section>
                   </div>
                 </div>
-                <div class="ch1-panel" role="tabpanel" id="ch1-panel-works" aria-labelledby="ch1-tab-works" hidden>
-                  <div class="ch1-works-stage">
-                    <p class="ch1-panel-body">``</p>
-                    <div class="ch1-vinyl-wrap" id="ch1VinylWrap">
-                      <button type="button" class="ch1-vinyl-btn" id="ch1VinylBtn" aria-label="播放 Chega de Saudade">
-                        <span class="ch1-vinyl-disc" aria-hidden="true">
-                          <img class="ch1-vinyl-label" src="./素材照片/Chega de Saudade.jpeg" alt="Chega de Saudade 專輯封面" width="132" height="132">
-                        </span>
-                      </button>
-                    </div>
-                    <p class="ch1-vinyl-hint">點擊黑膠播放 · Chega de Saudade</p>
-                  </div>
-                </div>
               </div>
             </div>
 
             <div class="ch1-folder-tabs ch1-folder-tabs--bottom" role="tablist" aria-label="裘賓資料夾索引（底部）">
               <button type="button" class="ch1-tab is-active" role="tab" id="ch1-tab-bio-bottom" aria-selected="true" aria-controls="ch1-panel-bio" data-ch1-tab="bio">生平</button>
               <button type="button" class="ch1-tab" role="tab" id="ch1-tab-music-bottom" aria-selected="false" aria-controls="ch1-panel-music" data-ch1-tab="music">音樂因子</button>
-              <button type="button" class="ch1-tab" role="tab" id="ch1-tab-works-bottom" aria-selected="false" aria-controls="ch1-panel-works" data-ch1-tab="works">作品</button>
             </div>
           </article>
         </div>
@@ -3028,7 +3057,9 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
 
       <article class="ch2-block">
         <h3 class="ch2-kicker">Bossa Nova的音樂性特色</h3>
-        <p class="ch2-body">正如同在 João Gilberto 介紹字卡內所說，去除了熱鬧、繁複的森巴打擊樂器組成，僅僅用幾把吉他加上人聲，就能成為兼備節奏與旋律的 Bossa Nova 樂隊。</p>
+        <p class="ch2-body">正如同在 João Gilberto 介紹字卡內所說，去除了熱鬧、繁複的森巴打擊樂器組成，僅僅用幾把吉他加上人聲，就能成為兼備節奏與旋律的 Bossa Nova 樂隊。
+<br><br>
+同時，在聲樂表現上，João Gilberto 使用呢喃般膽怯而安靜的唱法，使得歌曲圓潤輕柔。裘賓高度精密的作曲結構、João Gilberto 的節奏吉他與輕柔口吻，以及 Vinicius de Moraes 具備音律美感、如詩一般的歌詞，為 Bossa Nova 進行了定調。</p>
 
         <figure class="ch2-score-figure">
           <div class="ch2-score-slot">
@@ -3036,6 +3067,23 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           </div>
           <figcaption class="ch2-score-caption">João Gilberto 在 〈The Girl from Ipanema〉所使用的節奏型</figcaption>
         </figure>
+      </article>
+
+      <article class="ch2-block ch2-vinyl-block" id="ch2VinylBlock">
+        <h3 class="ch2-kicker">chega de saudade</h3>
+        <div class="ch2-vinyl-layout">
+          <div class="ch2-vinyl-stage">
+            <div class="ch2-vinyl-wrap" id="ch2VinylWrap">
+              <button type="button" class="ch2-vinyl-btn" id="ch2VinylBtn" aria-label="播放 Chega de Saudade">
+                <span class="ch2-vinyl-disc" aria-hidden="true">
+                  <img class="ch2-vinyl-label" src="./素材照片/Chega de Saudade.jpeg" alt="Chega de Saudade 專輯封面" width="132" height="132">
+                </span>
+              </button>
+            </div>
+            <p class="ch2-vinyl-hint">點擊黑膠播放 · Chega de Saudade</p>
+          </div>
+          <p class="ch2-body ch2-vinyl-quote">Chega de Saudade 是第一首將 Bossa Nova 三位重量級人物齊聚的作品，被視為 Bossa Nova 此音樂類型的代表。</p>
+        </div>
       </article>
     </section>
 
@@ -3073,7 +3121,19 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
             <span class="ch3-title-zh">1950年代現代化的巴西</span>
           </h2>
         </header>
-        <p class="ch3-body">``</p>
+
+        <p class="ch3-cite">主要引用：Suzel Ana Reily &lt;Tom Jobim and the Bossa Nova Era&gt;</p>
+
+        <p class="ch3-body">在理解 Bossa Nova 的形成時，除了關注天才音樂人們相遇與合作之外，還需要代入當時的時代脈絡。從 1960 年代巴西的政治、經濟、文化角度切入，關注當時人們對音樂的需求。當新任總統喊出「Fifty years in five」，即「在五年內彌補國家五十年滯後」口號時，搭上現代化列車的巴西人民對國家發展充滿希望；工業化的成功、新首都的建立、接軌國際的渴望⋯⋯，在現代化進程帶來的樂觀主義之下，文化藝術領域又受到了什麼樣的影響？</p>
+
+        <article class="ch3-block">
+          <h3 class="ch2-kicker">時空背景</h3>
+          <p class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的新首都——巴西利亞。期間，庫比契克總統大力推動工業發展以及建設工程，實現了巴西經濟的飛躍，擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
+<br><br>
+工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。（Tinhorião 1986，第 231 頁）。在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</p>
+          <p class="ch3-body ch3-note">註：新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p>
+          <p class="ch3-body ch3-note">註：冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p>
+        </article>
       </div>
     </section>
     <section class="chapter chapter-4" id="chapter-4" aria-labelledby="ch4-heading">
@@ -3086,7 +3146,6 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           </h2>
         </header>
         <article class="ch4-stage ch4-stage--hall">
-          <h3 class="ch4-stage-label">字卡一 · 卡內基廳</h3>
           <div class="ch4-hall-layout">
             <div class="ch4-flip-wrap">
               <button type="button" class="ch4-flip" id="ch4HallFlip" aria-label="1962年卡內基廳演出合照，點擊翻轉">
@@ -3095,34 +3154,35 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
                     <div class="ch4-flip-photo">
                       <img src="./素材照片/Carnegie Hall, March 1963..png" alt="1962年卡內基廳演出合照" width="520" height="390">
                     </div>
-                    <p class="ch4-flip-caption">1962年卡內基廳演出合照</p>
+                    <p class="ch4-flip-caption">1962年卡內基廳演出合照<span class="ch4-flip-caption-hint">（翻動字卡查看演出名單）</span></p>
                   </div>
                   <div class="ch4-flip-face ch4-flip-back">
-                    <p>``</p>
+                    <ul class="ch4-flip-roster">
+                      <li>貝斯：Tião Neto</li>
+                      <li>鋼琴：Tom Jobim</li>
+                      <li>次中音薩克斯風：Stan Getz</li>
+                      <li>吉他兼聲樂：João Gilberto</li>
+                      <li>鼓：Milton Banana</li>
+                    </ul>
                   </div>
                 </div>
               </button>
             </div>
-            <p class="ch4-body ch4-hall-body">``</p>
+            <p class="ch4-body ch4-hall-body">在美國，曾前往巴西參加里約爵士音樂節的音樂家向 Stan Getz 透露了新聲音（巴西的 Bossa Nova）。1962 年 11 月 21 日，外交部辦公室（Itamaraty）派出一支巴西音樂家團隊在卡內基音樂廳演奏 Bossa Nova，正式將此音樂類型推向國際舞台。
+<br><br>
+鏡頭前，這支代表著巴西的音樂演出組合西裝革履，一如 Bossa Nova 所具備的溫和儒雅特質，褪去過往巴西帶給世界的熱帶國度印象。那些躁動與熱情的氣息被減淡，只留下沈穩、內斂、舒緩的聲音。</p>
           </div>
         </article>
         <article class="ch4-stage ch4-stage--market" id="ch4MarketStage">
-          <h3 class="ch4-stage-label">字卡二 · 市場輝煌</h3>
           <div class="ch4-market-card" id="ch4MarketCard">
             <img class="ch4-market-cover" src="./素材照片/Getz-gilberto.jpg" alt="Getz/Gilberto 專輯封面" width="140" height="140">
-            <div class="ch4-stats">
-              <div class="ch4-stat">
-                <p class="ch4-stat-label">Billboard 200</p>
-                <p class="ch4-stat-value">Album Chart · No. 2</p>
-              </div>
-              <div class="ch4-stat">
-                <p class="ch4-stat-label">Grammy Awards</p>
-                <p class="ch4-stat-value">Album of the Year</p>
-              </div>
+            <div class="ch4-market-copy">
+              <p class="ch4-body ch4-market-body">這首歌於 1964 年在美國首次發行，出現在《Getz/Gilberto》，急遽竄升到排行榜上的第二名，擁有 4.2 million 的播放紀錄，在當時為披頭四帶來了巨大的威脅！(Anon 1994c, pp. 124–5)
+<br><br>
+1965 年，第七屆葛萊美獎上（Grammy Awards），這張專輯成功越過披頭四熱潮，奪下最高榮譽年度最佳專輯（Album of the Year），同時獲得年度製作（Record of the Year）。</p>
               <p class="ch4-playing" id="ch4Playing">Now Playing · The Girl from Ipanema</p>
             </div>
           </div>
-          <p class="ch4-body">``</p>
         </article>
       </div>
     </section>
@@ -3244,11 +3304,13 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           <h2 class="site-credits-heading" id="site-credits-refs-heading">資料援引</h2>
           <ul class="site-credits-list">
             <li>Anon. 1994a.</li>
+            <li>Anon. 1994c, pp. 124–5.</li>
             <li>Cabral. n.d.a., p. 12.</li>
             <li>Chediak. n.d.a, Vol. 4, p. 24.</li>
             <li>Chediak. n.d.b, Vol. 2, p. 15.</li>
             <li>McGowan, A. &amp; Pessanha, C. 1991, p. 62.</li>
-            <li>Tinhorião, J. R. 1986, p. 235.</li>
+            <li>Reily, S. A. Tom Jobim and the Bossa Nova Era.</li>
+            <li>Tinhorião, J. R. 1986, pp. 231, 235.</li>
           </ul>
         </section>
 
@@ -3527,10 +3589,6 @@ each one she passes goes, "Aaah..."`;
     const ch1Section = document.getElementById("chapter-1");
     const ch1Tabs = document.querySelectorAll(".ch1-tab");
     const ch1Panels = document.querySelectorAll(".ch1-panel");
-    const ch1VinylWrap = document.getElementById("ch1VinylWrap");
-    const ch1VinylBtn = document.getElementById("ch1VinylBtn");
-    const chegaAudio = new Audio("./Chega De Saudade - Antonio Carlos Jobim (youtube).mp3");
-    chegaAudio.preload = "auto";
     let ch1Pulled = false;
 
     const ch1Observer = new IntersectionObserver(
@@ -3560,45 +3618,52 @@ each one she passes goes, "Aaah..."`;
         panel.classList.toggle("is-active", active);
         panel.hidden = !active;
       });
-
-      if (tabId === "works") {
-        requestAnimationFrame(() => {
-          ch1VinylWrap.classList.add("is-out");
-        });
-      } else {
-        ch1VinylWrap.classList.remove("is-out");
-        ch1VinylBtn.classList.remove("is-spinning");
-        chegaAudio.pause();
-        chegaAudio.currentTime = 0;
-      }
     }
 
     ch1Tabs.forEach((tab) => {
       tab.addEventListener("click", () => switchCh1Tab(tab.dataset.ch1Tab));
     });
 
-    ch1VinylBtn.addEventListener("click", () => {
-      if (chegaAudio.paused) {
-        chegaAudio.play().catch(() => {});
-        ch1VinylBtn.classList.add("is-spinning");
-      } else {
-        chegaAudio.pause();
-        ch1VinylBtn.classList.remove("is-spinning");
-      }
-    });
-
-    chegaAudio.addEventListener("ended", () => {
-      chegaAudio.currentTime = 0;
-      ch1VinylBtn.classList.remove("is-spinning");
-    });
-
     /* ── 第二單元 ── */
     const ch2Flips = document.querySelectorAll(".ch2-flip");
+    const ch2VinylBlock = document.getElementById("ch2VinylBlock");
+    const ch2VinylWrap = document.getElementById("ch2VinylWrap");
+    const ch2VinylBtn = document.getElementById("ch2VinylBtn");
+    const chegaAudio = new Audio("./Chega De Saudade - João Gilberto (youtube).mp3");
+    chegaAudio.preload = "auto";
 
     ch2Flips.forEach((card) => {
       card.addEventListener("click", () => {
         card.classList.toggle("is-flipped");
       });
+    });
+
+    const ch2VinylObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            ch2VinylWrap?.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    if (ch2VinylBlock) ch2VinylObserver.observe(ch2VinylBlock);
+
+    ch2VinylBtn?.addEventListener("click", () => {
+      if (chegaAudio.paused) {
+        chegaAudio.play().catch(() => {});
+        ch2VinylBtn.classList.add("is-spinning");
+      } else {
+        chegaAudio.pause();
+        ch2VinylBtn.classList.remove("is-spinning");
+      }
+    });
+
+    chegaAudio.addEventListener("ended", () => {
+      chegaAudio.currentTime = 0;
+      ch2VinylBtn?.classList.remove("is-spinning");
     });
 
     /* ── 第三單元：滾動線條剪影 ── */
