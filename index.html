@@ -677,6 +677,9 @@
       .ch3-body,
       .ch3-note,
       .ch3-cite,
+      .ch3-supplement .ch3-body,
+      .ch3-press-lead,
+      .ch3-press-quote,
       .ch4-body,
       .ch4-flip-back p,
       .ch4-flip-roster li,
@@ -1061,9 +1064,9 @@
 
     .ch1-sticky-label {
       margin: 0 0 0.55rem;
-      font-family: var(--font-typewriter);
+      font-family: var(--font-zh-title);
       font-size: clamp(0.72rem, 1.3vw, 0.8rem);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       color: rgba(39, 39, 39, 0.62);
     }
 
@@ -1279,10 +1282,15 @@
 
     .ch2-kicker {
       margin: 0 0 1.25rem;
-      font-family: var(--font-typewriter);
+      font-family: var(--font-zh-title);
       font-size: clamp(0.82rem, 1.5vw, 0.95rem);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       color: var(--ink-soft);
+    }
+
+    .ch2-kicker--en {
+      font-family: var(--font-typewriter);
+      letter-spacing: 0.14em;
     }
 
     .ch2-body {
@@ -1706,6 +1714,86 @@
       font-style: italic;
     }
 
+    .ch3-supplement {
+      margin: 1.35rem 0 0;
+      max-width: 68ch;
+    }
+
+    .ch3-supplement-label {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+      letter-spacing: 0.1em;
+      color: rgba(42, 58, 68, 0.62);
+    }
+
+    .ch3-supplement .ch3-body {
+      max-width: none;
+      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
+      color: rgba(39, 39, 39, 0.58);
+      font-style: italic;
+    }
+
+    .ch3-press-clip {
+      margin: clamp(2rem, 5vh, 2.75rem) 0;
+      max-width: 72ch;
+      padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.35rem, 3vw, 2rem);
+      background: rgba(252, 248, 238, 0.94);
+      border: 1px solid rgba(62, 48, 32, 0.18);
+      box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.65) inset,
+        0 3px 14px rgba(42, 58, 68, 0.1);
+      transform: rotate(0.35deg);
+    }
+
+    .ch3-press-kicker {
+      margin: 0 0 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(92, 52, 38, 0.22);
+      font-family: var(--font-typewriter);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(92, 52, 38, 0.78);
+    }
+
+    .ch3-press-lead {
+      margin: 0 0 1rem;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+      line-height: 1.85;
+      color: rgba(62, 48, 32, 0.82);
+    }
+
+    .ch3-press-quote {
+      margin: 0 0 0.65rem;
+      padding-left: 1rem;
+      border-left: 3px solid rgba(92, 52, 38, 0.35);
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.9rem, 1.55vw, 1rem);
+      line-height: 1.88;
+      color: rgba(72, 42, 28, 0.88);
+    }
+
+    .ch3-press-quote--en {
+      font-family: var(--font-en-small);
+      font-style: italic;
+      letter-spacing: 0.02em;
+      color: rgba(58, 48, 42, 0.85);
+    }
+
+    .ch3-press-cite {
+      margin: 0 0 1.15rem;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.72rem, 1.25vw, 0.8rem);
+      letter-spacing: 0.04em;
+      color: rgba(62, 48, 32, 0.58);
+    }
+
+    .ch3-press-cite:last-child {
+      margin-bottom: 0;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .chapter-3::before { opacity: 0.5; }
       .ch3-silhouettes { opacity: 0.45; }
@@ -1920,9 +2008,9 @@
 
     .ch4-subheading {
       margin: clamp(1.75rem, 4vh, 2.25rem) 0 0.85rem;
-      font-family: var(--font-typewriter);
+      font-family: var(--font-zh-title);
       font-size: clamp(0.82rem, 1.5vw, 0.92rem);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--ink-soft);
     }
 
@@ -1964,13 +2052,103 @@
       }
     }
 
-    .ch4-market-cover {
+    .ch4-vinyl-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
       width: 100%;
       max-width: 140px;
+    }
+
+    .ch4-vinyl-wrap {
+      width: 100%;
       aspect-ratio: 1;
+      opacity: 0;
+      transform: translateX(-12%);
+      transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
+    }
+
+    .ch4-stage--market.is-visible .ch4-vinyl-wrap {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .ch4-vinyl-btn {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: transparent;
+      box-shadow: 0 10px 28px rgba(39, 39, 39, 0.18);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .ch4-vinyl-btn:hover {
+      box-shadow: 0 14px 32px rgba(39, 39, 39, 0.24);
+    }
+
+    .ch4-vinyl-disc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at center, #f3f3f3 0 2.8%, transparent 3%),
+        repeating-radial-gradient(circle at center, #1a1a1a 0 72%, #2a2a2a 72% 73%, #1a1a1a 73% 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .ch4-vinyl-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52%;
+      height: 52%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
       object-fit: cover;
-      border: 1px solid rgba(39, 39, 39, 0.1);
-      box-shadow: 0 2px 8px rgba(39, 39, 39, 0.06);
+      object-position: center;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .ch4-vinyl-disc::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5%;
+      height: 5%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #e8e8e8;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
+
+    .ch4-vinyl-btn.is-spinning .ch4-vinyl-disc {
+      animation: ch2VinylSpin 9s linear infinite;
+    }
+
+    .ch4-vinyl-hint {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+      color: var(--ink-faded);
+      opacity: 0;
+      transition: opacity 0.35s ease 0.2s;
+    }
+
+    .ch4-stage--market.is-visible .ch4-vinyl-hint {
+      opacity: 1;
     }
 
     .ch4-market-copy {
@@ -2001,6 +2179,15 @@
         opacity: 1;
         transform: none;
         transition: none;
+      }
+
+      .ch4-vinyl-wrap {
+        transform: none;
+        opacity: 1;
+      }
+
+      .ch4-vinyl-btn.is-spinning .ch4-vinyl-disc {
+        animation: none;
       }
     }
 
@@ -2158,14 +2345,44 @@
       color: var(--ink-dark);
     }
 
+    .chapter.chapter-5 .ch5-body,
+    .chapter.chapter-5 .ch2-kicker,
+    .chapter.chapter-5 .ch5-kicker {
+      color: color-mix(
+        in srgb,
+        var(--ink-dark) calc((1 - var(--ch5-progress, 0)) * 100%),
+        #ffffff calc(var(--ch5-progress, 0) * 100%)
+      );
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, calc((1 - var(--ch5-progress, 0)) * 0.5)),
+        0 1px 4px rgba(0, 0, 0, calc(var(--ch5-progress, 0) * 0.42));
+      transition:
+        color 0.35s ease,
+        text-shadow 0.35s ease;
+    }
+
     .ch5-body {
       margin: 0;
-      max-width: none;
-      min-height: clamp(300px, 40vh, 480px);
+      max-width: 68ch;
       font-family: var(--font-zh-body);
       font-size: clamp(0.92rem, 1.6vw, 1.02rem);
       line-height: 1.9;
-      color: #ffffff;
+    }
+
+    .ch5-body + .ch5-body {
+      margin-top: 1.35em;
+    }
+
+    .ch5-block {
+      margin-top: clamp(2.5rem, 5vh, 3.25rem);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chapter.chapter-5 .ch5-body,
+      .chapter.chapter-5 .ch2-kicker,
+      .chapter.chapter-5 .ch5-kicker {
+        transition: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -2732,6 +2949,22 @@
       line-height: 1.85;
       color: rgba(39, 39, 39, 0.72);
     }
+
+    /* 全站小標題：略大於各章內文 */
+    .site :is(
+      .ch1-music-heading,
+      .ch1-timeline-heading,
+      .ch1-sticky-label,
+      .ch2-kicker,
+      .ch3-supplement-label,
+      .ch4-stage-label,
+      .ch4-subheading,
+      .ch6-block-label,
+      .ch6-wave-label
+    ),
+    .site .chapter.chapter-6 .ch6-wave-label {
+      font-size: clamp(1.04rem, 1.85vw, 1.16rem);
+    }
   </style>
 
 </head>
@@ -2991,7 +3224,7 @@
 
       <article class="ch2-block">
         <h3 class="ch2-kicker">Bossa Nova一詞</h3>
-        <p class="ch2-body">「Bossa nova」一詞，首次出現在〈Desafinado〉 (Off Key) 這首歌的歌詞當中，由裘賓與 Newton Mendonça 作詞，並由 João Gilberto 於 1958 年首次為 Odeon 錄製。這首歌被視為 Bossa Nova 運動的宣言，當時的 Newton Mendonça 寫下這些話，並不知道這將成為一種音樂風格的指稱。
+        <p class="ch2-body">「Bossa nova」一詞，首次出現在〈Desafinado〉 (Off Key) 這首歌的歌詞當中，由裘賓與 Newton Mendonça 作詞，並由 João Gilberto 於 1958 年首次在 Odeon 唱片公司錄製。這首歌被視為 Bossa Nova 運動的宣言，當時的 Newton Mendonça 寫下這些話，並不知道這將成為一種音樂風格的指稱。
 <br><br>
 「Bossa」一詞原是俚語，指獨特而突出的東西，自 1940 年代以來一直被使用，特別是在音樂領域。
 <br><br>
@@ -3070,7 +3303,7 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
       </article>
 
       <article class="ch2-block ch2-vinyl-block" id="ch2VinylBlock">
-        <h3 class="ch2-kicker">chega de saudade</h3>
+        <h3 class="ch2-kicker ch2-kicker--en">chega de saudade</h3>
         <div class="ch2-vinyl-layout">
           <div class="ch2-vinyl-stage">
             <div class="ch2-vinyl-wrap" id="ch2VinylWrap">
@@ -3134,6 +3367,40 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           <p class="ch3-body ch3-note">註：新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p>
           <p class="ch3-body ch3-note">註：冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p>
         </article>
+
+        <article class="ch3-block">
+          <h3 class="ch2-kicker">文化真空狀態與 Bossa Nova</h3>
+          <p class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，人們積極對建築、繪畫、音樂的美學進行尋求與填補。Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
+<br><br>
+Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識去選擇了這樣的音樂型態。它被寄託成「具國家代表性」，卻「不顯得落後、原始」的音樂。在音樂史上，Bossa Nova 確實做到了這一點，因為在森巴與 Bossa Nova 之間，確實沒有出現足夠具影響力、且可以銜接其中落差的音樂型態。
+<br><br>
+形象上，當傳統森巴在大街上遊行，一群人戴著熱帶水果歡快跳舞時，Bossa Nova 穿著黑色高領毛衣坐在私密的沙龍裡，在小編制樂團的柔和聲音中交談。Bossa Nova 展現出的是浪漫的、精密設計的、不那麼熱情的音樂需求。</p>
+          <aside class="ch3-supplement" aria-label="補充">
+            <p class="ch3-supplement-label">補充</p>
+            <p class="ch3-body">建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p>
+          </aside>
+        </article>
+
+        <figure class="ch3-press-clip">
+          <figcaption class="ch3-press-kicker">O Globo · Rio de Janeiro · 1962</figcaption>
+          <p class="ch3-press-lead">1962 年在卡內基音樂廳舉行歷史悠久的波薩諾瓦音樂會之前，裘賓曾向里約主要報紙《O Globo》的記者表示其對 Bossa Nova 音樂的看法：</p>
+          <blockquote class="ch3-press-quote">我們不會推銷巴西的異國情調、咖啡和狂歡節。我們正在擺脫不發達的典型。我們將從農村進入工業時代。我們將使用我們的流行音樂，它不僅有自己的特色，而且具有很高的技術水準。</blockquote>
+          <p class="ch3-press-cite">（引用 Tinhorião 1986，p. 242）</p>
+          <blockquote class="ch3-press-quote ch3-press-quote--en">We are not going to sell [Brazil's] exotic side, of coffee and carnival. We are not going to wheel out the typical themes of underdevelopment. We are going to pass from agriculture to the industrial era. We are going to use our popular music with the conviction that it does not only have its own character, but also a high technical level.</blockquote>
+          <p class="ch3-press-cite">(引用 Tinhorião 1986, p. 242)</p>
+        </figure>
+
+        <article class="ch3-block">
+          <h3 class="ch2-kicker">補充 躍上國際的巴西</h3>
+          <p class="ch3-body">``</p>
+        </article>
+
+        <article class="ch3-block">
+          <h3 class="ch2-kicker">小結</h3>
+          <p class="ch3-body">Bossa Nova 被視為成功去除異國情調的巴西音樂，褪去對於世界而言的「異域感」。在借鑑各種非裔巴西傳統音樂的同時，Bossa Nova 吉他的圓潤聲音，以及柔和的打擊樂，顯示出其節奏編排的複雜性。João Gilberto 謹慎而安靜的歌聲，一改巴西人情緒高昂、熱情洋溢的種族刻板印象，轉而描繪成沈穩、親密和成熟的。他與裘賓「高技術水準」的旋律線條結合，形成聽起來簡約、易於靠近，實則如精密機器般完美的音樂。
+<br><br>
+狂歡的土地已經將腳步踏入現代。</p>
+        </article>
       </div>
     </section>
     <section class="chapter chapter-4" id="chapter-4" aria-labelledby="ch4-heading">
@@ -3175,12 +3442,21 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
         </article>
         <article class="ch4-stage ch4-stage--market" id="ch4MarketStage">
           <div class="ch4-market-card" id="ch4MarketCard">
-            <img class="ch4-market-cover" src="./素材照片/Getz-gilberto.jpg" alt="Getz/Gilberto 專輯封面" width="140" height="140">
+            <div class="ch4-vinyl-col">
+              <div class="ch4-vinyl-wrap" id="ch4VinylWrap">
+                <button type="button" class="ch4-vinyl-btn" id="ch4VinylBtn" aria-label="播放 The Girl from Ipanema">
+                  <span class="ch4-vinyl-disc" aria-hidden="true">
+                    <img class="ch4-vinyl-label" src="./素材照片/Getz-gilberto.jpg" alt="Getz/Gilberto 專輯封面" width="132" height="132">
+                  </span>
+                </button>
+              </div>
+              <p class="ch4-vinyl-hint">點擊黑膠播放 · The Girl from Ipanema</p>
+              <p class="ch4-playing" id="ch4Playing">Now Playing · The Girl from Ipanema</p>
+            </div>
             <div class="ch4-market-copy">
               <p class="ch4-body ch4-market-body">這首歌於 1964 年在美國首次發行，出現在《Getz/Gilberto》，急遽竄升到排行榜上的第二名，擁有 4.2 million 的播放紀錄，在當時為披頭四帶來了巨大的威脅！(Anon 1994c, pp. 124–5)
 <br><br>
 1965 年，第七屆葛萊美獎上（Grammy Awards），這張專輯成功越過披頭四熱潮，奪下最高榮譽年度最佳專輯（Album of the Year），同時獲得年度製作（Record of the Year）。</p>
-              <p class="ch4-playing" id="ch4Playing">Now Playing · The Girl from Ipanema</p>
             </div>
           </div>
         </article>
@@ -3198,7 +3474,22 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
             <span class="ch5-title-zh">1960年代巴西本土的裂痕</span>
           </h2>
         </header>
-        <p class="ch5-body">``</p>
+
+        <article class="ch5-block">
+          <h3 class="ch2-kicker">政治氛圍的變化</h3>
+          <p class="ch5-body">1959 年，古巴共產革命成功，隨後確立社會主義體制並與美國斷交。隨著古巴向蘇聯傾倒，美國陷入不安情緒，甘迺迪政府發起「爭取進步聯盟（Alliance for Progress）」計畫，旨在透過提供繁榮經濟，干預拉丁美洲政局不走向共產。
+<br><br>
+1961 年，古拉特就任巴西總統，與蘇聯及中華人民共和國互動頻繁，並且反對美國對古巴實行制裁的行為。其左傾風格遭到右翼軍人、商人、地主的反對。
+<br><br>
+1964 年，在美國中央情報局（CIA）的默許與支持下，巴西軍方發動軍事政變，推翻了傾向左派的民選政府，巴西正式進入長達 21 年的軍事獨裁時期。</p>
+        </article>
+
+        <article class="ch5-block">
+          <h3 class="ch2-kicker">音樂需求的轉向</h3>
+          <p class="ch5-body">面對軍政府的壓迫，學生組織、知識份子等形成激進的左派思想。他們開始認為 Bossa Nova 裡的「無憂無慮」無法反映現下需求。舊的 Bossa Nova 在此時此刻是一種「階級疏離」，是對社會現象的漠然。如 José Ramos Tinhorião（1986 年，第 237–45 頁）所說，Bossa Nova 接觸不到巴西被剝奪權利的那群人，它複雜的音樂語言與貧民窟的聲音相去甚遠。
+<br><br>
+此時的音樂家們必須找到一個新的方法，讓聽眾持續為 Bossa Nova 音樂買單。於是 Carlos Lyra 出現了，他保持了 Bossa Nova 固有的美學，但將其歌詞政治化，讓歌詞成為煽動知識分子與上層階級，成為反對獨裁政權的力量之一。Bossa Nova 的政治化，簇擁著音樂家們開始轉向巴西農村以及傳統的城市流行風格，讓他們的音樂與歌詞間建立更有機的關聯，不再只是唱誦愛情、陽光、沙灘。</p>
+        </article>
       </div>
     </section>
     <section class="chapter chapter-6" id="chapter-6" aria-labelledby="ch6-heading">
@@ -3290,8 +3581,8 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
         <header class="ch7-masthead">
           <p class="ch7-kicker">Historiography · Epilogue</p>
           <h2 class="ch7-title" id="ch7-heading">
-            Historical Reflection
-            <span class="ch7-title-zh">歷史的沉澱與冷靜反思</span>
+            Epilogue
+            <span class="ch7-title-zh">結尾</span>
           </h2>
         </header>
         <p class="ch7-body">``</p>
@@ -3305,12 +3596,13 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           <ul class="site-credits-list">
             <li>Anon. 1994a.</li>
             <li>Anon. 1994c, pp. 124–5.</li>
+            <li>Béhague, G. 1979, pp. 343–5.</li>
             <li>Cabral. n.d.a., p. 12.</li>
             <li>Chediak. n.d.a, Vol. 4, p. 24.</li>
             <li>Chediak. n.d.b, Vol. 2, p. 15.</li>
             <li>McGowan, A. &amp; Pessanha, C. 1991, p. 62.</li>
             <li>Reily, S. A. Tom Jobim and the Bossa Nova Era.</li>
-            <li>Tinhorião, J. R. 1986, pp. 231, 235.</li>
+            <li>Tinhorião, J. R. 1986, pp. 231, 235, 237–45, 242.</li>
           </ul>
         </section>
 
@@ -3332,6 +3624,7 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
   </div>
 
   <audio id="strumSound" preload="auto" src="./刷弦聲.mp3"></audio>
+  <audio id="heroIntroAudio" preload="auto" src="./hero intro.mp3"></audio>
   <audio id="ipanemaAudio" preload="auto" src="./The Girl From Ipanema - Stan Getz (youtube).mp3"></audio>
 
   <script>
@@ -3428,6 +3721,28 @@ each one she passes goes, "Aaah..."`;
     }
 
     window.addEventListener("resize", initHeroLyricSlot, { passive: true });
+
+    const heroIntroAudio = document.getElementById("heroIntroAudio");
+    let heroIntroStarted = false;
+
+    async function playHeroIntro() {
+      if (!heroIntroAudio || heroIntroStarted) return;
+      try {
+        heroIntroAudio.volume = 0.65;
+        heroIntroAudio.currentTime = 0;
+        await heroIntroAudio.play();
+        heroIntroStarted = true;
+      } catch {
+        /* autoplay blocked until user gesture */
+      }
+    }
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      playHeroIntro();
+    }
+    document.addEventListener("pointerdown", () => {
+      if (!heroIntroStarted && heroIntroAudio?.paused) playHeroIntro();
+    }, { once: true, passive: true });
 
     function playStringNote(stringId) {
       const audio = notePool[stringId];
@@ -3710,28 +4025,14 @@ each one she passes goes, "Aaah..."`;
     const ch4HallFlip = document.getElementById("ch4HallFlip");
     const ch4MarketStage = document.getElementById("ch4MarketStage");
     const ch4Playing = document.getElementById("ch4Playing");
+    const ch4VinylBtn = document.getElementById("ch4VinylBtn");
     const ipanemaAudio = document.getElementById("ipanemaAudio");
-    let ch4IpanemaStarted = false;
-    let ch4IpanemaWantsPlay = false;
 
-    async function syncCh4Ipanema(shouldPlay) {
+    function stopCh4Ipanema() {
       if (!ipanemaAudio) return;
-      ch4IpanemaWantsPlay = shouldPlay;
-      if (!shouldPlay) {
-        ipanemaAudio.pause();
-        ch4Playing?.classList.remove("is-active");
-        return;
-      }
-      try {
-        if (!ch4IpanemaStarted) {
-          ipanemaAudio.currentTime = 0;
-        }
-        await ipanemaAudio.play();
-        ch4IpanemaStarted = true;
-        ch4Playing?.classList.add("is-active");
-      } catch {
-        ch4Playing?.classList.remove("is-active");
-      }
+      ipanemaAudio.pause();
+      ch4VinylBtn?.classList.remove("is-spinning");
+      ch4Playing?.classList.remove("is-active");
     }
 
     if (ch4HallFlip) {
@@ -3740,27 +4041,33 @@ each one she passes goes, "Aaah..."`;
       });
     }
 
+    ch4VinylBtn?.addEventListener("click", () => {
+      if (!ipanemaAudio) return;
+      if (ipanemaAudio.paused) {
+        heroIntroAudio?.pause();
+        ipanemaAudio.play().catch(() => {});
+        ch4VinylBtn.classList.add("is-spinning");
+        ch4Playing?.classList.add("is-active");
+      } else {
+        stopCh4Ipanema();
+      }
+    });
+
     const ch4MarketObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             ch4MarketStage.classList.add("is-visible");
-            syncCh4Ipanema(true);
           } else {
-            syncCh4Ipanema(false);
+            ch4MarketStage.classList.remove("is-visible");
+            stopCh4Ipanema();
           }
         });
       },
-      { threshold: 0.25, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
     );
 
     if (ch4MarketStage) ch4MarketObserver.observe(ch4MarketStage);
-
-    document.addEventListener("pointerdown", () => {
-      if (ch4IpanemaWantsPlay && ipanemaAudio?.paused) {
-        syncCh4Ipanema(true);
-      }
-    }, { passive: true });
 
     /* ── 第五單元：音符一次性墜落 ── */
     const CH5_NOTE_COUNT = 36;
@@ -3864,6 +4171,7 @@ each one she passes goes, "Aaah..."`;
     window.addEventListener("resize", updateCh5Scroll, { passive: true });
 
     ipanemaAudio?.addEventListener("ended", () => {
+      ch4VinylBtn?.classList.remove("is-spinning");
       ch4Playing?.classList.remove("is-active");
     });
 
