@@ -40,6 +40,11 @@
       --paper-card-shadow-sm:
         0 1px 1px rgba(39, 39, 39, 0.03),
         0 4px 12px -4px rgba(39, 39, 39, 0.08);
+      --fold-line: rgba(39, 39, 39, 0.18);
+      --fold-bg: rgba(39, 39, 39, 0.04);
+      --fold-bg-warm: #f5f3ef;
+      --fold-body-bg: linear-gradient(180deg, #fdfcf9 0%, #f6f4ee 100%);
+      --fold-chevron: #4a4540;
     }
 
     /* 極簡仿真紙質字卡（全站共用） */
@@ -153,21 +158,179 @@
     }
 
     .site-mute-icon {
-      display: block;
-      width: clamp(0.95rem, 2.2vw, 1.08rem);
-      height: clamp(0.95rem, 2.2vw, 1.08rem);
-      object-fit: contain;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(1.05rem, 2.4vw, 1.2rem);
+      height: clamp(1.05rem, 2.4vw, 1.2rem);
       flex-shrink: 0;
-      transition: opacity 0.22s ease, filter 0.22s ease;
+      color: rgba(39, 39, 39, 0.72);
+      transition: color 0.22s ease, opacity 0.22s ease;
+    }
+
+    .site-mute-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .site-mute-svg--off {
+      display: none;
+    }
+
+    .site-mute-btn:hover .site-mute-icon {
+      color: var(--ink-soft);
     }
 
     .site-mute-btn.is-muted .site-mute-icon {
-      filter: brightness(0) invert(1);
-      opacity: 0.92;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .site-mute-btn.is-muted .site-mute-svg--on {
+      display: none;
+    }
+
+    .site-mute-btn.is-muted .site-mute-svg--off {
+      display: block;
     }
 
     .site-mute-text {
       line-height: 1;
+    }
+
+    /* ── 全站摺疊註解（原生 details / summary）── */
+    .site-fold {
+      margin: 1em 0 1.35em;
+      max-width: 68ch;
+      background: var(--fold-bg);
+      border: 1px solid rgba(39, 39, 39, 0.08);
+      border-radius: 3px;
+      box-shadow: var(--paper-card-shadow-sm);
+    }
+
+    .site-fold summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      padding: 0.8rem 0.9rem;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.88rem, 1.5vw, 0.96rem);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      transition: background 0.2s ease;
+    }
+
+    .site-fold summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .site-fold summary:hover {
+      background: rgba(39, 39, 39, 0.03);
+    }
+
+    .site-fold summary::after {
+      content: "";
+      flex-shrink: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+      margin-left: auto;
+      margin-top: 0.1rem;
+      border: 1.5px solid rgba(39, 39, 39, 0.22);
+      border-radius: 50%;
+      background-color: var(--fold-bg-warm);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%234a4540' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0.62rem;
+      transition: transform 0.25s ease;
+    }
+
+    .site-fold[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .site-fold__body {
+      margin: 0 0.65rem 0.75rem;
+      padding: 0.85rem 0.95rem 1rem;
+      background: var(--fold-body-bg);
+      border-top: 1px solid var(--fold-line);
+    }
+
+    .site-fold__body p {
+      margin: 0;
+      max-width: none;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
+      line-height: 1.75;
+      color: rgba(39, 39, 39, 0.58);
+      font-style: italic;
+      text-align: justify;
+      text-justify: inter-ideograph;
+    }
+
+    .site-fold--inline {
+      position: relative;
+      display: inline;
+      margin: 0;
+      max-width: none;
+      vertical-align: baseline;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+
+    .site-fold--inline summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0 0.12em;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+      border-bottom: 1px dotted rgba(39, 39, 39, 0.32);
+      background: rgba(39, 39, 39, 0.05);
+      white-space: normal;
+    }
+
+    .site-fold--inline summary:hover {
+      background: rgba(39, 39, 39, 0.08);
+    }
+
+    .site-fold--inline summary::after {
+      width: 0.85rem;
+      height: 0.85rem;
+      margin-left: 0.15rem;
+      margin-top: 0;
+      flex-shrink: 0;
+    }
+
+    .site-fold--inline[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .site-fold--inline .site-fold__body {
+      position: absolute;
+      top: calc(100% + 0.35em);
+      left: 0;
+      z-index: 40;
+      width: min(42ch, calc(100vw - 2.5rem));
+      margin: 0;
+      background: var(--fold-body-bg);
+      border: 1px solid rgba(39, 39, 39, 0.1);
+      border-top: 1px solid var(--fold-line);
+      border-radius: 3px;
+      box-shadow: var(--paper-card-shadow);
+    }
+
+    .ch3-body,
+    .ch3-block,
+    .ch1-panel-bio,
+    .ch1-panel-music,
+    .ch1-folder-interior {
+      overflow: visible;
     }
 
     .site-body {
@@ -731,7 +894,7 @@
       .ch2-trio-lead,
       .ch2-flip-back p,
       .ch3-body,
-      .ch3-note,
+      .site-fold__body p,
       .ch3-cite,
       .ch3-supplement .ch3-body,
       .ch3-press-lead,
@@ -1045,19 +1208,8 @@
       margin-bottom: 0;
     }
 
-    .ch1-panel-body.ch1-note {
-      margin-bottom: 1.35em;
-    }
-
     .ch1-panel-body.ch1-body-gap {
       margin-top: 1em;
-    }
-
-    .ch1-panel-bio .ch1-note,
-    .ch1-panel-music .ch1-note {
-      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
-      color: rgba(39, 39, 39, 0.58);
-      font-style: italic;
     }
 
     .ch1-music-section {
@@ -1643,7 +1795,7 @@
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       padding: clamp(5rem, 12vh, 8rem) clamp(1rem, 3vw, 2.5rem) clamp(6rem, 14vh, 9rem);
-      overflow: hidden;
+      overflow: visible;
       background: linear-gradient(
         175deg,
         #a8d4e6 0%,
@@ -1762,12 +1914,6 @@
 
     .ch3-block {
       margin-top: clamp(2.5rem, 5vh, 3.25rem);
-    }
-
-    .ch3-note {
-      font-size: clamp(0.86rem, 1.45vw, 0.96rem);
-      color: rgba(39, 39, 39, 0.58);
-      font-style: italic;
     }
 
     .ch3-supplement {
@@ -3026,7 +3172,18 @@
 </head>
 <body>
   <button type="button" class="site-mute-btn" id="siteMuteBtn" aria-label="噤聲" aria-pressed="false">
-    <img class="site-mute-icon" src="./噤聲.JPG" alt="" width="18" height="18" aria-hidden="true">
+    <span class="site-mute-icon" aria-hidden="true">
+      <svg class="site-mute-svg site-mute-svg--on" viewBox="0 0 40 24" focusable="false">
+        <path fill="currentColor" d="M2 9h4l5-4v14l-5-4H2V9z"/>
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M14 8q4 4 0 8"/>
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M17 6q6 6 0 12"/>
+        <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M20 4q8 8 0 16"/>
+      </svg>
+      <svg class="site-mute-svg site-mute-svg--off" viewBox="0 0 40 24" focusable="false">
+        <path fill="currentColor" d="M2 9h4l5-4v14l-5-4H2V9z"/>
+        <path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M15 5L28 19M28 5L15 19"/>
+      </svg>
+    </span>
     <span class="site-mute-text" id="siteMuteText">噤聲</span>
   </button>
   <div class="site">
@@ -3134,8 +3291,7 @@
                     <p class="ch1-panel-body">Antônio Carlos Jobim，又名 Tom Jobim（以下稱裘賓），1927 年生於巴西里約熱內盧。作為一名作曲家、鋼琴家、編曲者，裘賓活躍於 1960 年代，與許多美國音樂家進行合作，推動了 Bossa Nova 在國際市場的巨大成功。裘賓一生做了超過 400 首曲子 (Chediak n.d.b, Vol. 2, p. 15)，光是本人參與的專輯就有 40 多張。其音樂生涯所涉略，不僅限於爵士樂，更跨足交響樂以及電影配樂等。</p>
 
                     <p class="ch1-panel-body ch1-body-gap">他創作的交響曲和音調詩（或稱交響詩 Tone Poem），包括《里約熱內盧交響曲》（與比利·布蘭科合作）（歐洲大陸，1954 年），以及《巴西利亞》（哥倫比亞廣播公司，1983 年），首演於新首都的就職典禮。</p>
-                    <p class="ch1-panel-body">1959 年，裘賓參與了音樂劇電影黑人奧飛斯的大部分配樂。</p>
-                    <p class="ch1-panel-body ch1-note">註：該電影的內容與成功</p>
+                    <div class="ch1-panel-body">1959 年，裘賓參與了音樂劇電影<details class="site-fold site-fold--inline"><summary>黑人奧飛斯</summary><div class="site-fold__body"><p>註解建設中。</p></div></details>的大部分配樂。</div>
                     <p class="ch1-panel-body">1994 年 12 月 8 日，一場緊急手術後，裘賓於紐約逝世。此消息傳到巴西，舉國悲慟。他的遺體被送回里約，伴隨著國旗覆蓋上他的棺槨，那首最為唱誦的歌曲〈The Girl from Ipanema〉在街上響起。(Anon 1994a)</p>
 
                     <section class="ch1-timeline" aria-label="裘賓生平事件年表">
@@ -3229,7 +3385,12 @@
                     <section class="ch1-music-section" aria-labelledby="ch1-music-classical">
                       <h3 class="ch1-music-heading" id="ch1-music-classical">古典樂</h3>
                       <p class="ch1-panel-body">裘賓在少年時期就接受了古典鋼琴的教育，當時的他立志成為一名鋼琴獨奏家，在此投入了極大的時間與精力。裘賓的第一位老師是一名因歐洲戰亂而來到巴西的德國人 Hans-Joachim Koellreutter。</p>
-                      <p class="ch1-panel-body ch1-note">註：推測時間當時的戰亂可能是二次世界大戰</p>
+                      <details class="site-fold">
+                        <summary>註：推測時間當時的戰亂可能是二次世界大戰</summary>
+                        <div class="site-fold__body">
+                          <p>註：推測時間當時的戰亂可能是二次世界大戰</p>
+                        </div>
+                      </details>
                       <p class="ch1-panel-body">在 Koellreutter 帶領下，裘賓學會了讀譜、演奏的能力。他接收了德奧古典鋼琴中的嚴謹；轉化了法國德布西印象派以和弦捕捉光影的能力。透過巴西作曲家維拉-羅伯斯（Villa-Lobos）的視角，裘賓吸收了印象派技法，創造出一種能游走於傳統和聲與模糊調性之間的獨特語言。</p>
                       <aside class="ch1-sticky-note" aria-label="補充">
                         <span class="ch1-sticky-tape" aria-hidden="true"></span>
@@ -3249,7 +3410,12 @@
 
                       <p class="ch1-panel-body ch1-body-gap">北美音樂征服了南美廣播電臺，展現了狐步舞（foxtrot）、爵士樂（jazz）和藍調（blues）的魔力。非裔美國人藝術家展示的火熱節奏、精神性和即興創作，在整整一代巴西人身上留下了印記。其中，美國西岸酷派爵士（或稱冷爵士 Cool Jazz）中的知名專輯《Chet Baker Sings》也對裘賓以及其他 Bossa Nova 藝術家產生了深遠的影響，甚至形塑了他們的演唱風格。</p>
 
-                      <p class="ch1-panel-body ch1-note ch1-body-gap">註：guarânias 是巴拉圭標誌性音樂。</p>
+                      <details class="site-fold ch1-body-gap">
+                        <summary>註：guarânias 是巴拉圭標誌性音樂。</summary>
+                        <div class="site-fold__body">
+                          <p>註：guarânias 是巴拉圭標誌性音樂。</p>
+                        </div>
+                      </details>
                     </section>
 
                     <section class="ch1-music-section" aria-labelledby="ch1-music-performance">
@@ -3258,7 +3424,12 @@
 
                       <p class="ch1-panel-body ch1-body-gap">裘賓也常常在家跟他的叔叔們演奏音樂，不過裘賓有時很擔心，因為：“To pursue a career in music caused one to go hungry and die in the gutter.” 看來「玩音樂會餓死」是亙古存在的問題呢。</p>
 
-                      <p class="ch1-panel-body ch1-note ch1-body-gap">註：奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）</p>
+                      <details class="site-fold ch1-body-gap">
+                        <summary>註：奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）</summary>
+                        <div class="site-fold__body">
+                          <p>註：奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）</p>
+                        </div>
+                      </details>
                     </section>
                   </div>
                 </div>
@@ -3417,28 +3588,22 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
 
         <p class="ch3-cite">主要引用：Suzel Ana Reily &lt;Tom Jobim and the Bossa Nova Era&gt;</p>
 
-        <p class="ch3-body">在理解 Bossa Nova 的形成時，除了關注天才音樂人們相遇與合作之外，還需要代入當時的時代脈絡。從 1960 年代巴西的政治、經濟、文化角度切入，關注當時人們對音樂的需求。當新任總統喊出「Fifty years in five」，即「在五年內彌補國家五十年滯後」口號時，搭上現代化列車的巴西人民對國家發展充滿希望；工業化的成功、新首都的建立、接軌國際的渴望⋯⋯，在現代化進程帶來的樂觀主義之下，文化藝術領域又受到了什麼樣的影響？</p>
+        <p class="ch3-body">在理解 Bossa Nova 的形成時，除了關注天才音樂人們相遇與合作之外，還需要代入當時的時代脈絡。從 1960 年代巴西的政治、經濟、文化角度切入，關注當時人們對音樂的需求。當新任總統喊出「五年內彌補國家五十年滯後」口號時，搭上現代化列車的巴西人民對國家發展充滿希望；工業化的成功、新首都的建立、接軌國際的渴望⋯⋯，在現代化進程帶來的樂觀主義之下，文化藝術領域又受到了什麼樣的影響？</p>
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">時空背景</h3>
-          <p class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的新首都——巴西利亞。期間，庫比契克總統大力推動工業發展以及建設工程，實現了巴西經濟的飛躍，擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
+          <div class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的<details class="site-fold site-fold--inline"><summary>新首都——巴西利亞</summary><div class="site-fold__body"><p>新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p></div></details>。期間，庫比契克總統大力推動工業發展以及建設工程，實現了<details class="site-fold site-fold--inline"><summary>巴西經濟的飛躍</summary><div class="site-fold__body"><p>冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p></div></details>，擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
 <br><br>
-工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。（Tinhorião 1986，第 231 頁）。在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</p>
-          <p class="ch3-body ch3-note">註：新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p>
-          <p class="ch3-body ch3-note">註：冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p>
+工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。（Tinhorião 1986，第 231 頁）。在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</div>
         </article>
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">文化真空狀態與 Bossa Nova</h3>
-          <p class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，人們積極對建築、繪畫、音樂的美學進行尋求與填補。Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
+          <div class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，<details class="site-fold site-fold--inline"><summary>人們積極對建築、繪畫、音樂的美學進行尋求與填補</summary><div class="site-fold__body"><p>建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p></div></details>。Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
 <br><br>
 Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識去選擇了這樣的音樂型態。它被寄託成「具國家代表性」，卻「不顯得落後、原始」的音樂。在音樂史上，Bossa Nova 確實做到了這一點，因為在森巴與 Bossa Nova 之間，確實沒有出現足夠具影響力、且可以銜接其中落差的音樂型態。
 <br><br>
-形象上，當傳統森巴在大街上遊行，一群人戴著熱帶水果歡快跳舞時，Bossa Nova 穿著黑色高領毛衣坐在私密的沙龍裡，在小編制樂團的柔和聲音中交談。Bossa Nova 展現出的是浪漫的、精密設計的、不那麼熱情的音樂需求。</p>
-          <aside class="ch3-supplement" aria-label="補充">
-            <p class="ch3-supplement-label">補充</p>
-            <p class="ch3-body">建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p>
-          </aside>
+形象上，當傳統森巴在大街上遊行，一群人戴著熱帶水果歡快跳舞時，Bossa Nova 穿著黑色高領毛衣坐在私密的沙龍裡，在小編制樂團的柔和聲音中交談。Bossa Nova 展現出的是浪漫的、精密設計的、不那麼熱情的音樂需求。</div>
         </article>
 
         <figure class="ch3-press-clip">
@@ -3548,7 +3713,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           <h3 class="ch2-kicker">音樂需求的轉向</h3>
           <p class="ch5-body">面對軍政府的壓迫，學生組織、知識份子等形成激進的左派思想。他們開始認為 Bossa Nova 裡的「無憂無慮」無法反映現下需求。舊的 Bossa Nova 在此時此刻是一種「階級疏離」，是對社會現象的漠然。如 José Ramos Tinhorião（1986 年，第 237–45 頁）所說，Bossa Nova 接觸不到巴西被剝奪權利的那群人，它複雜的音樂語言與貧民窟的聲音相去甚遠。
 <br><br>
-此時的音樂家們必須找到一個新的方法，讓聽眾持續為 Bossa Nova 音樂買單。於是 Carlos Lyra 出現了，他保持了 Bossa Nova 固有的美學，但將其歌詞政治化，讓歌詞成為煽動知識分子與上層階級，成為反對獨裁政權的力量之一。Bossa Nova 的政治化，簇擁著音樂家們開始轉向巴西農村以及傳統的城市流行風格，讓他們的音樂與歌詞間建立更有機的關聯，不再只是唱誦愛情、陽光、沙灘。</p>
+此時的音樂家們必須找到一個新的方法，讓聽眾持續為 Bossa Nova 音樂買單。於是 Carlos Lyra 出現了，他保持了 Bossa Nova 固有的美學，但將其歌詞政治化，讓歌詞成為煽動知識分子與上層階級反對獨裁政權的力量之一。Bossa Nova 的政治化，簇擁著音樂家們開始轉向巴西農村以及傳統的城市流行風格，讓他們的音樂與歌詞間建立更有機的關聯，不再只是唱誦愛情、陽光、沙灘。</p>
         </article>
       </div>
     </section>
