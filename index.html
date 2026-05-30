@@ -270,6 +270,18 @@
       text-justify: inter-ideograph;
     }
 
+    .site-fold__body a {
+      color: rgba(39, 39, 39, 0.78);
+      text-decoration: underline;
+      text-decoration-color: rgba(39, 39, 39, 0.28);
+      text-underline-offset: 0.15em;
+    }
+
+    .site-fold__body a:hover {
+      color: var(--ink-dark);
+      text-decoration-color: rgba(39, 39, 39, 0.5);
+    }
+
     .site-fold--inline {
       position: relative;
       display: inline;
@@ -284,9 +296,9 @@
 
     .site-fold--inline summary {
       display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-      padding: 0 0.12em;
+      align-items: baseline;
+      gap: 0.12rem;
+      padding: 0;
       font-size: inherit;
       line-height: inherit;
       color: inherit;
@@ -3385,18 +3397,12 @@
                     <section class="ch1-music-section" aria-labelledby="ch1-music-classical">
                       <h3 class="ch1-music-heading" id="ch1-music-classical">古典樂</h3>
                       <p class="ch1-panel-body">裘賓在少年時期就接受了古典鋼琴的教育，當時的他立志成為一名鋼琴獨奏家，在此投入了極大的時間與精力。裘賓的第一位老師是一名因歐洲戰亂而來到巴西的德國人 Hans-Joachim Koellreutter。</p>
-                      <details class="site-fold">
-                        <summary>註：推測時間當時的戰亂可能是二次世界大戰</summary>
-                        <div class="site-fold__body">
-                          <p>註：推測時間當時的戰亂可能是二次世界大戰</p>
-                        </div>
-                      </details>
                       <p class="ch1-panel-body">在 Koellreutter 帶領下，裘賓學會了讀譜、演奏的能力。他接收了德奧古典鋼琴中的嚴謹；轉化了法國德布西印象派以和弦捕捉光影的能力。透過巴西作曲家維拉-羅伯斯（Villa-Lobos）的視角，裘賓吸收了印象派技法，創造出一種能游走於傳統和聲與模糊調性之間的獨特語言。</p>
                       <aside class="ch1-sticky-note" aria-label="補充">
                         <span class="ch1-sticky-tape" aria-hidden="true"></span>
                         <p class="ch1-sticky-label">補充</p>
                         <p class="ch1-panel-body">他的第二位音樂老師叫做 Lúcia Branco，Lúcia Branco 告訴裘賓，他的天賦可以使他成為一個偉大的作曲家：</p>
-                        <blockquote class="ch1-sticky-quote">“Why do you want to be a soloist? In light of the songs you have already shown me, I believe your talent is for composition. You can be.”</blockquote>
+                        <blockquote class="ch1-sticky-quote">「你為什麼想當獨奏家？就你已經給我看過的那些樂曲來說，我相信你的天賦在於作曲。你可以做到的。」</blockquote>
                         <p class="ch1-panel-body">不過當時的裘賓並不以為意。</p>
                         <p class="ch1-panel-body">裘賓其他時期的老師還有：Professor Paulo Silva, Tomás Terán, Léo Peracchi, and Alceu Bocchino.</p>
                       </aside>
@@ -3404,32 +3410,18 @@
 
                     <section class="ch1-music-section" aria-labelledby="ch1-music-jazz">
                       <h3 class="ch1-music-heading" id="ch1-music-jazz">美國爵士樂</h3>
-                      <p class="ch1-panel-body">在裘賓童年時期，大量的北美文化浸入巴西。文學、雜誌、電影以及音樂，對當時的青年們有深刻的影響力。那時的巴西廣播電臺中，更傾向於播放外國風格，例如：guarânias、倫巴（rumbas）和誇張的波萊羅（bolero）。</p>
+                      <div class="ch1-panel-body">在裘賓童年時期，大量的北美文化浸入巴西。文學、雜誌、電影以及音樂，對當時的青年們有深刻的影響力。那時的巴西廣播電臺中，更傾向於播放外國風格，例如：<details class="site-fold site-fold--inline"><summary>guarânias</summary><div class="site-fold__body"><p>guarânias 是巴拉圭標誌性音樂，風格舒緩、憂鬱。</p></div></details>、倫巴（rumbas）和誇張的波萊羅（bolero）。</div>
 
                       <p class="ch1-panel-body ch1-body-gap">此外，裘賓也喜歡看美國製作的電影。回家後，他會將他剛聽到的原聲帶唱給家人朋友們聽。</p>
 
-                      <p class="ch1-panel-body ch1-body-gap">北美音樂征服了南美廣播電臺，展現了狐步舞（foxtrot）、爵士樂（jazz）和藍調（blues）的魔力。非裔美國人藝術家展示的火熱節奏、精神性和即興創作，在整整一代巴西人身上留下了印記。其中，美國西岸酷派爵士（或稱冷爵士 Cool Jazz）中的知名專輯《Chet Baker Sings》也對裘賓以及其他 Bossa Nova 藝術家產生了深遠的影響，甚至形塑了他們的演唱風格。</p>
-
-                      <details class="site-fold ch1-body-gap">
-                        <summary>註：guarânias 是巴拉圭標誌性音樂。</summary>
-                        <div class="site-fold__body">
-                          <p>註：guarânias 是巴拉圭標誌性音樂。</p>
-                        </div>
-                      </details>
+                      <div class="ch1-panel-body ch1-body-gap">北美音樂征服了南美廣播電臺，展現了狐步舞（foxtrot）、爵士樂（jazz）和藍調（blues）的魔力。非裔美國人藝術家展示的火熱節奏、精神性和即興創作，在整整一代巴西人身上留下了印記。其中，美國西岸酷派爵士（或稱冷爵士 Cool Jazz）中的知名專輯<details class="site-fold site-fold--inline"><summary>《Chet Baker Sings》</summary><div class="site-fold__body"><p><a href="https://www.youtube.com/watch?v=nfk58XdlZJA&amp;list=PLL-NbN8uTOiicYA9ZJKXb9b1Bhp6phnmL" target="_blank" rel="noopener noreferrer">Time After Time · YouTube</a></p></div></details>也對裘賓以及其他 Bossa Nova 藝術家產生了深遠的影響，甚至形塑了他們的演唱風格。</div>
                     </section>
 
                     <section class="ch1-music-section" aria-labelledby="ch1-music-performance">
                       <h3 class="ch1-music-heading" id="ch1-music-performance">演奏</h3>
-                      <p class="ch1-panel-body">有時候裘賓會和朋友在奧索里奧將軍廣場演奏吉他或口琴。那些朋友當中就有一個他未來的作曲夥伴 Newton Mendonça！</p>
+                      <div class="ch1-panel-body">有時候裘賓會和朋友在<details class="site-fold site-fold--inline"><summary>奧索里奧將軍廣場</summary><div class="site-fold__body"><p>奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）。</p></div></details>演奏吉他或口琴。那些朋友當中就有一個他未來的作曲夥伴 Newton Mendonça！</div>
 
                       <p class="ch1-panel-body ch1-body-gap">裘賓也常常在家跟他的叔叔們演奏音樂，不過裘賓有時很擔心，因為：“To pursue a career in music caused one to go hungry and die in the gutter.” 看來「玩音樂會餓死」是亙古存在的問題呢。</p>
-
-                      <details class="site-fold ch1-body-gap">
-                        <summary>註：奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）</summary>
-                        <div class="site-fold__body">
-                          <p>註：奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）</p>
-                        </div>
-                      </details>
                     </section>
                   </div>
                 </div>
@@ -3480,7 +3472,9 @@ Newton Mendonça，這位陷入熱戀的「跑調歌手（Off Key）」聲稱，
                 </div>
               </div>
               <div class="ch2-flip-face ch2-flip-back">
-                <p>``</p>
+                <p>Tom Jobim 的作曲結構：
+<br><br>
+除了承襲德奧古典的理性結構與法國印象派的和弦色彩外，裘賓作曲獨特之處，還在於他在傳統經典 II-V-I 和弦進行，與「調性中心模糊不清」之間自由游移。他透過多種方式創造出調性上的模糊性，如《The One Note Samba》即是能體現裘賓和弦造詣的代表作；此外，裘賓的音樂中常使用的半音階下行（例如 Bm⁷ — B♭⁷(13) — Am⁷(11) — A♭⁷(♯11)），則能製造出 Bossa Nova 細緻而滑順往下進行的慵懶感。</p>
               </div>
             </div>
           </button>
@@ -3592,16 +3586,16 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">時空背景</h3>
-          <div class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的<details class="site-fold site-fold--inline"><summary>新首都——巴西利亞</summary><div class="site-fold__body"><p>新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p></div></details>。期間，庫比契克總統大力推動工業發展以及建設工程，實現了<details class="site-fold site-fold--inline"><summary>巴西經濟的飛躍</summary><div class="site-fold__body"><p>冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p></div></details>，擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
+          <div class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的<details class="site-fold site-fold--inline"><summary>新首都——巴西利亞。</summary><div class="site-fold__body"><p>新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p></div></details>期間，庫比契克總統大力推動工業發展以及建設工程，實現了<details class="site-fold site-fold--inline"><summary>巴西經濟的飛躍，</summary><div class="site-fold__body"><p>冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p></div></details>擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
 <br><br>
 工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。（Tinhorião 1986，第 231 頁）。在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</div>
         </article>
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">文化真空狀態與 Bossa Nova</h3>
-          <div class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，<details class="site-fold site-fold--inline"><summary>人們積極對建築、繪畫、音樂的美學進行尋求與填補</summary><div class="site-fold__body"><p>建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p></div></details>。Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
+          <div class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，<details class="site-fold site-fold--inline"><summary>人們積極對建築、繪畫、音樂的美學進行尋求與填補。</summary><div class="site-fold__body"><p>建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p></div></details>Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
 <br><br>
-Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識去選擇了這樣的音樂型態。它被寄託成「具國家代表性」，卻「不顯得落後、原始」的音樂。在音樂史上，Bossa Nova 確實做到了這一點，因為在森巴與 Bossa Nova 之間，確實沒有出現足夠具影響力、且可以銜接其中落差的音樂型態。
+Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識去選擇了這樣的音樂型態。它被寄託成「具國家代表性」，卻「不顯得落後、原始」的音樂。在音樂史上，Bossa Nova 確實做到了這一點，在森巴與 Bossa Nova 之間，的確沒有出現足夠具影響力、且可以銜接其中落差的音樂型態。
 <br><br>
 形象上，當傳統森巴在大街上遊行，一群人戴著熱帶水果歡快跳舞時，Bossa Nova 穿著黑色高領毛衣坐在私密的沙龍裡，在小編制樂團的柔和聲音中交談。Bossa Nova 展現出的是浪漫的、精密設計的、不那麼熱情的音樂需求。</div>
         </article>
@@ -3610,7 +3604,6 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           <figcaption class="ch3-press-kicker">O Globo · Rio de Janeiro · 1962</figcaption>
           <p class="ch3-press-lead">1962 年在卡內基音樂廳舉行歷史悠久的波薩諾瓦音樂會之前，裘賓曾向里約主要報紙《O Globo》的記者表示其對 Bossa Nova 音樂的看法：</p>
           <blockquote class="ch3-press-quote">我們不會推銷巴西的異國情調、咖啡和狂歡節。我們正在擺脫不發達的典型。我們將從農村進入工業時代。我們將使用我們的流行音樂，它不僅有自己的特色，而且具有很高的技術水準。</blockquote>
-          <p class="ch3-press-cite">（引用 Tinhorião 1986，p. 242）</p>
           <blockquote class="ch3-press-quote ch3-press-quote--en">We are not going to sell [Brazil's] exotic side, of coffee and carnival. We are not going to wheel out the typical themes of underdevelopment. We are going to pass from agriculture to the industrial era. We are going to use our popular music with the conviction that it does not only have its own character, but also a high technical level.</blockquote>
           <p class="ch3-press-cite">(引用 Tinhorião 1986, p. 242)</p>
         </figure>
