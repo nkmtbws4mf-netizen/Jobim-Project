@@ -348,7 +348,7 @@
     .site-body {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 clamp(1rem, 3vw, 2.5rem) 6rem;
+      padding: clamp(1.25rem, 2.8vw, 2rem) clamp(1rem, 3vw, 2.5rem) 6rem;
     }
 
     /* ── 第零單元：Hero 首頁小報（分屏排版） ── */
@@ -584,7 +584,7 @@
       position: relative;
       z-index: 100;
       width: 100%;
-      margin-top: 0.35rem;
+      margin-top: 0;
       padding: 0.15rem 0 0.65rem;
       transform-origin: top left;
     }
@@ -673,26 +673,56 @@
         opacity calc(var(--nav-popup-transition) * 0.55) ease;
     }
 
-    .index-menu-kicker {
+    .index-menu-heading {
       display: none;
       margin: 0;
       padding: 0;
-      font-family: var(--font-typewriter);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faded);
+      text-align: center;
       white-space: nowrap;
       pointer-events: none;
+      z-index: 5;
       transition: opacity calc(var(--nav-popup-transition) * 0.75) ease;
     }
 
-    .guitar-nav-wrap.is-collapsed.is-expanded .index-menu-kicker {
+    .index-menu-kicker {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-zh-title), var(--font-en-small), serif;
+      font-size: clamp(1rem, 1.65vw, 1.22rem);
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+    }
+
+    .index-menu-hint {
+      margin: 0.28em 0 0;
+      padding: 0;
+      font-family: var(--font-zh-title), var(--font-en-small), serif;
+      font-size: clamp(0.68rem, 1.05vw, 0.8rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.06em;
+      color: var(--ink-faded);
+    }
+
+    .guitar-nav-wrap:not(.is-collapsed) .index-menu-heading {
+      display: block;
+      position: absolute;
+      top: 0.35rem;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+
+    .guitar-nav-wrap.is-collapsed.is-expanded .index-menu-heading {
       display: block;
       position: absolute;
       top: 0.7rem;
       left: calc(var(--nav-collapsed-size) + 0.5rem);
       right: 0.85rem;
+      transform: none;
+      text-align: left;
       opacity: 1;
     }
 
@@ -915,7 +945,6 @@
       .ch4-flip-back p,
       .ch4-flip-roster li,
       .ch5-body,
-      .ch6-body,
       .ch7-body,
       .typewriter-quote,
       .copyright-statement
@@ -1247,7 +1276,6 @@
         1px 2px 0 rgba(255, 255, 255, 0.22) inset,
         1px 2px 5px rgba(62, 48, 32, 0.1),
         2px 5px 14px rgba(62, 48, 32, 0.07);
-      transform: rotate(-1.2deg);
       overflow: hidden;
     }
 
@@ -1282,14 +1310,6 @@
       z-index: 2;
     }
 
-    .ch1-sticky-label {
-      margin: 0 0 0.55rem;
-      font-family: var(--font-zh-title);
-      font-size: clamp(0.72rem, 1.3vw, 0.8rem);
-      letter-spacing: 0.1em;
-      color: rgba(39, 39, 39, 0.62);
-    }
-
     .ch1-sticky-note .ch1-panel-body {
       max-width: none;
       margin-bottom: 1.35em;
@@ -1305,10 +1325,10 @@
       margin: 0.65rem 0 0.75rem;
       padding-left: 0.85rem;
       border-left: 2px solid rgba(92, 72, 48, 0.2);
-      font-family: var(--font-en-display);
-      font-size: clamp(0.84rem, 1.4vw, 0.94rem);
-      line-height: 1.72;
-      font-style: italic;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.86rem, 1.45vw, 0.95rem);
+      line-height: 1.78;
+      font-style: normal;
       color: rgba(52, 42, 32, 0.82);
     }
 
@@ -1957,7 +1977,6 @@
       box-shadow:
         0 2px 0 rgba(255, 255, 255, 0.65) inset,
         0 3px 14px rgba(42, 58, 68, 0.1);
-      transform: rotate(0.35deg);
     }
 
     .ch3-press-kicker {
@@ -1983,10 +2002,15 @@
       margin: 0 0 0.65rem;
       padding-left: 1rem;
       border-left: 3px solid rgba(92, 52, 38, 0.35);
-      font-family: var(--font-zh-body);
       font-size: clamp(0.9rem, 1.55vw, 1rem);
       line-height: 1.88;
       color: rgba(72, 42, 28, 0.88);
+    }
+
+    .ch3-press-quote:not(.ch3-press-quote--en) {
+      margin-top: 1.35rem;
+      font-family: var(--font-zh-title);
+      font-style: normal;
     }
 
     .ch3-press-quote--en {
@@ -2203,6 +2227,21 @@
       font-size: clamp(0.88rem, 1.5vw, 0.98rem);
       line-height: 1.8;
       color: var(--ink-faded);
+    }
+
+    .ch4-flip-back-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.85rem;
+      width: 100%;
+    }
+
+    .ch4-flip-roster-kicker {
+      margin: 0;
+      font-family: var(--font-typewriter);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: rgba(39, 39, 39, 0.58);
     }
 
     .ch4-flip-roster {
@@ -2560,7 +2599,6 @@
     }
 
     .chapter.chapter-5 .ch5-body,
-    .chapter.chapter-5 .ch2-kicker,
     .chapter.chapter-5 .ch5-kicker {
       color: color-mix(
         in srgb,
@@ -2573,6 +2611,16 @@
       transition:
         color 0.35s ease,
         text-shadow 0.35s ease;
+    }
+
+    .chapter.chapter-5 .ch2-kicker {
+      color: color-mix(
+        in srgb,
+        #6f5838 calc((1 - var(--ch5-progress, 0)) * 100%),
+        #e8d4a8 calc(var(--ch5-progress, 0) * 100%)
+      );
+      text-shadow: 0 1px 6px rgba(0, 0, 0, calc(var(--ch5-progress, 0) * 0.38));
+      transition: color 0.35s ease, text-shadow 0.35s ease;
     }
 
     .ch5-body {
@@ -2596,6 +2644,10 @@
       .chapter.chapter-5 .ch2-kicker,
       .chapter.chapter-5 .ch5-kicker {
         transition: none;
+      }
+
+      .chapter.chapter-5 .ch2-kicker {
+        color: #e8d4a8;
       }
     }
 
@@ -2627,6 +2679,10 @@
       color: #ffffff;
     }
 
+    .chapter.chapter-6 :is(.ch6-block-label, .ch6-wave-label) {
+      color: #e8d4a8;
+    }
+
     .chapter-6::before {
       content: "";
       position: absolute;
@@ -2656,9 +2712,91 @@
     }
 
     .ch6-masthead {
-      margin-bottom: clamp(3.5rem, 8vh, 5rem);
+      margin-bottom: clamp(2rem, 5vh, 2.75rem);
       padding-bottom: 1.25rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .ch6-lead {
+      margin-bottom: clamp(3.5rem, 8vh, 5rem);
+      max-width: 68ch;
+    }
+
+    .ch6-lead .ch6-body {
+      margin-bottom: 0;
+    }
+
+    .ch6-lead .ch6-body + .ch6-body {
+      margin-top: 1.85em;
+    }
+
+    .ch6-lead-outro {
+      margin-top: 2.25em !important;
+      font-family: var(--font-zh-title);
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .chapter-6 .ch6-lead,
+    .chapter-6 .ch6-block,
+    .chapter-6 .ch6-inner {
+      overflow: visible;
+    }
+
+    .chapter-6 .site-fold {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    }
+
+    .chapter-6 .site-fold summary {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .chapter-6 .site-fold summary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .chapter-6 .site-fold summary::after {
+      border-color: rgba(255, 255, 255, 0.32);
+      background-color: rgba(255, 255, 255, 0.1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23e8e4dc' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+    }
+
+    .chapter-6 .site-fold__body {
+      background: linear-gradient(180deg, #4b5058 0%, #3e434b 100%);
+      border-top-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .chapter-6 .site-fold__body p {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .chapter-6 .site-fold__body a {
+      color: #e8d4a8;
+      text-decoration-color: rgba(232, 212, 168, 0.45);
+    }
+
+    .chapter-6 .site-fold__body a:hover {
+      color: #f5ecd0;
+      text-decoration-color: rgba(245, 236, 208, 0.65);
+    }
+
+    .chapter-6 .site-fold--inline summary {
+      color: inherit;
+      border-bottom-color: rgba(232, 212, 168, 0.55);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .chapter-6 .site-fold--inline summary:hover {
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .chapter-6 .site-fold--inline .site-fold__body {
+      background: linear-gradient(180deg, #4b5058 0%, #3e434b 100%);
+      border-color: rgba(255, 255, 255, 0.14);
+      border-top-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
     }
 
     .ch6-kicker {
@@ -2703,11 +2841,12 @@
       font-family: var(--font-zh-title);
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
       letter-spacing: 0.1em;
-      color: #ffffff;
+      color: #e8d4a8;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.32);
     }
 
     .ch6-body {
-      margin: 0 0 1.5rem;
+      margin: 0 0 clamp(2rem, 4.5vh, 2.85rem);
       max-width: 68ch;
       font-family: var(--font-zh-body);
       font-size: clamp(0.92rem, 1.6vw, 1.02rem);
@@ -2715,56 +2854,278 @@
       color: #ffffff;
     }
 
+    .ch6-lead .ch6-body + .ch6-body,
+    .ch6-sabia-prose .ch6-body + .ch6-body,
+    .ch6-block > .ch6-body + .ch6-body {
+      margin-top: 1.15em;
+    }
+
+    .chapter-6 .ch6-body {
+      text-align: start;
+    }
+
     .ch6-body:last-child {
       margin-bottom: 0;
     }
 
-    .ch6-audio-row {
+    .ch6-sabia-player {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(1rem, 3vw, 2rem);
-      margin-top: clamp(1.5rem, 4vh, 2.5rem);
+      grid-template-columns: minmax(0, 148px) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3vw, 2rem);
+      align-items: start;
+      margin-top: 0.25rem;
     }
 
-    @media (max-width: 640px) {
-      .ch6-audio-row {
-        grid-template-columns: 1fr;
+    .ch6-sabia-vinyl-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .ch6-sabia-lyrics {
+      max-height: min(420px, 52vh);
+      overflow-y: auto;
+      padding: clamp(0.85rem, 2vw, 1.1rem) clamp(1rem, 2.2vw, 1.25rem);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      background: rgba(72, 78, 88, 0.38);
+      backdrop-filter: blur(16px) saturate(1.12);
+      -webkit-backdrop-filter: blur(16px) saturate(1.12);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 10px 28px rgba(0, 0, 0, 0.28);
+      scrollbar-color: rgba(232, 212, 168, 0.35) transparent;
+      scrollbar-width: thin;
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .ch6-sabia-lyrics {
+        background: rgba(58, 63, 70, 0.72);
       }
     }
 
-    .ch6-audio-card {
-      padding: clamp(1rem, 2.5vw, 1.35rem);
-      background: rgba(248, 246, 242, 0.04);
-      border: 1px solid rgba(248, 246, 242, 0.1);
+    .ch6-sabia-lyrics::-webkit-scrollbar {
+      width: 6px;
     }
 
-    .chapter.chapter-6 .ch6-audio-label,
-    .ch6-audio-btn {
-      font-family: var(--font-en-display);
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: #ffffff;
+    .ch6-sabia-lyrics::-webkit-scrollbar-thumb {
+      background: rgba(232, 212, 168, 0.35);
+      border-radius: 3px;
     }
 
-    .chapter.chapter-6 .ch6-audio-label {
-      margin-top: -0.4rem;
-      margin-bottom: clamp(0.75rem, 2vh, 1rem);
+    .ch6-sabia-lyric-pair + .ch6-sabia-lyric-pair {
+      margin-top: 1.15em;
     }
 
-    .ch6-audio-btn {
+    .chapter.chapter-6 .ch6-sabia-lyric-pt {
+      margin: 0;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.82rem, 1.45vw, 0.92rem);
+      line-height: 1.65;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .chapter.chapter-6 .ch6-sabia-lyric-zh {
+      margin: 0.22em 0 0;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+      line-height: 1.75;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    @media (max-width: 560px) {
+      .ch6-sabia-player {
+        grid-template-columns: 1fr;
+      }
+
+      .ch6-sabia-lyrics {
+        max-height: min(360px, 45vh);
+        width: 100%;
+      }
+    }
+
+    .ch6-sabia-prose {
+      margin-top: clamp(2.5rem, 6vh, 3.5rem);
+      max-width: 68ch;
       width: 100%;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: transparent;
-      padding: 0.55rem 0.85rem;
-      cursor: pointer;
-      transition: background 0.25s ease, color 0.25s ease;
     }
 
-    .ch6-audio-btn:hover,
-    .ch6-audio-btn.is-playing {
-      background: rgba(255, 255, 255, 0.12);
-      color: #ffffff;
+    .ch6-sabia-prose .ch6-body {
+      margin-bottom: clamp(2.5rem, 5.5vh, 3.35rem);
+    }
+
+    .ch6-sabia-prose .ch6-sabia-prose-break {
+      margin-top: clamp(3rem, 6.5vh, 3.75rem);
+    }
+
+    .ch6-sabia-prose .ch6-body:last-of-type {
+      margin-bottom: clamp(1.5rem, 3vh, 2rem);
+    }
+
+    .ch6-staff-note {
+      position: relative;
+      width: 100%;
+      max-width: min(100%, 68ch);
+      margin: clamp(2rem, 5vh, 2.75rem) 0 0;
+      padding:
+        clamp(1.65rem, 4.5vw, 2.15rem)
+        clamp(1.35rem, 3.2vw, 1.85rem)
+        clamp(1.65rem, 4.5vw, 2.15rem)
+        clamp(5.5rem, 24%, 9.25rem);
+      background-color: #e2d6c0;
+      border: 1px solid rgba(72, 58, 40, 0.2);
+      box-shadow:
+        1px 2px 0 rgba(255, 255, 255, 0.28) inset,
+        2px 6px 18px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transform: rotate(-0.65deg);
+    }
+
+    .ch6-staff-note::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: url("./素材照片/五線譜.png") left 42% / auto 78% no-repeat;
+      opacity: 0.32;
+      filter: contrast(1.05) brightness(1.08);
+      mix-blend-mode: multiply;
+    }
+
+    .ch6-staff-note::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.48;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)' opacity='0.55'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      mix-blend-mode: multiply;
+    }
+
+    .ch6-staff-note > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .chapter.chapter-6 .ch6-staff-note p {
+      margin: 0;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.92rem, 1.55vw, 1.04rem);
+      line-height: 1.88;
+      letter-spacing: 0.06em;
+      color: #2a2824;
+      text-shadow: 0 1px 0 rgba(252, 248, 238, 0.75);
+    }
+
+    .ch6-staff-note-cta {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: rgba(46, 44, 40, 0.35);
+      text-underline-offset: 0.2em;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    .ch6-staff-note-cta:hover {
+      color: #1a1814;
+      text-decoration-color: rgba(26, 24, 20, 0.55);
+    }
+
+    .ch6-vinyl-wrap {
+      width: min(100%, 148px);
+      aspect-ratio: 1;
+    }
+
+    .ch6-vinyl-btn {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: transparent;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      transition: box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .ch6-vinyl-btn:hover {
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .ch6-vinyl-disc {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at center, #f3f3f3 0 2.8%, transparent 3%),
+        repeating-radial-gradient(circle at center, #1a1a1a 0 72%, #2a2a2a 72% 73%, #1a1a1a 73% 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .ch6-vinyl-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52%;
+      height: 52%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .ch6-vinyl-disc::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5%;
+      height: 5%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #e8e8e8;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
+
+    .ch6-vinyl-btn.is-spinning .ch6-vinyl-disc {
+      animation: ch2VinylSpin 9s linear infinite;
+    }
+
+    .ch6-vinyl-hint {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .ch6-playing {
+      margin: 0;
+      font-family: var(--font-en-small);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: #e8d4a8;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .ch6-playing.is-active {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ch6-vinyl-btn.is-spinning .ch6-vinyl-disc {
+        animation: none;
+      }
     }
 
     .ch6-redact {
@@ -2810,6 +3171,79 @@
       transform-origin: right center;
       opacity: 0;
       transition-delay: 0s;
+    }
+
+    .ch6-manchete-head {
+      margin: 0 0 clamp(1.35rem, 3vh, 1.75rem);
+      max-width: 68ch;
+    }
+
+    .ch6-manchete-title {
+      margin: 0;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      line-height: 1.45;
+      color: #e8d4a8;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.32);
+    }
+
+    .chapter.chapter-6 .ch6-manchete-reporter {
+      margin: 0.5em 0 0;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.72rem, 1.28vw, 0.8rem);
+      letter-spacing: 0.14em;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .ch6-manchete-figure {
+      margin: 0 0 clamp(2rem, 4.5vh, 2.75rem);
+      max-width: min(100%, 52rem);
+    }
+
+    .ch6-manchete-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+    }
+
+    .ch6-manchete-quote {
+      margin: 0 0 clamp(2.75rem, 5.5vh, 3.35rem);
+      max-width: 68ch;
+      padding: 0 0 0 1rem;
+      border-left: 3px solid rgba(232, 212, 168, 0.55);
+    }
+
+    .chapter.chapter-6 .ch6-manchete-quote-zh {
+      margin: 0 0 0.85em;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.94rem, 1.6vw, 1.05rem);
+      line-height: 1.9;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .chapter.chapter-6 .ch6-manchete-quote-pt {
+      margin: 0;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.82rem, 1.45vw, 0.92rem);
+      line-height: 1.75;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.62);
+    }
+
+    .chapter.chapter-6 .ch6-manchete-note {
+      margin: clamp(2.5rem, 5.5vh, 3.25rem) 0 clamp(2rem, 4.5vh, 2.75rem);
+      max-width: 68ch;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.68rem, 1.2vw, 0.76rem);
+      letter-spacing: 0.1em;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.48);
     }
 
     .ch6-block--nature {
@@ -2899,7 +3333,8 @@
       font-family: var(--font-zh-title);
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
       letter-spacing: 0.14em;
-      color: #ffffff;
+      color: #e8d4a8;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.32);
     }
 
     .ch6-wave-card {
@@ -2977,6 +3412,7 @@
         transform: none;
         transition: none;
       }
+
     }
 
     /* ── 第七單元：史學研究結尾 ── */
@@ -3168,7 +3604,6 @@
     .site :is(
       .ch1-music-heading,
       .ch1-timeline-heading,
-      .ch1-sticky-label,
       .ch2-kicker,
       .ch3-supplement-label,
       .ch4-stage-label,
@@ -3230,13 +3665,16 @@
     <div class="site-body">
     <nav class="guitar-nav-wrap" id="guitarNavWrap" aria-label="吉他六弦章節導覽">
       <div class="guitar-nav" id="guitarNav">
-        <button type="button" class="headstock-icon" id="headstockBtn" aria-label="展開章節導覽">
+        <button type="button" class="headstock-icon" id="headstockBtn" aria-label="展開目錄 INDEX 章節導覽">
           <svg viewBox="0 0 48 56" aria-hidden="true">
             <path d="M8 4h32v8H8zm4 12h6v36h-6zm10 0h6v36h-6zm10 0h6v36h-6z"/>
             <circle cx="14" cy="10" r="2"/><circle cx="24" cy="10" r="2"/><circle cx="34" cy="10" r="2"/>
           </svg>
         </button>
-        <p class="index-menu-kicker">章節索引 INDEX</p>
+        <div class="index-menu-heading">
+          <p class="index-menu-kicker">目錄 INDEX</p>
+          <p class="index-menu-hint">點即可快速跳轉章節</p>
+        </div>
         <main class="guitar-stage" id="guitarStage">
           <div class="bridge" aria-hidden="true"></div>
 
@@ -3398,9 +3836,8 @@
                       <h3 class="ch1-music-heading" id="ch1-music-classical">古典樂</h3>
                       <p class="ch1-panel-body">裘賓在少年時期就接受了古典鋼琴的教育，當時的他立志成為一名鋼琴獨奏家，在此投入了極大的時間與精力。裘賓的第一位老師是一名因歐洲戰亂而來到巴西的德國人 Hans-Joachim Koellreutter。</p>
                       <p class="ch1-panel-body">在 Koellreutter 帶領下，裘賓學會了讀譜、演奏的能力。他接收了德奧古典鋼琴中的嚴謹；轉化了法國德布西印象派以和弦捕捉光影的能力。透過巴西作曲家維拉-羅伯斯（Villa-Lobos）的視角，裘賓吸收了印象派技法，創造出一種能游走於傳統和聲與模糊調性之間的獨特語言。</p>
-                      <aside class="ch1-sticky-note" aria-label="補充">
+                      <aside class="ch1-sticky-note" aria-label="Lúcia Branco 引述">
                         <span class="ch1-sticky-tape" aria-hidden="true"></span>
-                        <p class="ch1-sticky-label">補充</p>
                         <p class="ch1-panel-body">他的第二位音樂老師叫做 Lúcia Branco，Lúcia Branco 告訴裘賓，他的天賦可以使他成為一個偉大的作曲家：</p>
                         <blockquote class="ch1-sticky-quote">「你為什麼想當獨奏家？就你已經給我看過的那些樂曲來說，我相信你的天賦在於作曲。你可以做到的。」</blockquote>
                         <p class="ch1-panel-body">不過當時的裘賓並不以為意。</p>
@@ -3610,7 +4047,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">補充 躍上國際的巴西</h3>
-          <p class="ch3-body">``</p>
+          <p class="ch3-body">網站持續補充建設中⋯⋯</p>
         </article>
 
         <article class="ch3-block">
@@ -3642,13 +4079,16 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
                     <p class="ch4-flip-caption">1962年卡內基廳演出合照<span class="ch4-flip-caption-hint">（翻動字卡查看演出名單）</span></p>
                   </div>
                   <div class="ch4-flip-face ch4-flip-back">
-                    <ul class="ch4-flip-roster">
-                      <li>貝斯：Tião Neto</li>
-                      <li>鋼琴：Tom Jobim</li>
-                      <li>次中音薩克斯風：Stan Getz</li>
-                      <li>吉他兼聲樂：João Gilberto</li>
-                      <li>鼓：Milton Banana</li>
-                    </ul>
+                    <div class="ch4-flip-back-body">
+                      <p class="ch4-flip-roster-kicker">由左至右</p>
+                      <ul class="ch4-flip-roster">
+                        <li>貝斯：Tião Neto</li>
+                        <li>鋼琴：Tom Jobim</li>
+                        <li>次中音薩克斯風：Stan Getz</li>
+                        <li>吉他兼聲樂：João Gilberto</li>
+                        <li>鼓：Milton Banana</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </button>
@@ -3720,24 +4160,159 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           </h2>
         </header>
 
-        <article class="ch6-block" id="ch6BlockCritique">
-          <h3 class="ch6-block-label">被批判的 Bossa Nova</h3>
-          <p class="ch6-body">``</p>
-          <div class="ch6-audio-row">
-            <div class="ch6-audio-card">
-              <p class="ch6-audio-label">Chico Buarque</p>
-              <button type="button" class="ch6-audio-btn" data-ch6-audio="banda" data-src="./Chico Buarque - Banda.mp3">Banda</button>
+        <div class="ch6-lead" id="ch6Lead">
+          <p class="ch6-body">1962 年，卡內基音樂廳 Bossa Nova 音樂會取得巨大成功後，裘賓便留在美國洛杉磯進行作曲、編曲、表演以及錄音工作，直到 1967 年回到巴西。同年，裘賓被邀請擔任<details class="site-fold site-fold--inline"><summary>全國性音樂節</summary><div class="site-fold__body"><p>1968 Festival Internacional Da Canção Popular</p></div></details>評審，當時的他對此回以拒絕；不過，基於歉意，他覺得自己不得不為此比賽也提交一首歌曲。於是，裘賓打了一通電話給<details class="site-fold site-fold--inline"><summary>Chico Buarque</summary><div class="site-fold__body"><p>Chico Buarque 是巴西著名的音樂創作者，同時作為作家活躍於文壇，曾多次獲得巴西文學最高榮譽「卡蒙斯獎」（Prêmio Camões）；在 1966 年第二屆巴西流行音樂節上，Chico Buarque 憑藉「Banda」（「樂隊」）一曲獲得了第一名。其文學與音樂作品，皆包含了對社會現實的刻畫，以及對獨裁當權者的反動，是當時著名的文化反抗象徵。</p><p><a href="https://youtu.be/mdm6Lys9Agg?si=77U85dZG1aKjbuVi" target="_blank" rel="noopener noreferrer">Banda · YouTube</a></p></div></details>，請他共同協作完成曲子。</p>
+          <p class="ch6-body">由此產生的歌曲《Sabiá》最終在全國音樂節上得到評審青睞，取得優勝，進入了國際比賽階段。然而，《Sabiá》的成功其實備受爭議。在當時的時空，這並不是一首能回應民眾「政治需求」的歌曲。對手傑拉爾多·萬德雷（Geraldo Vandré）的歌迷們產生了強烈抗議。</p>
+          <p class="ch6-body">萬德雷的<details class="site-fold site-fold--inline"><summary>《Pra não dizer que não falei das flores (Caminhando)》</summary><div class="site-fold__body"><p>該曲最終獲得了亞軍。</p><p><a href="https://youtu.be/KdvsXn8oVPY?si=0hoa5_HUk_cRM4sj" target="_blank" rel="noopener noreferrer">Caminhando · YouTube</a></p></div></details>，是一首更具備反叛精神的歌曲，號召著人民拿起武器反抗軍政府。批評人士聲稱，與萬德雷那首廣受擁戴的歌相比，《Sabiá》顯得太過於「逃避現實」了。</p>
+          <p class="ch6-body">《Sabiá》在激烈的抗議和嘲笑聲浪中得到了「第一名」，矛盾的是，這首歌的協作人，卻是因其反抗精神而深受擁戴的 Chico Buarque！</p>
+          <p class="ch6-body ch6-lead-outro">以下，讓我們進一步看看《Sabiá》歌曲的內容，以及當時裘賓的精神與生活。</p>
+        </div>
+
+        <article class="ch6-block ch6-block--sabia" id="ch6BlockSabia">
+          <h3 class="ch6-block-label">《Sabiá》</h3>
+          <div class="ch6-sabia-player">
+            <div class="ch6-sabia-vinyl-col">
+              <div class="ch6-vinyl-wrap">
+                <button type="button" class="ch6-vinyl-btn" id="ch6VinylBtn" aria-label="播放 Sabiá">
+                  <span class="ch6-vinyl-disc" aria-hidden="true">
+                    <img class="ch6-vinyl-label" src="./素材照片/sabia cover.jpeg" alt="Sabiá 專輯封面" width="148" height="148">
+                  </span>
+                </button>
+              </div>
+              <p class="ch6-vinyl-hint">點擊黑膠播放 · Sabiá</p>
+              <p class="ch6-playing" id="ch6Playing">Now Playing · Sabiá</p>
             </div>
-            <div class="ch6-audio-card">
-              <p class="ch6-audio-label">Tom Jobim</p>
-              <button type="button" class="ch6-audio-btn" data-ch6-audio="sabia" data-src="./Tom Jobim - Sabiá.mp3">Sabiá</button>
+            <div class="ch6-sabia-lyrics" tabindex="0" aria-label="《Sabiá》歌詞">
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Vou voltar</p>
+                <p class="ch6-sabia-lyric-zh">我會回去</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Sei que ainda vou voltar</p>
+                <p class="ch6-sabia-lyric-zh">我知道我終將歸去</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Para o meu lugar</p>
+                <p class="ch6-sabia-lyric-zh">回到我的故鄉</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Foi lá e é ainda lá</p>
+                <p class="ch6-sabia-lyric-zh">過去在那裡，現在依然在那裡</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Que eu hei de ouvir cantar</p>
+                <p class="ch6-sabia-lyric-zh">我將會聽見</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Uma sabiá</p>
+                <p class="ch6-sabia-lyric-zh">一隻木鶇鳥在歌唱</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Cantar uma sabiá</p>
+                <p class="ch6-sabia-lyric-zh">聽著木鶇鳥歌唱</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Ai, sem meus ares de manhã</p>
+                <p class="ch6-sabia-lyric-zh">唉，沒有了我早晨的氣息</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Vou deitar</p>
+                <p class="ch6-sabia-lyric-zh">我將會躺下</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">À sombra de uma palmeira</p>
+                <p class="ch6-sabia-lyric-zh">躺在棕櫚樹的蔭涼下</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Que já não há</p>
+                <p class="ch6-sabia-lyric-zh">那裡已不再有棕櫚樹</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Colher a flor que já não dá</p>
+                <p class="ch6-sabia-lyric-zh">摘取不再盛開的花朵</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">E talvez</p>
+                <p class="ch6-sabia-lyric-zh">而或許</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">A minha triste luz</p>
+                <p class="ch6-sabia-lyric-zh">我悲傷的光芒</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Se apague de vez</p>
+                <p class="ch6-sabia-lyric-zh">將會徹底熄滅</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Agora que o dia já vai</p>
+                <p class="ch6-sabia-lyric-zh">現在天色已漸漸破曉</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Vou voltar</p>
+                <p class="ch6-sabia-lyric-zh">我會回去</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Sei que ainda vou voltar</p>
+                <p class="ch6-sabia-lyric-zh">我知道我終將歸去</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Não vai ser em vão</p>
+                <p class="ch6-sabia-lyric-zh">這不會是徒勞</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Todo o meu chorar</p>
+                <p class="ch6-sabia-lyric-zh">我所有的哭泣</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Todo o meu amor</p>
+                <p class="ch6-sabia-lyric-zh">我所有的愛</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Todo o meu errar</p>
+                <p class="ch6-sabia-lyric-zh">我所有的過錯</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">E a minha dor</p>
+                <p class="ch6-sabia-lyric-zh">以及我的痛苦</p>
+              </div>
+              <div class="ch6-sabia-lyric-pair">
+                <p class="ch6-sabia-lyric-pt">Vai se apagar</p>
+                <p class="ch6-sabia-lyric-zh">將會煙消雲散</p>
+              </div>
             </div>
           </div>
+
+          <div class="ch6-sabia-prose">
+            <p class="ch6-body">《Sabiá》的歌詞是對 1843 年的詩歌<details class="site-fold site-fold--inline"><summary>《Canção do exílio》（流亡之歌）</summary><div class="site-fold__body"><p>《Canção do exílio》（流亡之歌）是詩人 Antônio Gonçalves Dias 在葡萄牙求學時期所寫。</p><p>Antônio Gonçalves Dias 是一位詩人和劇作家，《Canção do exílio》是他在巴西最著名的詩歌之一。它在巴西歷史上多次被引用，包括巴西國歌。</p></div></details>的重新轉化。這兩組作品中，都透過第一人稱呈現了懷鄉、對遙遠故土的渴望。《Canção do exílio》（流亡之歌）裡憂愁的文字承諾著，我最終會回到記憶中的棕櫚樹下，那裡有花團錦簇，有<details class="site-fold site-fold--inline"><summary>木鶇</summary><div class="site-fold__body"><p>紅腹鶇（學名：Rufous-Bellied Thrush）是一種鳴禽，分佈於巴西大部分地區。自1966年以來，一直是聖保羅州的州鳥，並於2002年成為巴西的國鳥。</p></div></details>歌聲依舊；而在《Sabiá》中，敘述者則渴望著一個不再存在的家：棕櫚樹消失了，花朵不再生長，木鶇的歌聲只是留存在記憶深處。</p>
+            <p class="ch6-body ch6-sabia-prose-break">《Sabiá》看似只描寫了花朵、棕櫚樹、木鶇與逝去的「愛」。</p>
+            <p class="ch6-body">乍聽之下，和過去的 Bossa Nova 所呈現的畫面似乎沒有太大的差異，同樣是自然與愛、同樣是淡而舒緩的悲傷。但，裘賓真的忽視了現實政局的不安，繼續唱誦著「沙灘、愛情、浪漫」嗎？現實裡，一個破碎而毫無生氣的地方，與記憶中的美好形成了鮮明的對比。烏託邦的逝去，其實正是一種對現實不堪的指控，是對當權者摧毀家園展現的悲傷情緒。</p>
+            <p class="ch6-body">當時代的抗議歌曲呈現出一種共同主題，他們描述的未來總是充滿希望的，是一個自由、歡樂而繁榮時代的回歸；人民即將重建土地，而那些獨裁政權的審查員、監獄、酷刑、流亡⋯⋯，將一一被掃除。《Sabiá》在內涵上，其實也不例外，在黯淡的語調之中，《Sabiá》描述著敘述者終將返回家園的畫面，他盼望著：「可能的戀情、新的一天，一切都不會白費⋯⋯。」</p>
+            <p class="ch6-body">在樂曲結構上，根據 <em>Priore &amp; Stover: The Subversive Songs of Bossa Nova: Tom Jobim in the Era of Censorship</em>，我們可以進一步以樂理角度詮釋《Sabiá》中的不安情緒，以作為裘賓隱晦地表達政治的證據。《Sabiá》的和弦十分複雜，表面上看似處於 D 大調（聽起來明朗、陽光），並將其關係小調 B 小調（聽起來陰暗、沉鬱）作為次要的調性。隨著樂曲展開，這種「大調／關係小調」的雙重性（Duality），透過一系列激進的和弦進行（radical harmonic motions）被問題化（Problematized）了，兩個調性並沒有依照設想進行互補，於是帶給聽者一種踩空、失重的情緒，歌曲融進裘賓在政治緊張下的不安情緒。</p>
+            <p class="ch6-body">該文作者認為，這一切複雜的結構，全都在服務、闡釋歌詞中所埋藏的隱藏含意。裘賓並不是逃避式地創作浪漫音樂，而是隱晦地透露了其不安。</p>
+            <aside class="ch6-staff-note" aria-label="回到音樂與歌詞">
+              <p>聽起來太理論了！<a class="ch6-staff-note-cta" href="#ch6VinylBtn">讓我們直接點開音樂，看著歌詞感受吧！</a></p>
+            </aside>
+          </div>
+
         </article>
 
         <article class="ch6-block ch6-block--censor" id="ch6BlockCensor">
           <h3 class="ch6-block-label">音樂家 Jobim 的緊張生活</h3>
-          <p class="ch6-body">``</p>
+          <header class="ch6-manchete-head">
+            <h4 class="ch6-manchete-title">1970 年《Manchete》訪談：</h4>
+            <p class="ch6-manchete-reporter">記者：Carlos Lacerda</p>
+          </header>
+          <figure class="ch6-manchete-figure">
+            <img src="./素材照片/緊張生活報導.jpg" alt="《Manchete》緊張生活報導" width="1200" height="800" loading="lazy" decoding="async">
+          </figure>
+          <blockquote class="ch6-manchete-quote">
+            <p class="ch6-manchete-quote-zh">我是巴西人，我創作巴西音樂，這並不是出於什麼民族主義，而是因為我根本不會做別的音樂。</p>
+            <p class="ch6-manchete-quote-pt">Sou brasileiro, faço música brasileira não por questão de nacionalismo, mas porque não sei fazer outra.</p>
+          </blockquote>
+          <p class="ch6-body">在裘賓作品「不夠政治」的噓聲下，記者Carlos Lacerda 對裘賓進行了長時間的訪談，紀錄並捕捉這段時間裘賓的狀態。裘賓後來自己向家人宣稱：「這是唯一一篇描述了我是誰的嚴肅文章。」這篇文章《A vida numerosa e tensa de Antônio Carlos Jobim （安東尼奧·卡洛斯·裘賓多重而緊張的生活）》於1970年出版在全國發行的<details class="site-fold site-fold--inline"><summary>1970 年《Manchete》</summary><div class="site-fold__body"><p>Title: A vida numerosa e tensa de Antonio Carlos Jobim<br>Author: Carlos Lacerda<br>Author: Carlos Lacerda | Revista Manchete<br>Date: 1970-10-24<br>Description: O documento preenche as páginas 41-50 da Revista Manchete.</p><p>以下，主要引用傳記《Antonio Carlos Jobim: An Illuminated Man》中，Trouble 章節裡關於《A vida numerosa e tensa de Antônio Carlos Jobim》的報導文字。英文譯者：Dário Borim Jr. 2011。</p><p>另附原文（葡萄牙文）報紙來源。<br>全文：<a href="https://www.jobim.org/jobim/handle/2010/10358" target="_blank" rel="noopener noreferrer">https://www.jobim.org/jobim/handle/2010/10358</a></p></div></details>週刊上。</p>
+          <p class="ch6-body">在這篇報導中，裘賓的神情被記者精準刻畫，用詞出現諸如「homem tenso, crispado（緊繃、緊繃的男人）」、「apreensiva prevenção（焦慮的防備）」等字眼，敘述裘賓在群眾罵聲中的緊張神態。裘賓的音樂在國際市場取得了巨大成功，卻在國內被批判為「背叛巴西」、「逃避現實政治」、「向資本主義投降」。</p>
+          <p class="ch6-body">文中，記者將裘賓的音樂從左右派別割離，為其進行平反。音樂不是用來粗暴地煽動人民的革命火種，裘賓生長在巴西，其血液自然地想要為這片土地歌頌，他的音樂是超越政治立場的。</p>
+          <p class="ch6-manchete-note">記者在訪談中多稱裘賓為Tom，以下摘錄時則沿用此稱呼。</p>
           <p class="ch6-body ch6-redact-para">
             ……他與<span class="ch6-redact">辛納屈</span>的交往，<span class="ch6-redact">富人崇洋</span>的暗流，以及<span class="ch6-redact">政府審查</span>的壓力……
           </p>
@@ -3844,6 +4419,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
   <audio id="strumSound" preload="auto" src="./刷弦聲.mp3"></audio>
   <audio id="heroIntroAudio" preload="auto" src="./hero intro.mp3"></audio>
   <audio id="ipanemaAudio" preload="auto" src="./The Girl From Ipanema - Stan Getz (youtube).mp3"></audio>
+  <audio id="ch6SabiaAudio" preload="auto" src="./Sabiá.mp3"></audio>
 
   <script>
     let siteMuted = false;
@@ -4469,11 +5045,12 @@ each one she passes goes, "Aaah..."`;
     const ch6TreeLines = document.querySelectorAll(".ch6-tree-line");
     const ch6Typewriter = document.getElementById("ch6Typewriter");
     const ch6Confession = "他們砍倒了樹木。他們殺死了鳥兒……我們怎麼辦？";
-    const ch6AudioBtns = document.querySelectorAll(".ch6-audio-btn");
+    const ch6VinylBtn = document.getElementById("ch6VinylBtn");
+    const ch6Playing = document.getElementById("ch6Playing");
+    const ch6SabiaAudio = registerSiteAudio(document.getElementById("ch6SabiaAudio"));
     const ch6TreeLayerDelay = [0, 0.08, 0.16, 0.24, 0.32, 0.4];
     const ch6ReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let ch6ConfessionTyped = false;
-    let ch6CurrentAudio = null;
     let ch6TreeLinesReady = false;
 
     function initCh6TreeLines() {
@@ -4547,42 +5124,37 @@ each one she passes goes, "Aaah..."`;
       updateCh7Scroll();
     }
 
-    function ch6StopAudio() {
-      if (ch6CurrentAudio) {
-        ch6CurrentAudio.pause();
-        ch6CurrentAudio.currentTime = 0;
-        ch6CurrentAudio = null;
-      }
-      ch6AudioBtns.forEach((btn) => btn.classList.remove("is-playing"));
+    function ch6StopSabia() {
+      if (!ch6SabiaAudio) return;
+      ch6SabiaAudio.pause();
+      ch6VinylBtn?.classList.remove("is-spinning");
+      ch6Playing?.classList.remove("is-active");
     }
 
-    ch6AudioBtns.forEach((btn) => {
-      const src = btn.dataset.src;
-      if (!src) return;
-      const audio = registerSiteAudio(new Audio(src));
-      audio.preload = "auto";
-      btn.addEventListener("click", () => {
-        if (siteMuted) return;
-        if (btn.classList.contains("is-playing")) {
-          ch6StopAudio();
-          return;
+    onSiteMute(ch6StopSabia);
+
+    ch6VinylBtn?.addEventListener("click", () => {
+      if (!ch6SabiaAudio || siteMuted) return;
+      if (ch6VinylBtn.classList.contains("is-spinning")) {
+        ch6StopSabia();
+        return;
+      }
+      heroIntroAudio?.pause();
+      ipanemaAudio?.pause();
+      ch4VinylBtn?.classList.remove("is-spinning");
+      ch4Playing?.classList.remove("is-active");
+      chegaAudio?.pause();
+      ch2VinylBtn?.classList.remove("is-spinning");
+      ch6SabiaAudio.currentTime = 0;
+      siteSafePlay(ch6SabiaAudio).then(() => {
+        if (!ch6SabiaAudio.paused) {
+          ch6VinylBtn.classList.add("is-spinning");
+          ch6Playing?.classList.add("is-active");
         }
-        ch6StopAudio();
-        ch6CurrentAudio = audio;
-        btn.classList.add("is-playing");
-        audio.currentTime = 0;
-        siteSafePlay(audio).catch(() => {
-          btn.classList.remove("is-playing");
-          ch6CurrentAudio = null;
-        });
-      });
-      audio.addEventListener("ended", () => {
-        btn.classList.remove("is-playing");
-        if (ch6CurrentAudio === audio) ch6CurrentAudio = null;
       });
     });
 
-    onSiteMute(ch6StopAudio);
+    ch6SabiaAudio?.addEventListener("ended", ch6StopSabia);
 
     const ch6CensorObserver = new IntersectionObserver(
       (entries) => {
