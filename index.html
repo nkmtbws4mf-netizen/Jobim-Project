@@ -323,6 +323,10 @@
       transform: rotate(180deg);
     }
 
+    .site-fold--inline:not([open]) .site-fold__body {
+      display: none;
+    }
+
     .site-fold--inline .site-fold__body {
       position: absolute;
       top: calc(100% + 0.35em);
@@ -2822,6 +2826,21 @@
       margin-bottom: 0;
     }
 
+    /* 行內註解浮層：展開不撐開句中間距（《Sabiá》正文） */
+    .ch6-sabia-prose .ch6-body .site-fold--inline[open] .site-fold__body {
+      position: absolute;
+      top: calc(100% + 0.25em);
+      left: 0;
+      width: min(42ch, calc(100vw - 2.5rem));
+      max-width: 68ch;
+      margin: 0;
+      padding: 0.65rem 0.85rem;
+    }
+
+    .ch6-sabia-prose .ch6-body .site-fold--inline[open] .site-fold__body p {
+      margin-bottom: 0.5em;
+    }
+
     .ch6-kicker {
       margin: 0 0 0.75rem;
       font-family: var(--font-typewriter);
@@ -2974,6 +2993,7 @@
       margin-top: clamp(2.5rem, 6vh, 3.5rem);
       max-width: 68ch;
       width: 100%;
+      overflow: visible;
     }
 
     .ch6-sabia-prose .ch6-body {
@@ -3153,8 +3173,9 @@
 
     .ch6-redact {
       position: relative;
-      display: inline;
-      white-space: nowrap;
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: top;
     }
 
     .ch6-redact.is-redacted {
@@ -3169,10 +3190,11 @@
     .ch6-redact::after {
       content: "";
       position: absolute;
+      z-index: 1;
       left: -3px;
       right: -3px;
-      top: 8%;
-      bottom: 8%;
+      top: 0.06em;
+      bottom: 0.06em;
       background: #141414;
       transform: scaleX(0);
       transform-origin: left center;
@@ -3180,7 +3202,7 @@
         transform 0.9s cubic-bezier(0.35, 0, 0.25, 1),
         opacity 0.45s ease;
       transition-delay: var(--redact-delay, 0s);
-      opacity: 0.94;
+      opacity: 1;
       border-radius: 1px;
       pointer-events: none;
     }
@@ -3792,6 +3814,330 @@
     .site .chapter.chapter-6 .ch6-wave-label {
       font-size: clamp(1.04rem, 1.85vw, 1.16rem);
     }
+
+    /* ── 第二單元：Off Key 黑膠 / 橫向播放器 ── */
+    .ch2-offkey-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(1.25rem, 3vw, 2rem);
+      margin: 1.35rem 0 0;
+      max-width: 100%;
+    }
+
+    .ch2-offkey-vinyl-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .ch2-offkey-vinyl-col .ch2-vinyl-wrap {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .ch2-offkey-vinyl-col > .ch2-vinyl-hint {
+      opacity: 1;
+      transition: none;
+    }
+
+    .ch2-offkey-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .ch2-offkey-title {
+      margin: 0;
+      font-family: var(--font-en-display);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      letter-spacing: 0.04em;
+      color: var(--ink-dark);
+    }
+
+    .ch2-offkey-hint {
+      margin: 0;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.72rem, 1.25vw, 0.8rem);
+      color: rgba(39, 39, 39, 0.55);
+      text-align: left;
+    }
+
+    .ch2-audio-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 36rem;
+      margin: 1rem 0 0;
+      padding: 0.65rem 0.85rem;
+      background: var(--paper-card-bg);
+      border: 1px solid var(--paper-card-border);
+      box-shadow: var(--paper-card-shadow-sm);
+      border-radius: 4px;
+    }
+
+    .ch2-audio-strip-play {
+      flex-shrink: 0;
+      width: 2.35rem;
+      height: 2.35rem;
+      padding: 0;
+      border: 1px solid rgba(39, 39, 39, 0.16);
+      border-radius: 3px;
+      background: #272727;
+      color: #fcfcfc;
+      font-family: var(--font-zh-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .ch2-audio-strip-play:hover {
+      background: #3d3d3d;
+    }
+
+    .ch2-audio-strip-play.is-playing {
+      background: #5c4332;
+    }
+
+    .ch2-audio-strip--pending {
+      opacity: 0.72;
+    }
+
+    .ch2-audio-strip--pending .ch2-audio-strip-play {
+      cursor: not-allowed;
+      background: rgba(39, 39, 39, 0.35);
+    }
+
+    .ch2-audio-strip-label {
+      margin: 0;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.82rem, 1.4vw, 0.92rem);
+      line-height: 1.45;
+      color: var(--ink-faded);
+      text-align: left;
+    }
+
+    /* ── 第六單元：註解箭頭 / 整段塗黑 ── */
+    .site-fold--inline summary::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.45em;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 9px solid #4a4540;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .chapter.chapter-6 .site-fold--inline summary::before {
+      border-top-color: #e8d4a8;
+    }
+
+    .site-fold--inline[open] summary::before {
+      opacity: 0.95;
+    }
+
+    .site-fold--inline summary {
+      position: relative;
+    }
+
+    .site-fold--inline summary::after {
+      width: 1.05rem;
+      height: 1.05rem;
+      border-width: 2px;
+      background-size: 0.72rem;
+      box-shadow: 0 1px 4px rgba(39, 39, 39, 0.12);
+    }
+
+    .chapter.chapter-6 .site-fold--inline summary::after {
+      border-color: rgba(232, 212, 168, 0.45);
+      background-color: rgba(20, 22, 26, 0.55);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23e8d4a8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+    }
+
+    .ch6-redact--sentence {
+      white-space: normal;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .ch6-redact-para--ending {
+      margin-top: clamp(2rem, 5vh, 2.75rem);
+      max-width: 68ch;
+    }
+
+    /* ── 訪客留言 ── */
+    .site-guestbook {
+      border-top: 1px solid var(--line);
+      padding: clamp(2.5rem, 6vh, 3.5rem) 0;
+      background: var(--paper);
+    }
+
+    .site-guestbook-inner {
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+
+    .site-guestbook-heading {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(1rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.1em;
+      color: var(--ink-dark);
+    }
+
+    .site-guestbook-lead {
+      margin: 0 0 1.25rem;
+      font-size: clamp(0.86rem, 1.45vw, 0.95rem);
+      line-height: 1.75;
+      color: var(--ink-faded);
+      text-align: left;
+    }
+
+    .site-guestbook-form {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .site-guestbook-form label {
+      font-size: clamp(0.82rem, 1.35vw, 0.9rem);
+      color: var(--ink-soft);
+      text-align: left;
+    }
+
+    .site-guestbook-form input,
+    .site-guestbook-form textarea {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid rgba(39, 39, 39, 0.14);
+      border-radius: 3px;
+      background: #fff;
+      font-family: var(--font-zh-body);
+      font-size: 0.95rem;
+      color: var(--ink-dark);
+    }
+
+    .site-guestbook-form textarea {
+      min-height: 5.5rem;
+      resize: vertical;
+    }
+
+    .site-guestbook-submit {
+      justify-self: start;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid rgba(39, 39, 39, 0.18);
+      border-radius: 999px;
+      background: #272727;
+      color: #fcfcfc;
+      font-family: var(--font-zh-title);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .site-guestbook-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-guestbook-entry {
+      padding: 0.85rem 0;
+      border-top: 1px solid rgba(39, 39, 39, 0.08);
+      text-align: left;
+    }
+
+    .site-guestbook-entry-name {
+      margin: 0 0 0.25rem;
+      font-family: var(--font-zh-title);
+      font-size: 0.9rem;
+      color: var(--ink-dark);
+    }
+
+    .site-guestbook-entry-msg {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--ink-faded);
+      white-space: pre-wrap;
+    }
+
+    .site-guestbook-entry-time {
+      margin: 0.35rem 0 0;
+      font-size: 0.72rem;
+      color: rgba(39, 39, 39, 0.45);
+    }
+
+    .ch7-outro {
+      margin-top: 1.5rem;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.88rem, 1.5vw, 0.98rem);
+      letter-spacing: 0.04em;
+      color: rgba(39, 39, 39, 0.62);
+      text-align: left;
+    }
+
+    @media (max-width: 720px) {
+      .chapter-3 .ch3-body,
+      .chapter-3 .ch3-body.ch3-cite,
+      .chapter-3 .ch3-block .ch3-body {
+        text-align: left;
+        text-justify: auto;
+        word-break: normal;
+        hyphens: none;
+      }
+
+      .site-fold--inline {
+        display: inline;
+        vertical-align: baseline;
+      }
+
+      .site-fold--inline[open] {
+        display: inline;
+      }
+
+      .site-fold--inline .site-fold__body {
+        position: static;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 0.5em 0 0;
+        left: auto;
+      }
+
+      .ch6-sabia-prose .site-fold--inline[open] .site-fold__body {
+        position: absolute;
+        display: block;
+        width: min(42ch, calc(100vw - 2rem));
+        max-width: 100%;
+        margin: 0;
+        left: 0;
+      }
+
+      .ch6-sabia-prose .site-fold--inline:not([open]) .site-fold__body {
+        display: none;
+      }
+
+      .ch4-flip-photo {
+        min-height: 12rem;
+      }
+
+      .ch4-flip-photo img {
+        object-fit: contain;
+        object-position: center top;
+      }
+    }
   </style>
 
 </head>
@@ -4036,7 +4382,7 @@
                       <h3 class="ch1-music-heading" id="ch1-music-performance">演奏</h3>
                       <div class="ch1-panel-body">有時候裘賓會和朋友在<details class="site-fold site-fold--inline"><summary>奧索里奧將軍廣場</summary><div class="site-fold__body"><p>奧索里奧將軍廣場，葡萄牙語：Praça General Osório。位於巴西里約熱內盧南區的伊帕內瑪（Ipanema）。</p></div></details>演奏吉他或口琴。那些朋友當中就有一個他未來的作曲夥伴 Newton Mendonça！</div>
 
-                      <p class="ch1-panel-body ch1-body-gap">裘賓也常常在家跟他的叔叔們演奏音樂，不過裘賓有時很擔心，因為：“To pursue a career in music caused one to go hungry and die in the gutter.” 看來「玩音樂會餓死」是亙古存在的問題呢。</p>
+                      <p class="ch1-panel-body ch1-body-gap">裘賓也常常在家跟他的叔叔們演奏音樂，不過裘賓有時很擔心，因為：「追求音樂生涯可能會讓人餓死在水溝裡。」<sup class="site-fn"><a href="#ref-jobim-1996" aria-label="參見 Helena Jobim 傳記">2</a></sup>看來「玩音樂會餓死」是亙古存在的問題呢。</p>
                     </section>
                   </div>
                 </div>
@@ -4066,8 +4412,24 @@
 <br><br>
 「Bossa」一詞原是俚語，指獨特而突出的東西，自 1940 年代以來一直被使用，特別是在音樂領域。
 <br><br>
-Newton Mendonça，這位陷入熱戀的「跑調歌手（Off Key）」聲稱，他只不過是想透過「反音樂」的演唱，來吸引他心愛的人的注意罷了：「有什麼比這更自然無偽的呢？」
-<br><br>
+Newton Mendonça，這位陷入熱戀的「跑調歌手（Off Key）」聲稱，他只不過是想透過「反音樂」的演唱，來吸引他心愛的人的注意罷了：「有什麼比這更自然無偽的呢？」</p>
+        <div class="ch2-offkey-wrap">
+          <div class="ch2-offkey-vinyl-col">
+            <div class="ch2-vinyl-wrap is-visible">
+              <button type="button" class="ch2-vinyl-btn" id="ch2OffKeyBtn" aria-label="播放 Desafinado">
+                <span class="ch2-vinyl-disc" aria-hidden="true">
+                  <img class="ch2-vinyl-label" src="./素材照片/jobim desafinado .jpeg" alt="Desafinado 專輯封面" width="132" height="132">
+                </span>
+              </button>
+            </div>
+            <p class="ch2-vinyl-hint">點擊播放 · Desafinado</p>
+          </div>
+          <div class="ch2-offkey-meta">
+            <p class="ch2-offkey-title">Desafinado</p>
+            <p class="ch2-offkey-hint">聽起來有「跑調」嗎？</p>
+          </div>
+        </div>
+        <p class="ch2-body"><br><br>
 在 João Gilberto 向里約中產階級青年介紹這首歌幾個月後，「bossa nova」一詞出現在一張海報上，據稱是由記者 Moisés 設計的<sup class="site-fn"><a href="#ref-chediak-a" aria-label="參見 Chediak, Songbook: Bossa Nova">1</a></sup>。內容提到：「今天，João Gilberto，Silvinha Tele 和一個『Bossa Nova』集團⋯⋯。」<sup class="site-fn"><a href="#ref-tinhoriao" aria-label="參見 Tinhorião">4</a></sup>
 <br><br>
 一位 Bossa Nova 運動的記者 Ronaldo Bôscoli 注意到了這個詞，並開始在他的報導中使用該詞。於是「Bossa Nova」開始流行，從此開始指代一種獨特的音樂風格，而 Bossa Nova 往日的用法則逐漸被人遺忘了。</p>
@@ -4140,6 +4502,18 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           </div>
           <figcaption class="ch2-score-caption">João Gilberto 在 〈The Girl from Ipanema〉所使用的節奏型</figcaption>
         </figure>
+
+        <div class="ch2-audio-strip ch2-audio-strip--pending" data-ch2-audio-strip data-ch2-audio-pending>
+          <button type="button" class="ch2-audio-strip-play" disabled aria-label="The Girl from Ipanema 節奏型（施工中）">播放</button>
+          <p class="ch2-audio-strip-label">The Girl from Ipanema 節奏型（施工中⋯⋯）</p>
+          <audio preload="none" src="./The Girl from Ipanema節奏型.mp3"></audio>
+        </div>
+
+        <div class="ch2-audio-strip ch2-audio-strip--pending" data-ch2-audio-strip data-ch2-audio-pending>
+          <button type="button" class="ch2-audio-strip-play" disabled aria-label="森巴節奏（施工中）">播放</button>
+          <p class="ch2-audio-strip-label">森巴節奏（施工中⋯⋯）</p>
+          <audio preload="none" src="./森巴節奏.mp3"></audio>
+        </div>
       </article>
 
       <article class="ch2-block ch2-vinyl-block" id="ch2VinylBlock">
@@ -4222,18 +4596,19 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
         </figure>
 
         <article class="ch3-block">
-          <h3 class="ch2-kicker">補充 躍上國際的巴西</h3>
-          <p class="ch3-body">網站持續補充建設中⋯⋯</p>
-        </article>
-
-        <article class="ch3-block">
           <h3 class="ch2-kicker">小結</h3>
           <p class="ch3-body">Bossa Nova 被視為成功去除異國情調的巴西音樂，褪去對於世界而言的「異域感」。在借鑑各種非裔巴西傳統音樂的同時，Bossa Nova 吉他的圓潤聲音，以及柔和的打擊樂，顯示出其節奏編排的複雜性。João Gilberto 謹慎而安靜的歌聲，一改巴西人情緒高昂、熱情洋溢的種族刻板印象，轉而描繪成沈穩、親密和成熟的。他與裘賓「高技術水準」的旋律線條結合，形成聽起來簡約、易於靠近，實則如精密機器般完美的音樂。
 <br><br>
 狂歡的土地已經將腳步踏入現代。</p>
         </article>
+
+        <article class="ch3-block">
+          <h3 class="ch2-kicker">補充 躍上國際的巴西</h3>
+          <p class="ch3-body">網站持續建設中 (ง˙∇˙)ว🎵⋯⋯</p>
+        </article>
       </div>
     </section>
+
     <section class="chapter chapter-4" id="chapter-4" aria-labelledby="ch4-heading">
       <div class="ch4-inner">
         <header class="ch4-masthead">
@@ -4250,7 +4625,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
                 <div class="ch4-flip-inner">
                   <div class="ch4-flip-face ch4-flip-front">
                     <div class="ch4-flip-photo">
-                      <img src="./素材照片/Carnegie Hall, March 1963..png" alt="1962年卡內基廳演出合照" width="520" height="390">
+                      <img src="./素材照片/Carnegie%20Hall,%20March%201963..png" alt="1962年卡內基廳演出合照" width="520" height="390" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./素材照片/CBS News - Carnegie Hall 1962 Bossa Nova.png';">
                     </div>
                     <p class="ch4-flip-caption">1962年卡內基廳演出合照<span class="ch4-flip-caption-hint">（翻動字卡查看演出名單）</span></p>
                   </div>
@@ -4326,6 +4701,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
         </article>
       </div>
     </section>
+
     <section class="chapter chapter-6" id="chapter-6" aria-labelledby="ch6-heading">
       <div class="ch6-inner">
         <header class="ch6-masthead">
@@ -4459,7 +4835,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           </div>
 
           <div class="ch6-sabia-prose">
-            <p class="ch6-body">《Sabiá》的歌詞是對 1843 年的詩歌<details class="site-fold site-fold--inline"><summary>《Canção do exílio》（流亡之歌）</summary><div class="site-fold__body"><p>《Canção do exílio》（流亡之歌）是詩人 Antônio Gonçalves Dias 在葡萄牙求學時期所寫。</p><p>Antônio Gonçalves Dias 是一位詩人和劇作家，《Canção do exílio》是他在巴西最著名的詩歌之一。它在巴西歷史上多次被引用，包括巴西國歌。</p></div></details>的重新轉化。這兩組作品中，都透過第一人稱呈現了懷鄉、對遙遠故土的渴望。《Canção do exílio》（流亡之歌）裡憂愁的文字承諾著，我最終會回到記憶中的棕櫚樹下，那裡有花團錦簇，有<details class="site-fold site-fold--inline"><summary>木鶇</summary><div class="site-fold__body"><p>紅腹鶇（學名：Rufous-Bellied Thrush）是一種鳴禽，分佈於巴西大部分地區。自1966年以來，一直是聖保羅州的州鳥，並於2002年成為巴西的國鳥。</p></div></details>歌聲依舊；而在《Sabiá》中，敘述者則渴望著一個不再存在的家：棕櫚樹消失了，花朵不再生長，木鶇的歌聲只是留存在記憶深處。</p>
+            <p class="ch6-body">《Sabiá》的歌詞是對 1843 年的詩歌<details class="site-fold site-fold--inline"><summary>《Canção do exílio》</summary><div class="site-fold__body"><p>《Canção do exílio》（流亡之歌）是詩人 Antônio Gonçalves Dias 在葡萄牙求學時期所寫。</p><p>Antônio Gonçalves Dias 是一位詩人和劇作家，《Canção do exílio》是他在巴西最著名的詩歌之一。它在巴西歷史上多次被引用，包括巴西國歌。</p></div></details>的重新轉化。這兩組作品中，都透過第一人稱呈現了懷鄉、對遙遠故土的渴望。《Canção do exílio》（流亡之歌）裡憂愁的文字承諾著，我最終會回到記憶中的棕櫚樹下，那裡有花團錦簇，有<details class="site-fold site-fold--inline"><summary>木鶇</summary><div class="site-fold__body"><p>紅腹鶇（學名：Rufous-Bellied Thrush）是一種鳴禽，分佈於巴西大部分地區。自1966年以來，一直是聖保羅州的州鳥，並於2002年成為巴西的國鳥。</p></div></details>歌聲依舊；而在《Sabiá》中，敘述者則渴望著一個不再存在的家：棕櫚樹消失了，花朵不再生長，木鶇的歌聲只是留存在記憶深處。</p>
             <p class="ch6-body ch6-sabia-prose-break">《Sabiá》看似只描寫了花朵、棕櫚樹、木鶇與逝去的「愛」。</p>
             <p class="ch6-body">乍聽之下，和過去的 Bossa Nova 所呈現的畫面似乎沒有太大的差異，同樣是自然與愛、同樣是淡而舒緩的悲傷。但，裘賓真的忽視了現實政局的不安，繼續唱誦著「沙灘、愛情、浪漫」嗎？現實裡，一個破碎而毫無生氣的地方，與記憶中的美好形成了鮮明的對比。烏託邦的逝去，其實正是一種對現實不堪的指控，是對當權者摧毀家園展現的悲傷情緒。</p>
             <p class="ch6-body">當時代的抗議歌曲呈現出一種共同主題，他們描述的未來總是充滿希望的，是一個自由、歡樂而繁榮時代的回歸；人民即將重建土地，而那些獨裁政權的審查員、監獄、酷刑、流亡⋯⋯，將一一被掃除。《Sabiá》在內涵上，其實也不例外，在黯淡的語調之中，《Sabiá》描述著敘述者終將返回家園的畫面，他盼望著：「可能的戀情、新的一天，一切都不會白費⋯⋯。」</p>
@@ -4556,28 +4932,25 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
                   <p class="ch6-press-sheet-pt">&ldquo;O que sou hoje é a casa que perdi.&rdquo;</p>
                   <p>「今天的我，就是我所失去的家園。」</p>
                   <p class="ch6-press-sheet-pt">&ldquo;Hoje estou lúcido como se estivesse para morrer.&rdquo;</p>
-                  <p>「我很清醒，彷彿我已準備好迎向死亡。」<details class="site-fold site-fold--inline"><summary>Fernando Pessoa</summary><div class="site-fold__body"><p>費爾南多·佩索亞，是葡萄牙現代主義詩人。裘賓在報導中提及日復一日地閱讀著該詩人的作品。</p></div></details></p>
-                  <p>現在，我們又開始關注生態問題了，真是怕什麼來什麼！Tom 他帶著一絲不安與戒備迎接我的來訪。毫無疑問，他是很熱情的。但這次談話會有什麼結果呢？這個人究竟是怎樣的人？我聽過關於他的各種評價，其中好壞參半。這就是他過度理性思考和抱持著「友善懷疑」的源頭嗎？</p>
+                  <p>「我很清醒，彷彿我已準備好迎向死亡。」——<details class="site-fold site-fold--inline"><summary>Fernando Pessoa</summary><div class="site-fold__body"><p>費爾南多·佩索亞，是葡萄牙現代主義詩人。裘賓在報導中提及日復一日地閱讀著該詩人的作品。</p></div></details></p>
                   <p class="ch6-press-sheet-pt">Temos, agora, preocupações ecológicas. Era o que me faltava!<br>Tom recebeu-me com apreensiva prevenção. Cordial, não há dúvida. Mas, que sairá dessa conversa? Que espécie de pessoa será essa da qual ouviu falar algum bem e tanto mal! Ou não será essa a origem daquela preparação intelectual excessiva, aquêle pé-atrás amistoso?</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <p>現在，我們又開始關注生態問題了，真是怕什麼來什麼！Tom 他帶著一絲不安與戒備迎接我的來訪。毫無疑問，他是很熱情的。但這次談話會有什麼結果呢？這個人究竟是怎樣的人？我聽過關於他的各種評價，其中好壞參半。這就是他過度理性思考和抱持著「友善懷疑」的源頭嗎？</p>
                 </div>
               </div>
             </article>
 
           </div>
 
-          <p class="ch6-body ch6-redact-para">
-            ……他與<span class="ch6-redact">辛納屈</span>的交往，<span class="ch6-redact">富人崇洋</span>的暗流，以及<span class="ch6-redact">政府審查</span>的壓力……
+          <p class="ch6-body ch6-redact-para ch6-redact-para--ending" id="ch6RedactEnding">
+            <span class="ch6-redact ch6-redact--sentence">與美國「巨星辛納屈」的往來、「極權軍人」政府的嚴密審查、「左派份子」激進的抗爭⋯⋯。</span>
           </p>
-        </article>
-
-        <article class="ch6-block ch6-block--wave" id="ch6BlockWave">
-          <div class="ch6-wave-stage" id="ch6WaveStage">
-            <p class="ch6-wave-label">補充聆聽</p>
-            <figure class="ch6-wave-card paper-card">
-              <img class="ch6-wave-cover" src="./素材照片/Wave.jpeg" alt="Wave — Antônio Carlos Jobim 專輯封面" width="200" height="200">
-              <figcaption class="ch6-wave-caption">Wave · Antônio Carlos Jobim</figcaption>
-            </figure>
-          </div>
         </article>
       </div>
     </section>
@@ -4591,7 +4964,23 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             <span class="ch7-title-zh">結尾</span>
           </h2>
         </header>
-        <p class="ch7-body">``</p>
+        <p class="ch7-body">感謝您的閱讀。本專題以史料梳理 Bossa Nova 的時代脈絡，並透過 Tom Jobim 的音樂生涯，理解音樂如何在政治與現代化之間成為歷史的載體。</p>
+        <p class="ch7-outro">請稍等，網站持續建設中(ง˙∇˙)ว🎵⋯⋯</p>
+      </div>
+    </section>
+
+    <section class="site-guestbook" id="guestbook" aria-labelledby="guestbook-heading">
+      <div class="site-guestbook-inner">
+        <h2 class="site-guestbook-heading" id="guestbook-heading">訪客留言</h2>
+        <p class="site-guestbook-lead">歡迎留下回饋或感想（訊息儲存於本機瀏覽器，僅供策展者於此裝置檢視）。</p>
+        <form class="site-guestbook-form" id="guestbookForm">
+          <label for="guestbookName">稱呼（選填）</label>
+          <input type="text" id="guestbookName" name="name" maxlength="40" autocomplete="name">
+          <label for="guestbookMessage">留言</label>
+          <textarea id="guestbookMessage" name="message" required maxlength="800" rows="4" placeholder="寫下您的想法⋯⋯"></textarea>
+          <button type="submit" class="site-guestbook-submit">送出留言</button>
+        </form>
+        <ul class="site-guestbook-list" id="guestbookList" aria-live="polite"></ul>
       </div>
     </section>
 
@@ -4599,7 +4988,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
       <div class="site-credits-inner">
         <section class="site-credits-block" aria-labelledby="site-credits-refs-heading">
           <h2 class="site-credits-heading" id="site-credits-refs-heading">參考文獻</h2>
-          <p class="site-bib-intro">格式依國立政治大學歷史學系〈專題論文格式與範例〉：正文以右上標數字連結至本節；中文書目在前、英文在後；條目第二行起內縮兩字。標示「待補」之欄位請自行補齊。</p>
+          <p class="site-bib-intro">格式依國立政治大學歷史學系〈專題論文格式與範例〉：正文以右上標數字連結至本節；中文書目在前、英文在後；條目第二行起內縮兩字。標示「待補」之欄位將陸續補齊。</p>
 
           <h3 class="site-bib-subheading">中文文獻</h3>
           <p class="site-bib-empty">（本站正文引用以英文文獻與報刊為主，尚無獨立中文專書條目。）</p>
@@ -4630,6 +5019,8 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             This website is an academic research curation and educational exhibition for National Chengchi University. All audio clips, archival photographs, and academic literature cited herein are the property of their respective copyright owners and record labels. All materials are used strictly under fair use for educational and non-profit research purposes.
             <br><br>
             © 2026 Antônio Carlos Jobim — The Bossa Nova Era. All Rights Reserved.
+            <br><br>
+            2026年，歷史系三年級，廖玄慈。史學多元實踐專題。
           </p>
         </section>
       </div>
@@ -4641,6 +5032,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
   <audio id="heroIntroAudio" preload="auto" src="./hero intro.mp3"></audio>
   <audio id="ipanemaAudio" preload="auto" src="./The Girl From Ipanema - Stan Getz (youtube).mp3"></audio>
   <audio id="ch6SabiaAudio" preload="auto" src="./Sabiá.mp3"></audio>
+  <audio id="ch2OffKeyAudio" preload="auto" src="./Desafinado - Antonio Carlos Jobim (youtube).mp3"></audio>
 
   <script>
     let siteMuted = false;
@@ -5040,17 +5432,6 @@ each one she passes goes, "Aaah..."`;
 
     if (ch2VinylBlock) ch2VinylObserver.observe(ch2VinylBlock);
 
-    ch2VinylBtn?.addEventListener("click", () => {
-      if (siteMuted) return;
-      if (chegaAudio.paused) {
-        siteSafePlay(chegaAudio);
-        ch2VinylBtn.classList.add("is-spinning");
-      } else {
-        chegaAudio.pause();
-        ch2VinylBtn.classList.remove("is-spinning");
-      }
-    });
-
     chegaAudio.addEventListener("ended", () => {
       chegaAudio.currentTime = 0;
       ch2VinylBtn?.classList.remove("is-spinning");
@@ -5059,6 +5440,82 @@ each one she passes goes, "Aaah..."`;
     onSiteMute(() => {
       chegaAudio.pause();
       ch2VinylBtn?.classList.remove("is-spinning");
+      ch2OffKeyAudio?.pause();
+      ch2OffKeyBtn?.classList.remove("is-spinning");
+      document.querySelectorAll("[data-ch2-audio-strip] audio").forEach((a) => a.pause());
+      document.querySelectorAll(".ch2-audio-strip-play.is-playing").forEach((b) => b.classList.remove("is-playing"));
+    });
+
+    const ch2OffKeyBtn = document.getElementById("ch2OffKeyBtn");
+    const ch2OffKeyAudio = registerSiteAudio(document.getElementById("ch2OffKeyAudio"));
+
+    function ch2StopAllExcept(activeAudio) {
+      if (activeAudio !== chegaAudio) {
+        chegaAudio.pause();
+        ch2VinylBtn?.classList.remove("is-spinning");
+      }
+      if (activeAudio !== ch2OffKeyAudio) {
+        ch2OffKeyAudio?.pause();
+        ch2OffKeyBtn?.classList.remove("is-spinning");
+      }
+      document.querySelectorAll("[data-ch2-audio-strip]").forEach((strip) => {
+        const audio = strip.querySelector("audio");
+        const btn = strip.querySelector(".ch2-audio-strip-play");
+        if (audio && audio !== activeAudio) {
+          audio.pause();
+          btn?.classList.remove("is-playing");
+        }
+      });
+    }
+
+    ch2VinylBtn?.addEventListener("click", () => {
+      if (siteMuted) return;
+      if (chegaAudio.paused) {
+        ch2StopAllExcept(chegaAudio);
+        siteSafePlay(chegaAudio);
+        ch2VinylBtn.classList.add("is-spinning");
+      } else {
+        chegaAudio.pause();
+        ch2VinylBtn.classList.remove("is-spinning");
+      }
+    });
+
+    ch2OffKeyBtn?.addEventListener("click", () => {
+      if (siteMuted || !ch2OffKeyAudio) return;
+      if (ch2OffKeyAudio.paused) {
+        ch2StopAllExcept(ch2OffKeyAudio);
+        if (ch2OffKeyAudio.readyState < 2) ch2OffKeyAudio.load();
+        siteSafePlay(ch2OffKeyAudio).then(() => {
+          if (!ch2OffKeyAudio.paused) ch2OffKeyBtn.classList.add("is-spinning");
+        });
+      } else {
+        ch2OffKeyAudio.pause();
+        ch2OffKeyBtn.classList.remove("is-spinning");
+      }
+    });
+
+    ch2OffKeyAudio?.addEventListener("ended", () => {
+      ch2OffKeyBtn?.classList.remove("is-spinning");
+    });
+
+    document.querySelectorAll("[data-ch2-audio-strip]").forEach((strip) => {
+      const audio = registerSiteAudio(strip.querySelector("audio"));
+      const btn = strip.querySelector(".ch2-audio-strip-play");
+      if (!audio || !btn) return;
+      if (strip.hasAttribute("data-ch2-audio-pending")) return;
+      btn.addEventListener("click", () => {
+        if (siteMuted) return;
+        if (audio.paused) {
+          ch2StopAllExcept(audio);
+          siteSafePlay(audio).then(() => {
+            if (!audio.paused) btn.classList.add("is-playing");
+          });
+        } else {
+          audio.pause();
+          btn.classList.remove("is-playing");
+        }
+      });
+      audio.addEventListener("ended", () => btn.classList.remove("is-playing"));
     });
 
     /* ── 第三單元：滾動線條剪影 ── */
@@ -5259,8 +5716,6 @@ each one she passes goes, "Aaah..."`;
 
     /* ── 第六單元 ── */
     const ch6BlockCensor = document.getElementById("ch6BlockCensor");
-    const ch6BlockWave = document.getElementById("ch6BlockWave");
-    const ch6WaveStage = document.getElementById("ch6WaveStage");
     const ch6VinylBtn = document.getElementById("ch6VinylBtn");
     const ch6Playing = document.getElementById("ch6Playing");
     const ch6SabiaAudio = registerSiteAudio(document.getElementById("ch6SabiaAudio"));
@@ -5330,24 +5785,46 @@ each one she passes goes, "Aaah..."`;
 
     ch6SabiaAudio?.addEventListener("ended", ch6StopSabia);
 
+    function applyCh6Redact(el, index) {
+      if (!el || el.classList.contains("is-revealed") || el.classList.contains("is-redacted")) return;
+      el.style.setProperty("--redact-delay", `${0.15 + index * 0.35}s`);
+      el.classList.add("is-redacted");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("role", "button");
+      el.setAttribute("aria-label", `摘去遮蓋：${el.textContent.trim()}`);
+    }
+
+    function applyCh6RedactInContainer(container) {
+      if (!container) return;
+      container.querySelectorAll(".ch6-redact").forEach((el, i) => applyCh6Redact(el, i));
+    }
+
     const ch6CensorObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.querySelectorAll(".ch6-redact").forEach((el, i) => {
-            if (el.classList.contains("is-revealed")) return;
-            el.style.setProperty("--redact-delay", `${0.15 + i * 0.35}s`);
-            el.classList.add("is-redacted");
-            el.setAttribute("tabindex", "0");
-            el.setAttribute("role", "button");
-            el.setAttribute("aria-label", `摘去遮蓋：${el.textContent.trim()}`);
-          });
+          applyCh6RedactInContainer(entry.target);
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
 
-    if (ch6BlockCensor) ch6CensorObserver.observe(ch6BlockCensor);
+    function tryCh6RedactIfVisible() {
+      if (!ch6RedactEnding) return;
+      const rect = ch6RedactEnding.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh * 0.9 && rect.bottom > vh * 0.1) {
+        applyCh6RedactInContainer(ch6RedactEnding);
+      }
+    }
+
+    const ch6RedactEnding = document.getElementById("ch6RedactEnding");
+    if (ch6RedactEnding) {
+      ch6CensorObserver.observe(ch6RedactEnding);
+      tryCh6RedactIfVisible();
+      window.addEventListener("load", tryCh6RedactIfVisible, { once: true });
+      window.addEventListener("resize", tryCh6RedactIfVisible, { passive: true });
+    }
 
     const ch6PressStack = document.getElementById("ch6PressStack");
     const ch6PressSheets = document.querySelectorAll("[data-ch6-press-sheet]");
@@ -5422,18 +5899,75 @@ each one she passes goes, "Aaah..."`;
       });
     });
 
-    const ch6WaveObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.28, rootMargin: "0px 0px -6% 0px" }
-    );
+    /* ── 訪客留言 ── */
+    const GUESTBOOK_KEY = "jobim-guestbook-v1";
+    const guestbookForm = document.getElementById("guestbookForm");
+    const guestbookList = document.getElementById("guestbookList");
 
-    if (ch6WaveStage) ch6WaveObserver.observe(ch6WaveStage);
+    function loadGuestbookEntries() {
+      if (!guestbookList) return;
+      let entries = [];
+      try {
+        entries = JSON.parse(localStorage.getItem(GUESTBOOK_KEY) || "[]");
+      } catch {
+        entries = [];
+      }
+      guestbookList.innerHTML = "";
+      if (!entries.length) {
+        const empty = document.createElement("li");
+        empty.className = "site-guestbook-entry";
+        empty.innerHTML = '<p class="site-guestbook-entry-msg">尚無留言，歡迎成為第一位。</p>';
+        guestbookList.append(empty);
+        return;
+      }
+      entries.slice().reverse().forEach((entry) => {
+        const li = document.createElement("li");
+        li.className = "site-guestbook-entry";
+        if (entry.name) {
+          const nameEl = document.createElement("p");
+          nameEl.className = "site-guestbook-entry-name";
+          nameEl.textContent = entry.name;
+          li.append(nameEl);
+        }
+        const msgEl = document.createElement("p");
+        msgEl.className = "site-guestbook-entry-msg";
+        msgEl.textContent = entry.message;
+        li.append(msgEl);
+        if (entry.time) {
+          const timeEl = document.createElement("p");
+          timeEl.className = "site-guestbook-entry-time";
+          timeEl.textContent = entry.time;
+          li.append(timeEl);
+        }
+        guestbookList.append(li);
+      });
+    }
+
+    guestbookForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const nameInput = document.getElementById("guestbookName");
+      const msgInput = document.getElementById("guestbookMessage");
+      const message = (msgInput?.value || "").trim();
+      if (!message) return;
+      const entry = {
+        name: (nameInput?.value || "").trim(),
+        message,
+        time: new Date().toLocaleString("zh-TW", { hour12: false })
+      };
+      let entries = [];
+      try {
+        entries = JSON.parse(localStorage.getItem(GUESTBOOK_KEY) || "[]");
+      } catch {
+        entries = [];
+      }
+      entries.push(entry);
+      localStorage.setItem(GUESTBOOK_KEY, JSON.stringify(entries));
+      console.info("[Guestbook]", entry);
+      guestbookForm.reset();
+      loadGuestbookEntries();
+    });
+
+    loadGuestbookEntries();
 
     updateCh6Zone();
     window.addEventListener("scroll", updateCh6Zone, { passive: true });
