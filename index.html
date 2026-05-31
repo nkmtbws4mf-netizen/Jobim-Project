@@ -2799,6 +2799,29 @@
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
     }
 
+    .chapter-6 .ch6-body .site-fold--inline[open] {
+      display: inline;
+      width: auto;
+      margin: 0;
+    }
+
+    .chapter-6 .ch6-body .site-fold--inline[open] .site-fold__body {
+      position: static;
+      display: block;
+      width: min(40ch, 100%);
+      max-width: 68ch;
+      margin: 0.3em 0 0.1em;
+      padding: 0.7rem 0.9rem;
+    }
+
+    .chapter-6 .ch6-body .site-fold--inline[open] .site-fold__body p {
+      margin-bottom: 0.65em;
+    }
+
+    .chapter-6 .ch6-body .site-fold--inline[open] .site-fold__body p:last-child {
+      margin-bottom: 0;
+    }
+
     .ch6-kicker {
       margin: 0 0 0.75rem;
       font-family: var(--font-typewriter);
@@ -3212,7 +3235,7 @@
     }
 
     .ch6-manchete-quote {
-      margin: 0 0 clamp(2.75rem, 5.5vh, 3.35rem);
+      margin: 0 0 clamp(1.75rem, 4vh, 2.25rem);
       max-width: 68ch;
       padding: 0 0 0 1rem;
       border-left: 3px solid rgba(232, 212, 168, 0.55);
@@ -3237,7 +3260,7 @@
     }
 
     .chapter.chapter-6 .ch6-manchete-note {
-      margin: clamp(2.5rem, 5.5vh, 3.25rem) 0 clamp(2rem, 4.5vh, 2.75rem);
+      margin: clamp(1.5rem, 3.5vh, 2rem) 0 clamp(1.25rem, 3vh, 1.75rem);
       max-width: 68ch;
       font-family: var(--font-typewriter);
       font-size: clamp(0.68rem, 1.2vw, 0.76rem);
@@ -3246,67 +3269,169 @@
       color: rgba(255, 255, 255, 0.48);
     }
 
-    .ch6-block--nature {
+    .ch6-press-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3rem, 8vh, 4.75rem);
+      margin: clamp(1.25rem, 3vh, 2rem) 0 clamp(3rem, 7vh, 4.25rem);
+      max-width: min(100%, 46rem);
+    }
+
+    .ch6-press-sheet {
       position: relative;
-      padding-top: clamp(1rem, 3vh, 2rem);
-      padding-bottom: clamp(10rem, 24vh, 14rem);
-    }
-
-    .ch6-nature-scene {
-      position: absolute;
-      right: clamp(-0.25rem, 1vw, 0.75rem);
-      bottom: clamp(0.25rem, 2vh, 1rem);
-      width: min(58vw, 340px);
-      height: min(42vh, 300px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: calc(0.15 + var(--ch6-tree, 0) * 0.65);
-    }
-
-    .ch6-nature-scene svg {
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(52px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.92s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--press-delay, 0s);
       width: 100%;
-      height: 100%;
-      display: block;
+      max-width: 100%;
+    }
+
+    .ch6-press-sheet:has(.site-fold--inline[open]) {
+      z-index: 12;
+    }
+
+    .ch6-press-sheet.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ch6-press-sheet-paper {
+      position: relative;
+      padding: clamp(1.35rem, 3.2vw, 1.85rem) clamp(1.4rem, 3.4vw, 2rem);
+      background-color: #f3ede2;
+      border: 1px solid rgba(62, 48, 32, 0.16);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.55) inset,
+        0 2px 0 rgba(62, 48, 32, 0.04),
+        0 14px 36px rgba(0, 0, 0, 0.38),
+        0 3px 10px rgba(0, 0, 0, 0.18);
       overflow: visible;
     }
 
-    .ch6-tree-line {
-      fill: none;
-      stroke: rgba(248, 246, 242, 0.42);
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
+    .ch6-press-sheet-paper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.44;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23k)' opacity='0.55'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      mix-blend-mode: multiply;
     }
 
-    .ch6-bird {
-      fill: none;
-      stroke: rgba(248, 246, 242, 0.5);
-      stroke-width: 1.3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-      opacity: calc(1 - var(--ch6-birds, 0));
-      transform-box: fill-box;
-      transform-origin: center center;
-      transform:
-        translate(
-          calc(var(--ch6-birds, 0) * var(--bird-dx, 120px)),
-          calc(var(--ch6-birds, 0) * var(--bird-dy, -90px))
-        )
-        scale(calc(1 - var(--ch6-birds, 0) * 0.4));
-      transition:
-        transform 1.75s cubic-bezier(0.22, 0.61, 0.36, 1),
-        opacity 1.35s ease;
-    }
-
-    .ch6-block--nature.is-birds-departed {
-      --ch6-birds: 1;
-    }
-
-    .ch6-nature-content {
+    .ch6-press-sheet-paper > * {
       position: relative;
       z-index: 1;
+    }
+
+    .ch6-press-sheet-body {
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      line-height: 1.88;
+      color: #2c2822;
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-body :is(p, li, em, strong, blockquote) {
+      color: #2c2822;
+    }
+
+    .ch6-press-sheet-body p {
+      margin: 0 0 1.15em;
+      max-width: none;
+    }
+
+    .ch6-press-sheet-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ch6-press-sheet-body p + p {
+      margin-top: 0.35em;
+    }
+
+    .ch6-press-sheet-subtitle {
+      margin: 0 0 0.9em;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.92rem, 1.55vw, 1.02rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #3a342c;
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-subtitle {
+      color: #3a342c;
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-pt {
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.82rem, 1.42vw, 0.92rem);
+      line-height: 1.75;
+      letter-spacing: 0.03em;
+      color: #3d3830;
+    }
+
+    .ch6-press-sheet-body .site-fold--inline summary {
+      color: #3a342c;
+      border-bottom-color: rgba(58, 48, 40, 0.42);
+      background: rgba(58, 48, 40, 0.06);
+    }
+
+    .ch6-press-sheet-body .site-fold--inline summary:hover {
+      background: rgba(58, 48, 40, 0.1);
+    }
+
+    .ch6-press-sheet-body .site-fold--inline[open] {
+      display: block;
+      width: 100%;
+      margin: 0.35em 0;
+    }
+
+    .ch6-press-sheet-body .site-fold--inline[open] .site-fold__body {
+      position: static;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0.45em;
+    }
+
+    .ch6-press-sheet-body .site-fold--inline .site-fold__body {
+      background: #ffffff;
+      border-color: rgba(92, 72, 48, 0.22);
+      border-top-color: rgba(92, 72, 48, 0.16);
+      box-shadow: 0 8px 22px rgba(62, 48, 32, 0.12);
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-body .site-fold__body :is(p, li) {
+      color: #5c4332;
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-body .site-fold__body a {
+      color: #6b4f3a;
+      text-decoration-color: rgba(107, 79, 58, 0.45);
+    }
+
+    .chapter.chapter-6 .ch6-press-sheet-body .site-fold__body a:hover {
+      color: #4a3628;
+      text-decoration-color: rgba(74, 54, 40, 0.65);
+    }
+
+    .chapter.chapter-6 .ch6-press-placeholder {
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.88rem, 1.45vw, 0.96rem);
+      letter-spacing: 0.05em;
+      color: rgba(44, 38, 30, 0.72);
+      font-style: italic;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ch6-press-sheet {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
 
     .ch6-block--wave {
@@ -3364,26 +3489,6 @@
       color: var(--ink-dark);
     }
 
-    .ch6-typewriter {
-      margin: clamp(1.5rem, 4vh, 2.25rem) 0 0;
-      min-height: 4.5em;
-      font-family: var(--font-typewriter);
-      font-size: clamp(0.88rem, 1.55vw, 1rem);
-      line-height: 1.85;
-      letter-spacing: 0.04em;
-      color: #ffffff;
-      white-space: pre-wrap;
-    }
-
-    .ch6-typewriter .cursor {
-      animation: ch6CursorBlink 0.9s step-end infinite;
-    }
-
-    @keyframes ch6CursorBlink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .ch6-redact::after {
         transition: none;
@@ -3396,15 +3501,6 @@
       .ch6-redact.is-revealed::after {
         transform: scaleX(0);
         opacity: 0;
-      }
-
-      .ch6-nature-scene {
-        opacity: 0.55;
-      }
-
-      .ch6-bird {
-        opacity: 0;
-        transform: none;
       }
 
       .ch6-wave-stage {
@@ -3592,6 +3688,88 @@
       margin-top: 0.55rem;
     }
 
+    .site-bib-intro {
+      margin: 0 0 1.25rem;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+      line-height: 1.75;
+      color: rgba(39, 39, 39, 0.62);
+    }
+
+    .site-bib-subheading {
+      margin: 1.5rem 0 0.75rem;
+      font-family: var(--font-zh-title);
+      font-size: clamp(0.88rem, 1.55vw, 0.98rem);
+      letter-spacing: 0.08em;
+      color: var(--ink-dark);
+    }
+
+    .site-bib-subheading:first-of-type {
+      margin-top: 0;
+    }
+
+    .site-bib-empty {
+      margin: 0;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.86rem, 1.45vw, 0.95rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+    }
+
+    .site-bibliography {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-bib-entry {
+      margin: 0;
+      padding-left: 2em;
+      text-indent: -2em;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.86rem, 1.45vw, 0.95rem);
+      line-height: 1.85;
+      color: var(--ink-faded);
+    }
+
+    .site-bib-entry + .site-bib-entry {
+      margin-top: 0.65rem;
+    }
+
+    .site-bib-entry cite {
+      font-style: italic;
+    }
+
+    .site-bib-entry:target {
+      color: var(--ink-dark);
+      background: rgba(217, 203, 176, 0.35);
+      border-radius: 2px;
+    }
+
+    [id^="ref-"] {
+      scroll-margin-top: 5rem;
+    }
+
+    .site-fn {
+      font-size: 0.72em;
+      line-height: 0;
+      vertical-align: super;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .site-fn a {
+      color: inherit;
+      text-decoration: none;
+      padding: 0 0.12em;
+    }
+
+    .site-fn a:hover,
+    .site-fn a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
     .copyright-statement {
       margin: 0;
       font-family: var(--font-zh-body);
@@ -3738,11 +3916,11 @@
               <div class="ch1-folder-interior">
                 <div class="ch1-panel is-active" role="tabpanel" id="ch1-panel-bio" aria-labelledby="ch1-tab-bio">
                   <div class="ch1-panel-bio">
-                    <p class="ch1-panel-body">Antônio Carlos Jobim，又名 Tom Jobim（以下稱裘賓），1927 年生於巴西里約熱內盧。作為一名作曲家、鋼琴家、編曲者，裘賓活躍於 1960 年代，與許多美國音樂家進行合作，推動了 Bossa Nova 在國際市場的巨大成功。裘賓一生做了超過 400 首曲子 (Chediak n.d.b, Vol. 2, p. 15)，光是本人參與的專輯就有 40 多張。其音樂生涯所涉略，不僅限於爵士樂，更跨足交響樂以及電影配樂等。</p>
+                    <p class="ch1-panel-body">Antônio Carlos Jobim，又名 Tom Jobim（以下稱裘賓），1927 年生於巴西里約熱內盧。作為一名作曲家、鋼琴家、編曲者，裘賓活躍於 1960 年代，與許多美國音樂家進行合作，推動了 Bossa Nova 在國際市場的巨大成功。裘賓一生做了超過 400 首曲子<sup class="site-fn"><a href="#ref-chediak-b" aria-label="參見 Chediak, Songbook: Tom Jobim">1</a></sup>，光是本人參與的專輯就有 40 多張。其音樂生涯所涉略，不僅限於爵士樂，更跨足交響樂以及電影配樂等。</p>
 
                     <p class="ch1-panel-body ch1-body-gap">他創作的交響曲和音調詩（或稱交響詩 Tone Poem），包括《里約熱內盧交響曲》（與比利·布蘭科合作）（歐洲大陸，1954 年），以及《巴西利亞》（哥倫比亞廣播公司，1983 年），首演於新首都的就職典禮。</p>
                     <div class="ch1-panel-body">1959 年，裘賓參與了音樂劇電影<details class="site-fold site-fold--inline"><summary>黑人奧飛斯</summary><div class="site-fold__body"><p>註解建設中。</p></div></details>的大部分配樂。</div>
-                    <p class="ch1-panel-body">1994 年 12 月 8 日，一場緊急手術後，裘賓於紐約逝世。此消息傳到巴西，舉國悲慟。他的遺體被送回里約，伴隨著國旗覆蓋上他的棺槨，那首最為唱誦的歌曲〈The Girl from Ipanema〉在街上響起。(Anon 1994a)</p>
+                    <p class="ch1-panel-body">1994 年 12 月 8 日，一場緊急手術後，裘賓於紐約逝世。此消息傳到巴西，舉國悲慟。他的遺體被送回里約，伴隨著國旗覆蓋上他的棺槨，那首最為唱誦的歌曲〈The Girl from Ipanema〉在街上響起。<sup class="site-fn"><a href="#ref-jobim-1996" aria-label="參見 Helena Jobim 傳記（1996）">2</a></sup></p>
 
                     <section class="ch1-timeline" aria-label="裘賓生平事件年表">
                       <h3 class="ch1-timeline-heading">事件年表</h3>
@@ -3830,7 +4008,7 @@
                 </div>
                 <div class="ch1-panel" role="tabpanel" id="ch1-panel-music" aria-labelledby="ch1-tab-music" hidden>
                   <div class="ch1-panel-music">
-                    <p class="ch1-panel-body">裘賓的作曲血液，容納了古典樂的優雅與嚴謹、爵士樂的隨機與從容，以及巴西本土的節奏與陽光。這三股源頭相互纏繞並蓄，構成了 Bossa Nova 曲風的高度精緻性。在欣賞者的角度，Bossa Nova 易於靠近，慵懶而輕鬆，但正如裘賓所說：「Bossa Nova 是寧靜的，它是愛和浪漫，但它是不安分的。」（McGowan 和 Pessanha 1991，p. 62）。簡明扼要地指出了 Bossa Nova 簡約的美學身後，所仰賴的是對樂理與音樂技術的高度把握。</p>
+                    <p class="ch1-panel-body">裘賓的作曲血液，容納了古典樂的優雅與嚴謹、爵士樂的隨機與從容，以及巴西本土的節奏與陽光。這三股源頭相互纏繞並蓄，構成了 Bossa Nova 曲風的高度精緻性。在欣賞者的角度，Bossa Nova 易於靠近，慵懶而輕鬆，但正如裘賓所說：「Bossa Nova 是寧靜的，它是愛和浪漫，但它是不安分的。」<sup class="site-fn"><a href="#ref-mcgowan" aria-label="參見 McGowan 與 Pessanha">3</a></sup>簡明扼要地指出了 Bossa Nova 簡約的美學身後，所仰賴的是對樂理與音樂技術的高度把握。</p>
 
                     <section class="ch1-music-section" aria-labelledby="ch1-music-classical">
                       <h3 class="ch1-music-heading" id="ch1-music-classical">古典樂</h3>
@@ -3890,7 +4068,7 @@
 <br><br>
 Newton Mendonça，這位陷入熱戀的「跑調歌手（Off Key）」聲稱，他只不過是想透過「反音樂」的演唱，來吸引他心愛的人的注意罷了：「有什麼比這更自然無偽的呢？」
 <br><br>
-在 João Gilberto 向里約中產階級青年介紹這首歌幾個月後，「bossa nova」一詞出現在一張海報上，據稱是由記者 Moisés 設計的（Chediak n.d.a，Vol4，p. 24）。內容提到：「今天，João Gilberto，Silvinha Tele 和一個『Bossa Nova』集團⋯⋯。」（Tinhorião 1986，p. 235）。
+在 João Gilberto 向里約中產階級青年介紹這首歌幾個月後，「bossa nova」一詞出現在一張海報上，據稱是由記者 Moisés 設計的<sup class="site-fn"><a href="#ref-chediak-a" aria-label="參見 Chediak, Songbook: Bossa Nova">1</a></sup>。內容提到：「今天，João Gilberto，Silvinha Tele 和一個『Bossa Nova』集團⋯⋯。」<sup class="site-fn"><a href="#ref-tinhoriao" aria-label="參見 Tinhorião">4</a></sup>
 <br><br>
 一位 Bossa Nova 運動的記者 Ronaldo Bôscoli 注意到了這個詞，並開始在他的報導中使用該詞。於是「Bossa Nova」開始流行，從此開始指代一種獨特的音樂風格，而 Bossa Nova 往日的用法則逐漸被人遺忘了。</p>
       </article>
@@ -3928,7 +4106,7 @@ Newton Mendonça，這位陷入熱戀的「跑調歌手（Off Key）」聲稱，
 <br><br>
 João Gilberto 的「口吃吉他」：他的吉他技術將和弦嵌入旋律的切分音之間，模擬森巴中打擊樂的節奏，被稱為「口吃吉他」（stuttering guitar）。
 <br><br>
-João Gilberto 從森巴打擊樂中使用的巴西框鼓（Tamborin）的節奏中，衍伸出他「節拍」中的上拍聲（upper snaps）；而拇指，則再現了桑巴低音鼓（Surdo）。他能用右手的小指撥出最高弦，從而產生多達五個音調的和弦，是樂器使用上的創舉。（Cabral n.d.a.，p. 12）</p>
+João Gilberto 從森巴打擊樂中使用的巴西框鼓（Tamborin）的節奏中，衍伸出他「節拍」中的上拍聲（upper snaps）；而拇指，則再現了桑巴低音鼓（Surdo）。他能用右手的小指撥出最高弦，從而產生多達五個音調的和弦，是樂器使用上的創舉。<sup class="site-fn"><a href="#ref-cabral" aria-label="參見 Cabral">5</a></sup></p>
               </div>
             </div>
           </button>
@@ -4017,20 +4195,18 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           </h2>
         </header>
 
-        <p class="ch3-cite">主要引用：Suzel Ana Reily &lt;Tom Jobim and the Bossa Nova Era&gt;</p>
-
-        <p class="ch3-body">在理解 Bossa Nova 的形成時，除了關注天才音樂人們相遇與合作之外，還需要代入當時的時代脈絡。從 1960 年代巴西的政治、經濟、文化角度切入，關注當時人們對音樂的需求。當新任總統喊出「五年內彌補國家五十年滯後」口號時，搭上現代化列車的巴西人民對國家發展充滿希望；工業化的成功、新首都的建立、接軌國際的渴望⋯⋯，在現代化進程帶來的樂觀主義之下，文化藝術領域又受到了什麼樣的影響？</p>
+        <p class="ch3-body ch3-cite">本章主要依據 Suzel Ana Reily 之研究<sup class="site-fn"><a href="#ref-reily" aria-label="參見 Reily">6</a></sup>。在理解 Bossa Nova 的形成時，除了關注天才音樂人們相遇與合作之外，還需要代入當時的時代脈絡。從 1960 年代巴西的政治、經濟、文化角度切入，關注當時人們對音樂的需求。當新任總統喊出「五年內彌補國家五十年滯後」口號時，搭上現代化列車的巴西人民對國家發展充滿希望；工業化的成功、新首都的建立、接軌國際的渴望⋯⋯，在現代化進程帶來的樂觀主義之下，文化藝術領域又受到了什麼樣的影響？</p>
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">時空背景</h3>
           <div class="ch3-body">1956 年，巴西總統庫比契克（Juscelino Kubitschek）發起遷都計畫，並且喊出五年口號。僅花費 41 個月，一座飛機造型的現代化的城市座落在巴西高原上，那就是巴西的<details class="site-fold site-fold--inline"><summary>新首都——巴西利亞。</summary><div class="site-fold__body"><p>新首都由都市計畫師盧西奧·科斯塔（Lúcio Costa）設計，俯瞰如同一架飛機。機身為政府機構，機翼則是住宅區與商業區。</p></div></details>期間，庫比契克總統大力推動工業發展以及建設工程，實現了<details class="site-fold site-fold--inline"><summary>巴西經濟的飛躍，</summary><div class="site-fold__body"><p>冷戰全面爆發。美國在二戰後確立了全球經濟與文化霸權。此時美國對拉丁美洲的態度，主要是透過經濟援助與文化交流，防止共產主義赤化其「後院」。</p></div></details>擺脫舊標籤的巴西，民族自豪感高漲，人們懷抱著巴西邁向國際的信心與期盼。
 <br><br>
-工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。（Tinhorião 1986，第 231 頁）。在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</div>
+工業化的成功，將巴西成功帶離依賴農業經濟的狀態，同時代表著中產階級的崛起。進入現代城市的人民，享用著現代化帶來的便利生活，許多中上層階級的子女出生在先進城市中，難以與底層接觸，遑論想像底層人民生活。就社會而言，此時的巴西出現上層與下層空間分離的情況。<sup class="site-fn"><a href="#ref-tinhoriao" aria-label="參見 Tinhorião">4</a></sup>在這種情況下長大的年輕人過著無憂無慮的日子，生活中充斥陽光、沙灘，以及浪漫。</div>
         </article>
 
         <article class="ch3-block">
           <h3 class="ch2-kicker">文化真空狀態與 Bossa Nova</h3>
-          <div class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，<details class="site-fold site-fold--inline"><summary>人們積極對建築、繪畫、音樂的美學進行尋求與填補。</summary><div class="site-fold__body"><p>建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應（Béhague 1979，第 343–5 頁）。</p></div></details>Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
+          <div class="ch3-body">在國家社會的高速變化，以及現代化崇拜氛圍之下，知識分子和文藝青年渴望擺脫「落後、農業、異域」的傳統形象，尋找一種能代表「現代、理性、文明」的新文化範式。當時，並沒有由國家訂定的美學模板，在此文化真空的狀態下，<details class="site-fold site-fold--inline"><summary>人們積極對建築、繪畫、音樂的美學進行尋求與填補。</summary><div class="site-fold__body"><p>建築設計界透過新首都的尼邁耶建築的形式主義做出了回應；文學界透過具體運動（the concrete movement）做出了回應；嚴肅音樂界則對轉向序列主義（serialism）的做出了回應<sup class="site-fn"><a href="#ref-behague" aria-label="參見 Béhague">7</a></sup>。</p></div></details>Bossa Nova 就在這種充滿樂觀主義的文化真空期被接納了。
 <br><br>
 Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識去選擇了這樣的音樂型態。它被寄託成「具國家代表性」，卻「不顯得落後、原始」的音樂。在音樂史上，Bossa Nova 確實做到了這一點，在森巴與 Bossa Nova 之間，的確沒有出現足夠具影響力、且可以銜接其中落差的音樂型態。
 <br><br>
@@ -4042,7 +4218,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           <p class="ch3-press-lead">1962 年在卡內基音樂廳舉行歷史悠久的波薩諾瓦音樂會之前，裘賓曾向里約主要報紙《O Globo》的記者表示其對 Bossa Nova 音樂的看法：</p>
           <blockquote class="ch3-press-quote">我們不會推銷巴西的異國情調、咖啡和狂歡節。我們正在擺脫不發達的典型。我們將從農村進入工業時代。我們將使用我們的流行音樂，它不僅有自己的特色，而且具有很高的技術水準。</blockquote>
           <blockquote class="ch3-press-quote ch3-press-quote--en">We are not going to sell [Brazil's] exotic side, of coffee and carnival. We are not going to wheel out the typical themes of underdevelopment. We are going to pass from agriculture to the industrial era. We are going to use our popular music with the conviction that it does not only have its own character, but also a high technical level.</blockquote>
-          <p class="ch3-press-cite">(引用 Tinhorião 1986, p. 242)</p>
+          <p class="ch3-press-cite">引文出處<sup class="site-fn"><a href="#ref-tinhoriao" aria-label="參見 Tinhorião">4</a></sup></p>
         </figure>
 
         <article class="ch3-block">
@@ -4112,7 +4288,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
               <p class="ch4-playing" id="ch4Playing">Now Playing · The Girl from Ipanema</p>
             </div>
             <div class="ch4-market-copy">
-              <p class="ch4-body ch4-market-body">這首歌於 1964 年在美國首次發行，出現在《Getz/Gilberto》，急遽竄升到排行榜上的第二名，擁有 4.2 million 的播放紀錄，在當時為披頭四帶來了巨大的威脅！(Anon 1994c, pp. 124–5)
+              <p class="ch4-body ch4-market-body">這首歌於 1964 年在美國首次發行，出現在《Getz/Gilberto》，急遽竄升到排行榜上的第二名，擁有 4.2 million 的播放紀錄，在當時為披頭四帶來了巨大的威脅！<sup class="site-fn"><a href="#ref-jobim-1996" aria-label="參見 Helena Jobim 傳記（1996）">2</a></sup>
 <br><br>
 1965 年，第七屆葛萊美獎上（Grammy Awards），這張專輯成功越過披頭四熱潮，奪下最高榮譽年度最佳專輯（Album of the Year），同時獲得年度製作（Record of the Year）。</p>
             </div>
@@ -4144,7 +4320,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
 
         <article class="ch5-block">
           <h3 class="ch2-kicker">音樂需求的轉向</h3>
-          <p class="ch5-body">面對軍政府的壓迫，學生組織、知識份子等形成激進的左派思想。他們開始認為 Bossa Nova 裡的「無憂無慮」無法反映現下需求。舊的 Bossa Nova 在此時此刻是一種「階級疏離」，是對社會現象的漠然。如 José Ramos Tinhorião（1986 年，第 237–45 頁）所說，Bossa Nova 接觸不到巴西被剝奪權利的那群人，它複雜的音樂語言與貧民窟的聲音相去甚遠。
+          <p class="ch5-body">面對軍政府的壓迫，學生組織、知識份子等形成激進的左派思想。他們開始認為 Bossa Nova 裡的「無憂無慮」無法反映現下需求。舊的 Bossa Nova 在此時此刻是一種「階級疏離」，是對社會現象的漠然。如 José Ramos Tinhorião 所說<sup class="site-fn"><a href="#ref-tinhoriao" aria-label="參見 Tinhorião">4</a></sup>，Bossa Nova 接觸不到巴西被剝奪權利的那群人，它複雜的音樂語言與貧民窟的聲音相去甚遠。
 <br><br>
 此時的音樂家們必須找到一個新的方法，讓聽眾持續為 Bossa Nova 音樂買單。於是 Carlos Lyra 出現了，他保持了 Bossa Nova 固有的美學，但將其歌詞政治化，讓歌詞成為煽動知識分子與上層階級反對獨裁政權的力量之一。Bossa Nova 的政治化，簇擁著音樂家們開始轉向巴西農村以及傳統的城市流行風格，讓他們的音樂與歌詞間建立更有機的關聯，不再只是唱誦愛情、陽光、沙灘。</p>
         </article>
@@ -4287,7 +4463,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             <p class="ch6-body ch6-sabia-prose-break">《Sabiá》看似只描寫了花朵、棕櫚樹、木鶇與逝去的「愛」。</p>
             <p class="ch6-body">乍聽之下，和過去的 Bossa Nova 所呈現的畫面似乎沒有太大的差異，同樣是自然與愛、同樣是淡而舒緩的悲傷。但，裘賓真的忽視了現實政局的不安，繼續唱誦著「沙灘、愛情、浪漫」嗎？現實裡，一個破碎而毫無生氣的地方，與記憶中的美好形成了鮮明的對比。烏託邦的逝去，其實正是一種對現實不堪的指控，是對當權者摧毀家園展現的悲傷情緒。</p>
             <p class="ch6-body">當時代的抗議歌曲呈現出一種共同主題，他們描述的未來總是充滿希望的，是一個自由、歡樂而繁榮時代的回歸；人民即將重建土地，而那些獨裁政權的審查員、監獄、酷刑、流亡⋯⋯，將一一被掃除。《Sabiá》在內涵上，其實也不例外，在黯淡的語調之中，《Sabiá》描述著敘述者終將返回家園的畫面，他盼望著：「可能的戀情、新的一天，一切都不會白費⋯⋯。」</p>
-            <p class="ch6-body">在樂曲結構上，根據 <em>Priore &amp; Stover: The Subversive Songs of Bossa Nova: Tom Jobim in the Era of Censorship</em>，我們可以進一步以樂理角度詮釋《Sabiá》中的不安情緒，以作為裘賓隱晦地表達政治的證據。《Sabiá》的和弦十分複雜，表面上看似處於 D 大調（聽起來明朗、陽光），並將其關係小調 B 小調（聽起來陰暗、沉鬱）作為次要的調性。隨著樂曲展開，這種「大調／關係小調」的雙重性（Duality），透過一系列激進的和弦進行（radical harmonic motions）被問題化（Problematized）了，兩個調性並沒有依照設想進行互補，於是帶給聽者一種踩空、失重的情緒，歌曲融進裘賓在政治緊張下的不安情緒。</p>
+            <p class="ch6-body">在樂曲結構上，根據 Priore 與 Stover 的研究<sup class="site-fn"><a href="#ref-priore" aria-label="參見 Priore 與 Stover">8</a></sup>，我們可以進一步以樂理角度詮釋《Sabiá》中的不安情緒，以作為裘賓隱晦地表達政治的證據。《Sabiá》的和弦十分複雜，表面上看似處於 D 大調（聽起來明朗、陽光），並將其關係小調 B 小調（聽起來陰暗、沉鬱）作為次要的調性。隨著樂曲展開，這種「大調／關係小調」的雙重性（Duality），透過一系列激進的和弦進行（radical harmonic motions）被問題化（Problematized）了，兩個調性並沒有依照設想進行互補，於是帶給聽者一種踩空、失重的情緒，歌曲融進裘賓在政治緊張下的不安情緒。</p>
             <p class="ch6-body">該文作者認為，這一切複雜的結構，全都在服務、闡釋歌詞中所埋藏的隱藏含意。裘賓並不是逃避式地創作浪漫音樂，而是隱晦地透露了其不安。</p>
             <aside class="ch6-staff-note" aria-label="回到音樂與歌詞">
               <p>聽起來太理論了！<a class="ch6-staff-note-cta" href="#ch6VinylBtn">讓我們直接點開音樂，看著歌詞感受吧！</a></p>
@@ -4309,52 +4485,89 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             <p class="ch6-manchete-quote-zh">我是巴西人，我創作巴西音樂，這並不是出於什麼民族主義，而是因為我根本不會做別的音樂。</p>
             <p class="ch6-manchete-quote-pt">Sou brasileiro, faço música brasileira não por questão de nacionalismo, mas porque não sei fazer outra.</p>
           </blockquote>
-          <p class="ch6-body">在裘賓作品「不夠政治」的噓聲下，記者Carlos Lacerda 對裘賓進行了長時間的訪談，紀錄並捕捉這段時間裘賓的狀態。裘賓後來自己向家人宣稱：「這是唯一一篇描述了我是誰的嚴肅文章。」這篇文章《A vida numerosa e tensa de Antônio Carlos Jobim （安東尼奧·卡洛斯·裘賓多重而緊張的生活）》於1970年出版在全國發行的<details class="site-fold site-fold--inline"><summary>1970 年《Manchete》</summary><div class="site-fold__body"><p>Title: A vida numerosa e tensa de Antonio Carlos Jobim<br>Author: Carlos Lacerda<br>Author: Carlos Lacerda | Revista Manchete<br>Date: 1970-10-24<br>Description: O documento preenche as páginas 41-50 da Revista Manchete.</p><p>以下，主要引用傳記《Antonio Carlos Jobim: An Illuminated Man》中，Trouble 章節裡關於《A vida numerosa e tensa de Antônio Carlos Jobim》的報導文字。英文譯者：Dário Borim Jr. 2011。</p><p>另附原文（葡萄牙文）報紙來源。<br>全文：<a href="https://www.jobim.org/jobim/handle/2010/10358" target="_blank" rel="noopener noreferrer">https://www.jobim.org/jobim/handle/2010/10358</a></p></div></details>週刊上。</p>
+          <p class="ch6-body">在裘賓作品「不夠政治」的噓聲下，記者 Carlos Lacerda 對裘賓進行了長時間的訪談，紀錄並捕捉這段時間裘賓的狀態。裘賓後來自己向家人宣稱：「這是唯一一篇描述了我是誰的嚴肅文章。」這篇文章〈A vida numerosa e tensa de Antônio Carlos Jobim〉（安東尼奧·卡洛斯·裘賓多重而緊張的生活）於 1970 年出版在全國發行的<details class="site-fold site-fold--inline"><summary>《Manchete》</summary><div class="site-fold__body"><p>Carlos Lacerda，〈A vida numerosa e tensa de Antônio Carlos Jobim〉，《Manchete》（1970 年 10 月 24 日，里約熱內盧），頁 41–50。原文見 <a href="https://www.jobim.org/jobim/handle/2010/10358" target="_blank" rel="noopener noreferrer">jobim.org 典藏</a>。</p><p>以下摘錄另參考 Helena Jobim 傳記〈Trouble〉章節之英譯轉述<sup class="site-fn"><a href="#ref-jobim-2011" aria-label="參見 Helena Jobim 傳記（2011 英譯）">9</a></sup>；英譯 Dário Borim Jr.，Hal Leonard Books，2011。</p></div></details>週刊上<sup class="site-fn"><a href="#ref-lacerda" aria-label="參見 Lacerda">10</a></sup>。</p>
           <p class="ch6-body">在這篇報導中，裘賓的神情被記者精準刻畫，用詞出現諸如「homem tenso, crispado（緊繃、緊繃的男人）」、「apreensiva prevenção（焦慮的防備）」等字眼，敘述裘賓在群眾罵聲中的緊張神態。裘賓的音樂在國際市場取得了巨大成功，卻在國內被批判為「背叛巴西」、「逃避現實政治」、「向資本主義投降」。</p>
           <p class="ch6-body">文中，記者將裘賓的音樂從左右派別割離，為其進行平反。音樂不是用來粗暴地煽動人民的革命火種，裘賓生長在巴西，其血液自然地想要為這片土地歌頌，他的音樂是超越政治立場的。</p>
           <p class="ch6-manchete-note">記者在訪談中多稱裘賓為Tom，以下摘錄時則沿用此稱呼。</p>
+
+          <div class="ch6-press-stack" id="ch6PressStack" aria-label="《Manchete》報導摘錄">
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <p>在軍事獨裁統治時期，那些瘋狂、輕率的噓聲，傷害了一位音樂家。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <h5 class="ch6-press-sheet-subtitle">音樂上的極端民粹</h5>
+                  <p>在裘賓職業生涯開始時，他已經是一名創作者，創作了與傳統森巴不同的音樂；但在批評家眼中，森巴是不可觸碰的。一部分左派認為，Tom（裘賓）的音樂已經美國化了，或者，更準確地說，是北美化了。他的綽號甚至是由他的妹妹取的，據說是故意挑選的美國人的名字。那些左派評論家們爭辯著，認為裘賓正在歪曲巴西的音樂文化。</p>
+                  <p>報導中描述當時的體制就是「敲鑼打鼓」（粗俗吵雜的），追求激進、抗議、民族性，是音樂上的國家法西斯主義。</p>
+                  <p class="ch6-press-sheet-pt">O regime é do taratachimbum. A isto se reduz o nacional-fascismo musical.</p>
+                  <p>在《巴西音樂在國外的鬧劇》這本有著高度偏見的書中，Tom 的音樂因其在美國的成功而被駁為「出賣」：</p>
+                  <p>「這不是森巴；因此，它並不受歡迎。 它不受歡迎；因此，它不是巴西的。」</p>
+                  <p class="ch6-press-sheet-pt">Não é samba, logo não é popular, não é popular, logo não é brasileira.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <h5 class="ch6-press-sheet-subtitle">《Sabiá》的噓聲</h5>
+                  <p>他現在已經43歲了，他受到了令人不安的噓聲，當專家評審團因其抒情歌曲《Sabiá》授予他一等獎，將第二名授予Geraldo Vandré（萬德雷）的《Para não dizer que não falei de flores》時，數千人發出了嘲笑。</p>
+                  <p>萬德雷的那首歌，是一首偽裝起來的抗議歌曲（Protest song in disguise），這倒是加強了它的煽動力量。它就像是內斂版的<details class="site-fold site-fold--inline"><summary>《關塔納梅拉》</summary><div class="site-fold__body"><p>Guantanamera，古巴著名革命民謠。</p></div></details>。在同類曲風中，顯得優雅，而且非常適合全場大合唱。適合這種具有競爭性質的音樂節。如果換作是在其他的場地、時空背景，人們或許會更偏愛抒情歌；但在那個舉辦音樂節的體育館裡，群眾的反應是可被預期的。</p>
+                  <p>《Sabiá》不是那種能讓全場觀眾興奮起立狂歡的曲子；相反地，它是一首用來提振、洗滌人們心靈的歌。它是一部純粹的傑作。在這裡，抒情主義——尤其是那種融合了葡萄牙與巴西傳統的抒情美學（Luso-Brazilian lyricism）——就此凌空翱翔，直奔天堂。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <h5 class="ch6-press-sheet-subtitle">與美國巨星的合作是「不能提到的」！</h5>
+                  <p>湯姆·裘賓（Tom Jobim）最近才與法蘭克·辛納屈（Frank Sinatra）<details class="site-fold site-fold--inline"><summary>同台獻唱</summary><div class="site-fold__body"><p>Sinatra 錄製了 Tom Jobim 的歌曲。</p><p><a href="https://youtu.be/6GFsiFQuUFo?si=9wv8mDl30uTvI8EF" target="_blank" rel="noopener noreferrer">合作專輯 · YouTube</a></p><p><a href="https://youtu.be/NldPFVKYmiw?si=DwZ_cutWjXxKoTNw" target="_blank" rel="noopener noreferrer">兩人共同演出的片段 · YouTube</a></p></div></details>，而辛納屈也錄製了 Tom 的歌曲。然而，在我們的訪談對話中，他卻從未提及這件事——而這正是我們那次相遇<details class="site-fold site-fold--inline"><summary>最棒的地方</summary><div class="site-fold__body"><p>陷入結構性沈默，心照不宣地迴避在美國所取得的成功。</p></div></details>。</p>
+                  <p>我一次也沒有追問<details class="site-fold site-fold--inline"><summary>辛納屈</summary><div class="site-fold__body"><p>法蘭克·辛納屈（Frank Sinatra）身為二十世紀最偉大的美國流行爵士巨星，一生最受爭議的私人謎團，就是他與美國義大利裔黑手黨（Mafia）老大們說不清的關係。這是記者在報導中展現的八卦幽默。</p></div></details>是否真的與黑手黨有染。我實在無法想像法蘭西斯·阿爾伯特·辛納屈（Francis Albert Sinatra，即辛納屈）會在安東尼奧·卡洛斯·裘賓的耳邊低語：「嘿，老兄，這話就我們兩個知道：我其實真的是個黑手黨。」</p>
+                  <p class="ch6-press-sheet-pt">Não imagino Francis Albert Sinatra cochichando no ouvido de Antônio Carlos Jobim: &ldquo;Olha, ô cara, aqui entre nós que ninguém nos ouça, eu mesmo sou mafioso.&rdquo;</p>
+                  <p>我們本該聊聊這個的，至少能滿足讀者的好奇心。但，這又何必呢？難道要讓 Tom 再次去回應那些因成功帶來的指控嗎？</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <p>他的一位喜劇演員朋友曾說過：「巴西就是個如此悲慘、不幸的國家，以至於那些賺了錢的人，要因此產生一種罪惡感。」</p>
+                  <p class="ch6-press-sheet-pt">O Brasil é um país tão miserável que as pessoas que ganham dinheiro ficam com complexo de culpa.</p>
+                  <p>Tom 難道該為他享譽全球而感到愧疚嗎？我們難道需要因此去否定《伊帕內瑪姑娘》嗎？我不這麼認為。</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="ch6-press-sheet" data-ch6-press-sheet>
+              <div class="ch6-press-sheet-paper">
+                <div class="ch6-press-sheet-body">
+                  <h5 class="ch6-press-sheet-subtitle">故土凋敝，投身自然與文學的裘賓</h5>
+                  <p class="ch6-press-sheet-pt">&ldquo;Cortaram as árvores, mataram os pássaros e nós, em que ficamos?&rdquo;</p>
+                  <p>「他們砍伐了樹木，殺死了鳥類。那我們呢？我們所有人又該立足於何處？」</p>
+                  <p class="ch6-press-sheet-pt">&ldquo;O que sou hoje é a casa que perdi.&rdquo;</p>
+                  <p>「今天的我，就是我所失去的家園。」</p>
+                  <p class="ch6-press-sheet-pt">&ldquo;Hoje estou lúcido como se estivesse para morrer.&rdquo;</p>
+                  <p>「我很清醒，彷彿我已準備好迎向死亡。」<details class="site-fold site-fold--inline"><summary>Fernando Pessoa</summary><div class="site-fold__body"><p>費爾南多·佩索亞，是葡萄牙現代主義詩人。裘賓在報導中提及日復一日地閱讀著該詩人的作品。</p></div></details></p>
+                  <p>現在，我們又開始關注生態問題了，真是怕什麼來什麼！Tom 他帶著一絲不安與戒備迎接我的來訪。毫無疑問，他是很熱情的。但這次談話會有什麼結果呢？這個人究竟是怎樣的人？我聽過關於他的各種評價，其中好壞參半。這就是他過度理性思考和抱持著「友善懷疑」的源頭嗎？</p>
+                  <p class="ch6-press-sheet-pt">Temos, agora, preocupações ecológicas. Era o que me faltava!<br>Tom recebeu-me com apreensiva prevenção. Cordial, não há dúvida. Mas, que sairá dessa conversa? Que espécie de pessoa será essa da qual ouviu falar algum bem e tanto mal! Ou não será essa a origem daquela preparação intelectual excessiva, aquêle pé-atrás amistoso?</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
           <p class="ch6-body ch6-redact-para">
             ……他與<span class="ch6-redact">辛納屈</span>的交往，<span class="ch6-redact">富人崇洋</span>的暗流，以及<span class="ch6-redact">政府審查</span>的壓力……
           </p>
-        </article>
-
-        <article class="ch6-block ch6-block--nature" id="ch6BlockNature">
-          <div class="ch6-nature-scene" id="ch6NatureScene" aria-hidden="true">
-            <svg viewBox="0 0 280 300" preserveAspectRatio="xMaxYMax meet">
-              <path class="ch6-tree-line" data-ch6-tree-layer="0" d="M 148 278 L 148 168"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 148 210 L 108 168"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 148 198 L 188 156"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 148 178 L 118 138"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 148 166 L 178 126"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 148 152 L 128 118"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 148 142 L 168 108"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 128 Q 118 98 92 82"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 118 Q 178 88 204 72"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 148 108 Q 148 78 148 52"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 118 96 Q 98 78 88 62"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 178 92 Q 198 74 212 58"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="0" d="M 228 278 L 228 212"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 228 242 L 212 218"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="1" d="M 228 234 L 244 210"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 228 224 L 216 202"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="2" d="M 228 218 L 240 196"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 228 210 L 220 190"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="3" d="M 228 204 L 236 184"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 198 Q 214 178 204 168"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 192 Q 242 172 252 162"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="4" d="M 228 186 Q 228 168 228 154"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 216 184 Q 208 172 202 164"/>
-              <path class="ch6-tree-line" data-ch6-tree-layer="5" d="M 240 180 Q 248 168 256 160"/>
-              <path class="ch6-bird" style="--bird-dx: 110px; --bird-dy: -82px" d="M 132 88 L 142 82 L 152 88"/>
-              <path class="ch6-bird" style="--bird-dx: 130px; --bird-dy: -96px" d="M 158 72 L 168 66 L 178 72"/>
-              <path class="ch6-bird" style="--bird-dx: 95px; --bird-dy: -88px" d="M 112 104 L 122 98 L 132 104"/>
-            </svg>
-          </div>
-          <div class="ch6-nature-content">
-            <h3 class="ch6-block-label">逃向大自然的焦慮移情</h3>
-            <p class="ch6-body">``</p>
-            <p class="ch6-typewriter" id="ch6Typewriter" aria-live="polite"></p>
-          </div>
         </article>
 
         <article class="ch6-block ch6-block--wave" id="ch6BlockWave">
@@ -4385,17 +4598,25 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
     <footer class="site-credits" id="references" aria-labelledby="site-credits-refs-heading">
       <div class="site-credits-inner">
         <section class="site-credits-block" aria-labelledby="site-credits-refs-heading">
-          <h2 class="site-credits-heading" id="site-credits-refs-heading">資料援引</h2>
-          <ul class="site-credits-list">
-            <li>Anon. 1994a.</li>
-            <li>Anon. 1994c, pp. 124–5.</li>
-            <li>Béhague, G. 1979, pp. 343–5.</li>
-            <li>Cabral. n.d.a., p. 12.</li>
-            <li>Chediak. n.d.a, Vol. 4, p. 24.</li>
-            <li>Chediak. n.d.b, Vol. 2, p. 15.</li>
-            <li>McGowan, A. &amp; Pessanha, C. 1991, p. 62.</li>
-            <li>Reily, S. A. Tom Jobim and the Bossa Nova Era.</li>
-            <li>Tinhorião, J. R. 1986, pp. 231, 235, 237–45, 242.</li>
+          <h2 class="site-credits-heading" id="site-credits-refs-heading">參考文獻</h2>
+          <p class="site-bib-intro">格式依國立政治大學歷史學系〈專題論文格式與範例〉：正文以右上標數字連結至本節；中文書目在前、英文在後；條目第二行起內縮兩字。標示「待補」之欄位請自行補齊。</p>
+
+          <h3 class="site-bib-subheading">中文文獻</h3>
+          <p class="site-bib-empty">（本站正文引用以英文文獻與報刊為主，尚無獨立中文專書條目。）</p>
+
+          <h3 class="site-bib-subheading">英文文獻</h3>
+          <ul class="site-bibliography">
+            <li id="ref-behague" class="site-bib-entry">Béhague, Gerard, <cite>Music in Latin America: An Introduction</cite> (Englewood Cliffs, NJ: Prentice-Hall, 1979), pp. 343–5.</li>
+            <li id="ref-cabral" class="site-bib-entry">Cabral, Vinicius Carlos, <cite>【書名待補】</cite>（【出版地待補】：【出版者待補】，【年份待補】），頁 12。</li>
+            <li id="ref-chediak-a" class="site-bib-entry">Chediak, Almir, <cite>Songbook: Bossa Nova</cite>, 5 vols. (Rio de Janeiro: 【出版者待補】，n.d.), pp. 10–17, vol. 4, p. 24.</li>
+            <li id="ref-chediak-b" class="site-bib-entry">Chediak, Almir, <cite>Songbook: Tom Jobim</cite>, 3 vols. (Rio de Janeiro: 【出版者待補】，n.d.), vol. 2, p. 15.</li>
+            <li id="ref-jobim-1996" class="site-bib-entry">Jobim, Helena, <cite>Antonio Carlos Jobim: Um Homem Illuminado</cite> (Rio de Janeiro: Editora Nova Fronteira, 1996), pp. 【逝世場景頁碼待補】、124–5。</li>
+            <li id="ref-jobim-2011" class="site-bib-entry">Jobim, Helena, <cite>Antonio Carlos Jobim: An Illuminated Man</cite>, trans. Dário Borim Jr. (Milwaukee: Hal Leonard Books, 2011).（《Manchete》報導摘錄之英譯轉述，〈Trouble〉章。）</li>
+            <li id="ref-lacerda" class="site-bib-entry">Lacerda, Carlos, “A vida numerosa e tensa de Antônio Carlos Jobim,” <cite>Revista Manchete</cite> (24 October 1970, Rio de Janeiro), pp. 41–50.</li>
+            <li id="ref-mcgowan" class="site-bib-entry">McGowan, Chris and Ricardo Pessanha, <cite>The Brazilian Sound: Samba, Bossa Nova, and the Popular Music of Brazil</cite> (Philadelphia: Temple University Press, 1991), p. 62.</li>
+            <li id="ref-priore" class="site-bib-entry">Priore, Irna and Chris Stover, “The Subversive Songs of Bossa Nova: Tom Jobim in the Era of Censorship,” <cite>Analytical Approaches to World Music</cite> 3, no. 2 (2014).</li>
+            <li id="ref-reily" class="site-bib-entry">Reily, Suzel Ana, “Tom Jobim and the Bossa Nova Era,” <cite>Popular Music</cite> 15, no. 1 (Jan. 1996), pp. 1–16.</li>
+            <li id="ref-tinhoriao" class="site-bib-entry">Tinhorião, José Ramos, <cite>Pequena história da música popular: da modinha ao tropicalismo</cite> (São Paulo: 【出版者待補】，1986)，頁 231、235、237–45、242。</li>
           </ul>
         </section>
 
@@ -5038,57 +5259,11 @@ each one she passes goes, "Aaah..."`;
 
     /* ── 第六單元 ── */
     const ch6BlockCensor = document.getElementById("ch6BlockCensor");
-    const ch6BlockNature = document.getElementById("ch6BlockNature");
-    const ch6NatureScene = document.getElementById("ch6NatureScene");
     const ch6BlockWave = document.getElementById("ch6BlockWave");
     const ch6WaveStage = document.getElementById("ch6WaveStage");
-    const ch6TreeLines = document.querySelectorAll(".ch6-tree-line");
-    const ch6Typewriter = document.getElementById("ch6Typewriter");
-    const ch6Confession = "他們砍倒了樹木。他們殺死了鳥兒……我們怎麼辦？";
     const ch6VinylBtn = document.getElementById("ch6VinylBtn");
     const ch6Playing = document.getElementById("ch6Playing");
     const ch6SabiaAudio = registerSiteAudio(document.getElementById("ch6SabiaAudio"));
-    const ch6TreeLayerDelay = [0, 0.08, 0.16, 0.24, 0.32, 0.4];
-    const ch6ReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let ch6ConfessionTyped = false;
-    let ch6TreeLinesReady = false;
-
-    function initCh6TreeLines() {
-      ch6TreeLines.forEach((line) => {
-        const len = line.getTotalLength();
-        line.dataset.len = String(len);
-        line.style.strokeDasharray = String(len);
-        line.style.strokeDashoffset = ch6ReducedMotion ? "0" : String(len);
-      });
-      ch6TreeLinesReady = true;
-      if (ch6ReducedMotion && ch6BlockNature) {
-        ch6BlockNature.style.setProperty("--ch6-tree", "1");
-        ch6BlockNature.style.setProperty("--ch6-birds", "1");
-      }
-    }
-
-    function updateCh6NatureScroll() {
-      if (!ch6BlockNature || ch6ReducedMotion) return;
-      const vh = window.innerHeight;
-      const rect = ch6BlockNature.getBoundingClientRect();
-      const start = vh * 0.82;
-      const end = -rect.height * 0.1;
-      const raw = (start - rect.top) / (start - end);
-      const progress = Math.min(1, Math.max(0, raw));
-      const treeProgress = Math.min(1, progress / 0.62);
-
-      ch6BlockNature.style.setProperty("--ch6-tree", treeProgress.toFixed(3));
-
-      if (ch6TreeLinesReady) {
-        ch6TreeLines.forEach((line) => {
-          const len = parseFloat(line.dataset.len || "0");
-          const layer = Number(line.dataset.ch6TreeLayer || 0);
-          const delay = ch6TreeLayerDelay[layer] ?? 0;
-          const layerProgress = Math.min(1, Math.max(0, (treeProgress - delay) / (1 - delay)));
-          line.style.strokeDashoffset = String(len * (1 - layerProgress));
-        });
-      }
-    }
 
     function updateCh7Scroll() {
       if (!ch7Section) return;
@@ -5120,7 +5295,6 @@ each one she passes goes, "Aaah..."`;
       if (inCh6) {
         document.body.classList.remove("is-ch5-zone");
       }
-      updateCh6NatureScroll();
       updateCh7Scroll();
     }
 
@@ -5175,6 +5349,60 @@ each one she passes goes, "Aaah..."`;
 
     if (ch6BlockCensor) ch6CensorObserver.observe(ch6BlockCensor);
 
+    const ch6PressStack = document.getElementById("ch6PressStack");
+    const ch6PressSheets = document.querySelectorAll("[data-ch6-press-sheet]");
+
+    const ch6PressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    ch6PressSheets.forEach((sheet, index) => {
+      sheet.style.setProperty("--press-delay", `${Math.min(index * 0.08, 0.32)}s`);
+      ch6PressObserver.observe(sheet);
+    });
+
+    function buildCh6PressSheets(stackEl, rawText) {
+      if (!stackEl || !rawText) return;
+      const parts = rawText.split("[換段落]").map((s) => s.trim()).filter(Boolean);
+      stackEl.innerHTML = "";
+      parts.forEach((part, index) => {
+        const article = document.createElement("article");
+        article.className = "ch6-press-sheet";
+        article.dataset.ch6PressSheet = "";
+        article.style.setProperty("--press-delay", `${Math.min(index * 0.08, 0.32)}s`);
+
+        const paper = document.createElement("div");
+        paper.className = "ch6-press-sheet-paper";
+
+        const body = document.createElement("div");
+        body.className = "ch6-press-sheet-body";
+
+        part.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean).forEach((para) => {
+          const p = document.createElement("p");
+          p.textContent = para;
+          body.appendChild(p);
+        });
+
+        if (!body.childElementCount) {
+          const p = document.createElement("p");
+          p.textContent = part;
+          body.appendChild(p);
+        }
+
+        paper.append(body);
+        article.append(paper);
+        stackEl.append(article);
+        ch6PressObserver.observe(article);
+      });
+    }
+
     function revealCh6Redact(el) {
       if (!el.classList.contains("is-redacted") || el.classList.contains("is-revealed")) return;
       el.classList.add("is-revealed");
@@ -5194,24 +5422,6 @@ each one she passes goes, "Aaah..."`;
       });
     });
 
-    const ch6NatureObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-birds-departed");
-            if (!ch6ConfessionTyped && ch6Typewriter) {
-              ch6ConfessionTyped = true;
-              typeInto(ch6Typewriter, ch6Confession);
-            }
-          }
-        });
-      },
-      { threshold: 0.22 }
-    );
-
-    if (ch6BlockNature) ch6NatureObserver.observe(ch6BlockNature);
-
     const ch6WaveObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -5224,8 +5434,6 @@ each one she passes goes, "Aaah..."`;
     );
 
     if (ch6WaveStage) ch6WaveObserver.observe(ch6WaveStage);
-
-    if (ch6TreeLines.length) initCh6TreeLines();
 
     updateCh6Zone();
     window.addEventListener("scroll", updateCh6Zone, { passive: true });
