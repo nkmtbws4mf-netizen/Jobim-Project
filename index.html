@@ -2455,8 +2455,8 @@
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(5rem, 11vh, 7rem);
-      overflow: hidden;
+      padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(1.5rem, 4vh, 2.5rem);
+      overflow: visible;
       background: linear-gradient(
         180deg,
         #ece6dc 0%,
@@ -2561,8 +2561,8 @@
       max-width: 920px;
       margin: 0 auto;
       padding-top: clamp(3rem, 7vh, 5rem);
-      padding-bottom: clamp(7rem, 16vh, 11rem);
-      min-height: clamp(68vh, 78vh, 860px);
+      padding-bottom: clamp(1rem, 2.5vh, 1.75rem);
+      min-height: 0;
     }
 
     .ch5-masthead {
@@ -2643,6 +2643,11 @@
       margin-top: clamp(2.5rem, 5vh, 3.25rem);
     }
 
+    .ch5-block:last-of-type {
+      position: relative;
+      z-index: 2;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .chapter.chapter-5 .ch5-body,
       .chapter.chapter-5 .ch2-kicker,
@@ -2660,14 +2665,77 @@
       .chapter-5 { padding-top: clamp(4rem, 10vh, 6rem); }
     }
 
+    /* ── 第五單元：凝視之眼（段落下方轉場） ── */
+    .ch5-eye-stage {
+      position: relative;
+      z-index: 1;
+      margin-top: clamp(-7.5rem, -14vh, -4.5rem);
+      margin-bottom: clamp(-12rem, -22vh, -8rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .ch5-eye-stage .censor-eye-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background: transparent;
+      perspective: 1000px;
+      pointer-events: none;
+      transform: translateY(clamp(-1.25rem, -3vh, -0.75rem));
+    }
+
+    .censor-eye {
+      width: min(92vw, 1240px);
+      max-height: 60vh;
+      height: auto;
+    }
+
+    .censor-eye-draw {
+      fill: none;
+      stroke: hsla(36, 52%, 86%, 0.54);
+      stroke-width: 0.28;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      filter: url(#eye-ripple);
+    }
+
+    .eye-contour {
+      stroke-width: 0.32;
+    }
+
+    .eye-iris {
+      stroke-width: 0.26;
+      opacity: 0.82;
+    }
+
+    .eye-pupil {
+      fill: none;
+      stroke: hsla(32, 58%, 82%, 0.62);
+      stroke-width: 0.24;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .censor-eye-draw {
+        filter: none;
+      }
+    }
+
     /* ── 第六單元：1970 鉛色年代的沈默 ── */
     .chapter-6 {
       position: relative;
+      z-index: 2;
       border-top: none;
       width: 100vw;
+      margin-top: clamp(-14rem, -24vh, -9rem);
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      padding: clamp(4rem, 10vh, 6rem) clamp(1rem, 3vw, 2.5rem) clamp(6rem, 14vh, 9rem);
+      padding: clamp(2.5rem, 6vh, 4rem) clamp(1rem, 3vw, 2.5rem) clamp(6rem, 14vh, 9rem);
       overflow: hidden;
       background: linear-gradient(
         180deg,
@@ -3646,6 +3714,76 @@
       color: var(--ink-faded);
     }
 
+    .ch7-body + .ch7-body {
+      margin-top: 1.35em;
+    }
+
+    .ch7-statue-figure {
+      position: relative;
+      margin: clamp(2rem, 5vh, 2.75rem) 0 0;
+      max-width: min(100%, 36rem);
+    }
+
+    .ch7-intersection {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .ch7-intersection .line {
+      position: absolute;
+      transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
+    }
+
+    .ch7-intersection .line.vertical {
+      width: 1.5px;
+      height: 100%;
+      top: 0;
+      left: 46%;
+      background-color: rgba(110, 142, 171, 0.45);
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .ch7-intersection .line.horizontal {
+      height: 1.5px;
+      width: 100%;
+      left: 0;
+      top: 57%;
+      background-color: rgba(219, 153, 163, 0.45);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition-delay: 0s;
+    }
+
+    .ch7-intersection.is-visible .line.vertical {
+      transform: scaleY(1);
+    }
+
+    .ch7-intersection.is-visible .line.horizontal {
+      transform: scaleX(1);
+      transition-delay: 0.35s;
+    }
+
+    .ch7-statue-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(39, 39, 39, 0.1);
+      box-shadow: 0 10px 28px rgba(39, 39, 39, 0.1);
+    }
+
+    .ch7-statue-caption {
+      margin: 0.65rem 0 0;
+      font-family: var(--font-typewriter);
+      font-size: clamp(0.72rem, 1.2vw, 0.82rem);
+      letter-spacing: 0.04em;
+      color: rgba(39, 39, 39, 0.52);
+    }
+
     .chapter.chapter-7 h2.ch7-title,
     .chapter.chapter-7 .ch7-title-zh,
     .chapter.chapter-7 .ch7-kicker {
@@ -3668,6 +3806,18 @@
       .chapter-7::before,
       .chapter-7::after {
         opacity: 0;
+      }
+
+      .ch7-intersection .line {
+        transition: none;
+      }
+
+      .ch7-intersection.is-visible .line.vertical {
+        transform: scaleY(1);
+      }
+
+      .ch7-intersection.is-visible .line.horizontal {
+        transform: scaleX(1);
       }
     }
 
@@ -3963,12 +4113,6 @@
       border-color: rgba(232, 212, 168, 0.45);
       background-color: rgba(20, 22, 26, 0.55);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23e8d4a8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
-    }
-
-    .ch6-redact--sentence {
-      white-space: normal;
-      display: inline-block;
-      width: 100%;
     }
 
     .ch6-redact-para--ending {
@@ -4699,6 +4843,24 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
 <br><br>
 此時的音樂家們必須找到一個新的方法，讓聽眾持續為 Bossa Nova 音樂買單。於是 Carlos Lyra 出現了，他保持了 Bossa Nova 固有的美學，但將其歌詞政治化，讓歌詞成為煽動知識分子與上層階級反對獨裁政權的力量之一。Bossa Nova 的政治化，簇擁著音樂家們開始轉向巴西農村以及傳統的城市流行風格，讓他們的音樂與歌詞間建立更有機的關聯，不再只是唱誦愛情、陽光、沙灘。</p>
         </article>
+
+        <div class="ch5-eye-stage" id="ch5EyeStage">
+          <div class="censor-eye-container">
+            <svg class="censor-eye" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="時代凝視之眼">
+              <defs>
+                <filter id="eye-ripple" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+                  <feTurbulence id="eye-ripple-turbulence" type="fractalNoise" baseFrequency="0.042 0.058" numOctaves="2" seed="0" result="noise" />
+                  <feDisplacementMap id="eye-ripple-displace" in="SourceGraphic" in2="noise" scale="1.95" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+              </defs>
+              <g class="censor-eye-draw">
+                <path class="eye-contour" d="M10,30 Q50,5 90,30 Q50,55 10,30" />
+                <circle class="eye-iris" cx="50" cy="30" r="14" />
+                <circle class="eye-pupil" cx="50" cy="30" r="6" />
+              </g>
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -4949,7 +5111,7 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
           </div>
 
           <p class="ch6-body ch6-redact-para ch6-redact-para--ending" id="ch6RedactEnding">
-            <span class="ch6-redact ch6-redact--sentence">與美國「巨星辛納屈」的往來、「極權軍人」政府的嚴密審查、「左派份子」激進的抗爭⋯⋯。</span>
+            與美國<span class="ch6-redact">巨星辛納屈</span>的往來、<span class="ch6-redact">極權軍人</span>政府的嚴密審查、<span class="ch6-redact">左派份子</span>激進的抗爭⋯⋯。
           </p>
         </article>
       </div>
@@ -4964,8 +5126,21 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             <span class="ch7-title-zh">結尾</span>
           </h2>
         </header>
-        <p class="ch7-body">感謝您的閱讀。本專題以史料梳理 Bossa Nova 的時代脈絡，並透過 Tom Jobim 的音樂生涯，理解音樂如何在政治與現代化之間成為歷史的載體。</p>
-        <p class="ch7-outro">請稍等，網站持續建設中(ง˙∇˙)ว🎵⋯⋯</p>
+        <p class="ch7-body">經過時代洗滌，一種輕快、舒緩，時而浪漫、時而悲傷的音樂被留下了。作為經典，被傳唱於世界的Jazz 酒吧，在夜晚一次又一次被詮釋；他或許填充了某一個艷陽海灘、某一個吵雜的咖啡館、某一個無言相對的深夜⋯⋯。</p>
+        <p class="ch7-body">今日，我想我們難以再定義所謂主流。並蓄的音樂風格爭相出現在市場之中，相互染色；如同許多細小支流，帶著相同的音樂基因，持續蓬勃發展。我們可能會遺忘1960年代蔚為風潮的Bossa Nova，但當點開這些作品，我們仍然能看見樂觀而充滿希望的巴西。</p>
+        <p class="ch7-body">專題尾聲，讓我們再次扣回最初發出的問題：</p>
+        <p class="ch7-body">首先，裘賓所壯大的Bossa Nova音樂可以真的代表巴西文化嗎？我想，我們確實無法否認裘賓在巴西音樂領域所開創的成就。裘賓將其精密化的技術帶入了巴西流行音樂的製作中，抬升了後續音樂家們的創作標準。並且，裘賓與其他Bossa Nova音樂家以這一種橫空出世的音樂，為巴西賦予了嶄新風貌，將巴西推向世界。當現代化的巴西將其腳步踏進國際舞台時，背後能夠有如此細緻、高度技術化的聲音相伴。</p>
+        <p class="ch7-body">然而，當我們論及音樂中的「民族代表性」時，無法忽略該民族長久依賴的「傳統」。在不同的時空背景，「傳統」被借用、被改動時，人群的反應不盡然會相同：「借鑑」可能被視為「挪用」；「融合」可能被視為「摘除」。經歷1950年代的樂觀主義，再過渡到1970年代的高壓統治，同一種音樂，在時代中面臨了國際化與民族性的悖論；原先文化複雜程度的削減，似乎成了擴大市場的代價。Bossa Nova是否是被市場篩選過後的「巴西形象」呢？是否是美國人，或是世界想看見的巴西？</p>
+        <p class="ch7-body">就音樂性而言，裘賓所追求的Bossa Nova，有意地只保留部分巴西特性，融合古典樂的嚴謹與酷派爵士樂的沈穩，轉化為一種小編制的、沙龍內演奏的「親密音樂」；並且，在美學真空的年代裡，進一步地被中產階級所接納推廣。這是音樂的自然走向，一種新音樂出現，有人為其買單，則音樂能繼續存活，甚至，能走向更大的市場。但當極右政權造成左派反動，那些反威權、要革命的神經觸角敏銳地延伸到了音樂身上。裘賓大概也想不到時局的改變會導致音樂遭受批評。正如裘賓所言，他的創作，從來不是刻意以「民族主義」出發，他只是自然地在巴西這片土地，創造巴西的音樂。</p>
+        <p class="ch7-body">今日，維尼修斯街（Vinicius de Moraes Street）與湯姆裘賓大道（Tom Jobim Avenue）在伊帕內瑪海灘的十字路口交會⋯⋯，鉛色年代曾經帶來不安與窒息，但歷史最終將家園還給了詩人與音樂家。這是一場詩意的致敬。那個改變了巴西流行音樂面貌的時代，至此，被鐫刻在城市的骨骼裡傳唱著。</p>
+        <figure class="ch7-statue-figure">
+          <div class="ch7-intersection" id="ch7Intersection" aria-hidden="true">
+            <span class="line vertical"></span>
+            <span class="line horizontal"></span>
+          </div>
+          <img src="./素材照片/29.16.06-Tom-Jobim-Statue-at-Ipanema-Beach-photo-By-Joao-Paulo-V-Tinoco.webp" alt="伊帕內瑪海灘的湯姆·裘賓雕像" width="1200" height="800" loading="lazy" decoding="async">
+          <figcaption class="ch7-statue-caption">伊帕內瑪海灘 · Photo by João Paulo V. Tinoco</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -5616,6 +5791,7 @@ each one she passes goes, "Aaah..."`;
     const ch7Section = document.getElementById("chapter-7");
     const ch4MarketCard = document.getElementById("ch4MarketCard");
     const ch5NotesFall = document.getElementById("ch5NotesFall");
+    const ch5EyeStage = document.getElementById("ch5EyeStage");
     const ch5ReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ch5NoteColors = ["#eceae4", "#b8b4ac", "#8a9098", "#6a6258", "#d4d0c8", "#525860"];
@@ -5708,6 +5884,30 @@ each one she passes goes, "Aaah..."`;
     updateCh5Scroll();
     window.addEventListener("scroll", updateCh5Scroll, { passive: true });
     window.addEventListener("resize", updateCh5Scroll, { passive: true });
+
+    /* ── 第五單元：凝視之眼漣漪線條 ── */
+    const eyeRippleTurbulence = document.getElementById("eye-ripple-turbulence");
+    const eyeRippleDisplace = document.getElementById("eye-ripple-displace");
+    let eyeRippleFrame = null;
+    let eyeRippleSeed = 0;
+    let eyeRippleTime = 0;
+
+    function animateEyeRipple() {
+      if (!eyeRippleTurbulence || ch5ReducedMotion) return;
+      eyeRippleSeed = (eyeRippleSeed + 1) % 1000;
+      eyeRippleTime += 0.018;
+      const freqX = 0.036 + Math.sin(eyeRippleTime * 2.6) * 0.014;
+      const freqY = 0.05 + Math.cos(eyeRippleTime * 2.1) * 0.016;
+      const scale = 1.75 + Math.sin(eyeRippleTime * 3.4) * 0.65;
+      eyeRippleTurbulence.setAttribute("seed", String(eyeRippleSeed));
+      eyeRippleTurbulence.setAttribute("baseFrequency", `${freqX.toFixed(4)} ${freqY.toFixed(4)}`);
+      eyeRippleDisplace?.setAttribute("scale", scale.toFixed(2));
+      eyeRippleFrame = requestAnimationFrame(animateEyeRipple);
+    }
+
+    if (ch5EyeStage && !ch5ReducedMotion) {
+      animateEyeRipple();
+    }
 
     ipanemaAudio?.addEventListener("ended", () => {
       ch4VinylBtn?.classList.remove("is-spinning");
@@ -5968,6 +6168,17 @@ each one she passes goes, "Aaah..."`;
     });
 
     loadGuestbookEntries();
+
+    const ch7Intersection = document.getElementById("ch7Intersection");
+    const ch7IntersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      },
+      { threshold: 0.32, rootMargin: "0px 0px -8% 0px" }
+    );
+    if (ch7Intersection) ch7IntersectionObserver.observe(ch7Intersection);
 
     updateCh6Zone();
     window.addEventListener("scroll", updateCh6Zone, { passive: true });
