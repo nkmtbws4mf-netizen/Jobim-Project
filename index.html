@@ -3860,6 +3860,17 @@
       margin-top: 0.55rem;
     }
 
+    .site-credits-list a {
+      color: var(--ink-dark);
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    .site-credits-list a:hover,
+    .site-credits-list a:focus-visible {
+      color: var(--ink-mid);
+    }
+
     .site-bib-intro {
       margin: 0 0 1.25rem;
       font-family: var(--font-zh-body);
@@ -3938,6 +3949,41 @@
 
     .site-fn a:hover,
     .site-fn a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    [id^="cite-ref-"] {
+      scroll-margin-top: 5rem;
+    }
+
+    .site-fn:target a {
+      background: rgba(217, 203, 176, 0.45);
+      border-radius: 2px;
+    }
+
+    .site-bib-back {
+      display: inline;
+      margin-left: 0.35em;
+      font-size: 0.88em;
+      white-space: nowrap;
+    }
+
+    .site-bib-back-link {
+      color: inherit;
+      text-decoration: none;
+      padding: 0 0.15em;
+    }
+
+    .site-bib-back-link:not(:first-child)::before {
+      content: "·";
+      padding: 0 0.3em;
+      opacity: 0.45;
+      text-decoration: none;
+    }
+
+    .site-bib-back-link:hover,
+    .site-bib-back-link:focus-visible {
       text-decoration: underline;
       text-underline-offset: 0.15em;
     }
@@ -4033,6 +4079,9 @@
 
     .ch2-audio-strip-play {
       flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 2.35rem;
       height: 2.35rem;
       padding: 0;
@@ -4040,11 +4089,27 @@
       border-radius: 3px;
       background: #272727;
       color: #fcfcfc;
-      font-family: var(--font-zh-body);
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
       cursor: pointer;
       transition: background 0.2s ease;
+    }
+
+    .ch2-audio-strip-icon {
+      display: block;
+      width: 0.82rem;
+      height: 0.82rem;
+      fill: currentColor;
+    }
+
+    .ch2-audio-strip-icon-pause {
+      display: none;
+    }
+
+    .ch2-audio-strip-play.is-playing .ch2-audio-strip-icon-play {
+      display: none;
+    }
+
+    .ch2-audio-strip-play.is-playing .ch2-audio-strip-icon-pause {
+      display: block;
     }
 
     .ch2-audio-strip-play:hover {
@@ -4280,6 +4345,26 @@
       .ch4-flip-photo img {
         object-fit: contain;
         object-position: center top;
+      }
+
+      /* 第五→六單元轉場：手機改為上下堆疊，避免眼睛與 ch6 文字重疊 */
+      .ch5-eye-stage {
+        margin-top: clamp(1.25rem, 4vh, 2rem);
+        margin-bottom: clamp(0.75rem, 2.5vh, 1.25rem);
+      }
+
+      .ch5-eye-stage .censor-eye-container {
+        transform: none;
+      }
+
+      .censor-eye {
+        width: min(72vw, 360px);
+        max-height: 28vh;
+      }
+
+      .chapter-6 {
+        margin-top: 0;
+        padding-top: clamp(2rem, 5vh, 3rem);
       }
     }
   </style>
@@ -4647,15 +4732,31 @@ Moraes 詩意的歌詞：作為職業外交官與著名詩人，Moraes 將精鍊
           <figcaption class="ch2-score-caption">João Gilberto 在 〈The Girl from Ipanema〉所使用的節奏型</figcaption>
         </figure>
 
-        <div class="ch2-audio-strip ch2-audio-strip--pending" data-ch2-audio-strip data-ch2-audio-pending>
-          <button type="button" class="ch2-audio-strip-play" disabled aria-label="The Girl from Ipanema 節奏型（施工中）">播放</button>
-          <p class="ch2-audio-strip-label">The Girl from Ipanema 節奏型（施工中⋯⋯）</p>
-          <audio preload="none" src="./The Girl from Ipanema節奏型.mp3"></audio>
+        <div class="ch2-audio-strip" data-ch2-audio-strip>
+          <button type="button" class="ch2-audio-strip-play" aria-label="播放 The Girl from Ipanema 節奏型">
+            <svg class="ch2-audio-strip-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <polygon class="ch2-audio-strip-icon-play" points="8 5 19 12 8 19" />
+              <g class="ch2-audio-strip-icon-pause">
+                <rect x="6" y="5" width="4" height="14" rx="0.5" />
+                <rect x="14" y="5" width="4" height="14" rx="0.5" />
+              </g>
+            </svg>
+          </button>
+          <p class="ch2-audio-strip-label">The Girl from Ipanema 節奏型</p>
+          <audio preload="none" src="./girl from ipanema 節奏.mp3"></audio>
         </div>
 
-        <div class="ch2-audio-strip ch2-audio-strip--pending" data-ch2-audio-strip data-ch2-audio-pending>
-          <button type="button" class="ch2-audio-strip-play" disabled aria-label="森巴節奏（施工中）">播放</button>
-          <p class="ch2-audio-strip-label">森巴節奏（施工中⋯⋯）</p>
+        <div class="ch2-audio-strip" data-ch2-audio-strip>
+          <button type="button" class="ch2-audio-strip-play" aria-label="播放森巴節奏">
+            <svg class="ch2-audio-strip-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <polygon class="ch2-audio-strip-icon-play" points="8 5 19 12 8 19" />
+              <g class="ch2-audio-strip-icon-pause">
+                <rect x="6" y="5" width="4" height="14" rx="0.5" />
+                <rect x="14" y="5" width="4" height="14" rx="0.5" />
+              </g>
+            </svg>
+          </button>
+          <p class="ch2-audio-strip-label">森巴節奏</p>
           <audio preload="none" src="./森巴節奏.mp3"></audio>
         </div>
       </article>
@@ -5181,6 +5282,13 @@ Bossa Nova 無疑是時代的產物，是里約中產階級青年們，有意識
             <li id="ref-priore" class="site-bib-entry">Priore, Irna and Chris Stover, “The Subversive Songs of Bossa Nova: Tom Jobim in the Era of Censorship,” <cite>Analytical Approaches to World Music</cite> 3, no. 2 (2014).</li>
             <li id="ref-reily" class="site-bib-entry">Reily, Suzel Ana, “Tom Jobim and the Bossa Nova Era,” <cite>Popular Music</cite> 15, no. 1 (Jan. 1996), pp. 1–16.</li>
             <li id="ref-tinhoriao" class="site-bib-entry">Tinhorião, José Ramos, <cite>Pequena história da música popular: da modinha ao tropicalismo</cite> (São Paulo: 【出版者待補】，1986)，頁 231、235、237–45、242。</li>
+          </ul>
+        </section>
+
+        <section class="site-credits-block" aria-labelledby="site-credits-media-heading">
+          <h2 class="site-credits-heading" id="site-credits-media-heading">示範音檔來源</h2>
+          <ul class="site-credits-list">
+            <li>〈森巴節奏〉示範音檔：<a href="https://youtu.be/pjME78xpF-M" target="_blank" rel="noopener noreferrer">YouTube</a>（第二單元「Bossa Nova 的音樂性特色」）</li>
           </ul>
         </section>
 
@@ -6168,6 +6276,58 @@ each one she passes goes, "Aaah..."`;
     });
 
     loadGuestbookEntries();
+
+    (function initBibliographyCiteBackLinks() {
+      const refCounts = Object.create(null);
+      const refCites = Object.create(null);
+
+      document.querySelectorAll('.site-fn a[href^="#ref-"]').forEach((link) => {
+        const refId = link.getAttribute("href").slice(1);
+        const sup = link.closest(".site-fn");
+        if (!sup || !refId) return;
+
+        const n = (refCounts[refId] = (refCounts[refId] || 0) + 1);
+        const citeId = `cite-${refId}-${n}`;
+        sup.id = citeId;
+
+        if (!refCites[refId]) refCites[refId] = [];
+        refCites[refId].push({ citeId, label: link.textContent.trim() });
+      });
+
+      Object.entries(refCites).forEach(([refId, cites]) => {
+        const entry = document.getElementById(refId);
+        if (!entry) return;
+
+        const backWrap = document.createElement("span");
+        backWrap.className = "site-bib-back";
+
+        cites.forEach(({ citeId, label }, index) => {
+          const backLink = document.createElement("a");
+          backLink.href = `#${citeId}`;
+          backLink.className = "site-bib-back-link";
+          const ordinal = cites.length > 1 ? `（第 ${index + 1} 處）` : "";
+          backLink.setAttribute("aria-label", `返回正文引用 ${label}${ordinal}`);
+          backLink.textContent = cites.length > 1 ? "↩" : `↩\u00a0${label}`;
+          backLink.addEventListener("click", () => {
+            document
+              .getElementById(citeId)
+              ?.closest("details.site-fold")
+              ?.setAttribute("open", "");
+          });
+          backWrap.append(backLink);
+        });
+
+        entry.append(backWrap);
+      });
+
+      function openFoldForCiteHash(hash) {
+        if (!hash.startsWith("#cite-ref-")) return;
+        document.querySelector(hash)?.closest("details.site-fold")?.setAttribute("open", "");
+      }
+
+      if (location.hash) openFoldForCiteHash(location.hash);
+      window.addEventListener("hashchange", () => openFoldForCiteHash(location.hash));
+    })();
 
     const ch7Intersection = document.getElementById("ch7Intersection");
     const ch7IntersectionObserver = new IntersectionObserver(
